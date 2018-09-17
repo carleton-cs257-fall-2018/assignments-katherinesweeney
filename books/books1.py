@@ -4,13 +4,13 @@
 import sys
 import csv
 
-def read_file(inputFile):
+def read_file(input_file):
     try:
         books = []
-        with open(inputFile, newline='') as file:
+        with open(input_file, newline='') as file:
             reader = csv.reader(file)
-            for bookInfo in reader:
-                books.append(bookInfo)
+            for book_info in reader:
+                books.append(book_info)
             return books
     except:
         handle_error()
@@ -23,45 +23,31 @@ def choose_sort(action, order, books):
     else:
         handle_error()
 
-def handle_error():
-    print("Usage: python3 books1.py input-file action [sort-direction]", file=sys.stderr)
-    exit()
+def make_list_of_titles(books):
+    title_list = []
+    for i in books:
+        title_list.append(i[0])
+    return title_list
 
 def sort_titles(books, order):
-    titleList = make_list_of_titles(books)
+    title_list = make_list_of_titles(books)
     if order == "reverse":
-        reverseList = sorted(titleList, reverse=True)
-        return reverseList
+        reverse_list = sorted(title_list, reverse=True)
+        return reverse_list
     else:
-        alphaList = sorted(titleList)
-        return alphaList
-
-def make_list_of_titles(books):
-    titleList = []
-    for i in books:
-        titleList.append(i[0])
-    return titleList
-
-def sort_authors(books, order):
-    authorDateList = make_list_of_authors(books)
-    authorList = process_raw_author_data(authorDateList)
-    if order == "reverse":
-        reverseList = sorted(authorList, reverse=True, key=lambda x: x.split(" ")[-1]+x.split(" ")[-2])
-        return reverseList
-    else:
-        alphaList = sorted(authorList, key=lambda x: x.split(" ")[-1]+x.split(" ")[-2])
-        return(alphaList)
+        alpha_list = sorted(title_list)
+        return alpha_list
 
 def make_list_of_authors(books):
-    authorDateList = []
+    author_date_list = []
     for i in books:
-        authorDateList.append(i[2])
-    return authorDateList
+        author_date_list.append(i[2])
+    return author_date_list
 
-def process_raw_author_data(authorDateList):
+def process_raw_author_data(author_date_list):
     unwanted = ["0","1","2","3","4","5","6","7","8","9","(",")","-"]
-    authorList = []
-    for k in authorDateList:
+    author_list = []
+    for k in author_date_list:
         new=k
         for m in unwanted:
             new = new.replace(m, "")
@@ -71,20 +57,34 @@ def process_raw_author_data(authorDateList):
             new = new.replace(", "," and ")
             new = new.split(" and ")
             for i in new:
-                authorList.append(i)
+                author_list.append(i)
         else:
-            authorList.append(new)
-    return authorList
+            author_list.append(new)
+    return author_list
+
+def sort_authors(books, order):
+    author_date_list = make_list_of_authors(books)
+    author_list = process_raw_author_data(author_date_list)
+    if order == "reverse":
+        reverse_list = sorted(author_list, reverse=True, key=lambda x: x.split(" ")[-1]+x.split(" ")[-2])
+        return reverse_list
+    else:
+        alpha_list = sorted(author_list, key=lambda x: x.split(" ")[-1]+x.split(" ")[-2])
+        return alpha_list
+
+def handle_error():
+    print("Usage: python3 books1.py input-file action [sort-direction]", file=sys.stderr)
+    exit()
 
 def main():
-    inputFile = sys.argv[1]
+    input_file = sys.argv[1]
     action = sys.argv[2]
     order = sys.argv[-1]
 
-    books = read_file(inputFile)
-    sortedList = choose_sort(action, order, books)
+    books = read_file(input_file)
+    sorted_list = choose_sort(action, order, books)
     previous = ""
-    for i in sortedList:
+    for i in sorted_list:
         if i != previous:
             print(i)
         previous = i
