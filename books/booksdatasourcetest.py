@@ -1,6 +1,5 @@
 #Authors: Owen Barnett and Katherine Sweeney
 
-\
 
 import booksdatasource
 import unittest
