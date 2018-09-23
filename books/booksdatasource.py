@@ -6,6 +6,7 @@
     For use in some assignments at the beginning of Carleton's
     CS 257 Software Design class, Fall 2018.
 '''
+import csv
 
 
 class BooksDataSource:
@@ -74,7 +75,40 @@ class BooksDataSource:
             NOTE TO STUDENTS: I have not specified how you will store the books/authors
             data in a BooksDataSource object. That will be up to you, in Phase 3.
         '''
-        pass
+        self.list_books = []
+        file = open(books_filename, newline='')
+        reader_books = csv.reader(file)
+        for row in reader_books:
+            self.list_books.append({"id": int(row[0]), "title": row[1], "publication_year": int(row[2])})
+
+        file.close()
+
+        self.list_authors = []
+        file = open(authors_filename, newline='')
+        reader_author = csv.reader(file)
+        for row in reader_author:
+            self.list_authors.append({"id":int(row[0]),"last_name":row[1],"first_name":row[2],"birth_year":int(row[3]),"death_year":row[4]})
+
+        file.close()
+
+        self.author_for_book = {}
+        self.book_for_author = {}
+        file = open(books_authors_link_filename, newline='')
+        reader_link = csv.reader(file)
+
+        for row in reader_link:
+            if row[0] in self.author_for_book.keys():
+                self.author_for_book[row[0]].append(row[1])
+            else:
+                self.author_for_book.update({row[0]:[row[1]]})
+
+            if row[1] in self.book_for_author.keys():
+                self.book_for_author[row[1]].append(row[0])
+            else:
+                self.book_for_author.update({row[1]:[row[0]]})
+
+
+        file.close()
 
     def book(self, book_id):
         ''' Returns the book with the specified ID. (See the BooksDataSource comment
@@ -82,7 +116,12 @@ class BooksDataSource:
 
             Raises ValueError if book_id is not a valid book ID.
         '''
-        return {}
+        for book in self.list_books:
+            if book["id"] == book_id:
+
+                return book
+
+        raise ValueError("Not a valid book id")
 
     def books(self, *, author_id=None, search_text=None, start_year=None, end_year=None, sort_by='title'):
         ''' Returns a list of all the books in this data source matching all of
@@ -111,7 +150,27 @@ class BooksDataSource:
             QUESTION: How about ValueError? And if so, for which parameters?
             Raises ValueError if author_id is non-None but is not a valid author ID.
         '''
-        return []
+        valid_books = []
+
+        if not author_id is None:
+            self.book(author_id)
+
+        for book in self.list_books:
+            if author_id == None or (str(author_id) in self.author_for_book[str(book["id"])]):
+                if (search_text == None or search_text in book["title"].lower()):
+                    if (start_year == None or book["publication_year"] >= start_year):
+                        if (end_year == None or book["publication_year"] <= end_year):
+                            valid_books.append(book)
+        if sort_by == "year":
+            valid_books.sort(key = lambda x: str(x["publication_year"]) + x["title"])
+            return valid_books
+        elif sort_by == "title":
+            valid_books.sort(key = lambda x: x["title"] + str(x["publication_year"]))
+            return valid_books
+
+        raise TypeError("Not valid input")
+
+
 
     def author(self, author_id):
         ''' Returns the author with the specified ID. (See the BooksDataSource comment for a
@@ -119,7 +178,11 @@ class BooksDataSource:
 
             Raises ValueError if author_id is not a valid author ID.
         '''
-        return {}
+        for author in self.list_authors:
+            if author["id"] == author_id:
+                return author
+
+        raise ValueError("Not a valid author id")
 
     def authors(self, *, book_id=None, search_text=None, start_year=None, end_year=None, sort_by='birth_year'):
         ''' Returns a list of all the authors in this data source matching all of the
@@ -146,7 +209,27 @@ class BooksDataSource:
 
             See the BooksDataSource comment for a description of how an author is represented.
         '''
-        return []
+        valid_authors = []
+
+        if not book_id is None:
+            self.author(book_id)
+
+        for author in self.list_authors:
+            if (book_id == None or (str(book_id) in self.book_for_author[str(author["id"])])):
+                if (search_text == None or search_text in (author["last_name"].lower() + author["first_name"].lower() )):
+                    if (start_year == None or (author["death_year"] == "NULL" or int(author["death_year"]) >= start_year)):
+                        if (end_year == None or (author["birth_year"] <= end_year)):
+                            valid_authors.append(author)
+
+        if sort_by == "birth_year":
+            valid_authors.sort(key=lambda x: str(x["birth_year"]) + x["last_name"] + x["first_name"])
+            return valid_authors
+
+        elif sort_by == "last_name":
+            valid_authors.sort(key=lambda x: x["last_name"] + x["first_name"] + str(x["birth_year"]))
+            return valid_authors
+
+        raise TypeError("Not valid input")
 
     # Note for my students: The following two methods provide no new functionality beyond
     # what the books(...) and authors(...) methods already provide. But they do represent a
