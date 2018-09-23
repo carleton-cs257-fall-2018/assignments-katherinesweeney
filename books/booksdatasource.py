@@ -6,6 +6,8 @@
     For use in some assignments at the beginning of Carleton's
     CS 257 Software Design class, Fall 2018.
 '''
+#implementation by Katherine Sweeney and Owen Barnett
+
 import csv
 
 
