@@ -82,6 +82,7 @@ def get_item_with_id(type_and_id):
 
 def handle_error():
     print("Usage: python3 api-test.py category [id-number]", file=sys.stderr)
+    print("Categories available: 'films', 'people', 'planets', 'species', 'starships', 'vehicles'")
     exit()
 
 def main():
