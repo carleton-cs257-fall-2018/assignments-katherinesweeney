@@ -1,3 +1,24 @@
 Katherine Sweeney & Owen Barnett
-NASA Exoplanet data
 
+NASA data on confirmed exoplanents with technical measurement information and their associated stars and research laboratories.
+interative: https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=planets
+csv format: https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets
+
+Alice wants to get a list of all exoplanets.
+Alice wants to get data for a specific exoplanet.
+Alice wants to sort planets by distance from Earth.
+Alice wants to find planets comparable to Earth.
+Alice wants to get a list of exoplanets for a certain star.
+Alice wants to get a list of stars with multiple planets.
+Alice wants to sort planets by mass.
+Alice wants to know how many planets each research laboratory has found.
+Alice wants to see which research facilities use which discovery methods.
+Alice wants to wants to know how many planets have been found with a discovery method.
+ALice wants to get planets in the Kepler field.
+ALice wants to compare size of planets with the size of their stars.
+Alice wants to get a list of planets found on the K2 Mission.
+Alice wants to compare stellar densitities to planet densities.
+Alice wants to get planets with notes.
+Alice wants to see how well we know a planet.
+Alice wants to get exoplanets with a certain orbital period.
+Alice wants to see the distribution of orbital periods.
