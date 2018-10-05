@@ -1,24 +1,54 @@
 Katherine Sweeney & Owen Barnett
 
 NASA data on confirmed exoplanents with technical measurement information and their associated stars and research laboratories.
+Includes information on:
+-Star name
+-Planet letter
+-Planet name
+-Discovery method
+-Discovery facility
+-Number of planets in system
+-Orbital period
+-Orbit semi-major axis
+-Eccentricity of orbit
+-Inclination
+-Planet mass
+-Planet radius
+-Planet density
+-TTV/Kepler/K2 Mission flags
+-Extra notes on the planet
+-Right ascension
+-Declination
+-Distance from Earth
+-Optical magnitude
+-Optical magnitude band
+-G-band
+-Effective temperature
+-Stellar mass
+-Stellar radius
+-Date of last update
+
 interative: https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=planets
 csv format: https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets
 
+User Stories:
+
 Alice wants to get a list of all exoplanets.
-Alice wants to get data for a specific exoplanet.
+Alice wants to get all data for a specific exoplanet.
 Alice wants to sort planets by distance from Earth.
 Alice wants to find planets comparable to Earth.
 Alice wants to get a list of exoplanets for a certain star.
 Alice wants to get a list of stars with multiple planets.
 Alice wants to sort planets by mass.
+Alice wants to sort solar systems by number of planets in the system.
 Alice wants to know how many planets each research laboratory has found.
 Alice wants to see which research facilities use which discovery methods.
-Alice wants to wants to know how many planets have been found with a discovery method.
-ALice wants to get planets in the Kepler field.
+Alice wants to wants to know how many planets have been found with each discovery method.
+ALice wants to get a list planets in the Kepler field.
 ALice wants to compare size of planets with the size of their stars.
 Alice wants to get a list of planets found on the K2 Mission.
 Alice wants to compare stellar densitities to planet densities.
-Alice wants to get planets with notes.
-Alice wants to see how well we know a planet.
+Alice wants to get planets with additional notes.
+Alice wants to see how well we know a planet by seeing the number of data fields available..
 Alice wants to get exoplanets with a certain orbital period.
 Alice wants to see the distribution of orbital periods.
