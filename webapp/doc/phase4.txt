@@ -1,0 +1,34 @@
+CREATE TABLE planets (
+    id SERIAL,
+    pl_hostname TEXT,
+    pl_discmethod TEXT,
+    pl_pnum INT,
+    pl_orbper INT,
+    ....
+);
+
+CREATE TABLE stars (
+    id SERIAL,
+    etc
+);
+
+
+SYNOPSIS: Get a dictionary of all of a planet's data by name
+QUERY (GET): /planets/<pl_name>/
+RESPONSE: A dictionary that contains all available data for the planet as a key
+EXAMPLE: http://whatever.com/planets/11CombB/
+....
+
+SYNOPSIS: Get a list of planets that meet specified criteria
+QUERY (GET): /planets/table?pl_name=name&pl_hostname=starname&pl_pnum=numberofplanetsinsystem
+RESPONSE: A list of dictionaries of all keys for plants that meet the criteria
+EXAMPLE: http://whatever.com/planets/table?pl_discmethod=radialvelocity&max_distance=100&min_distance=25/
+.........
+
+SYNOPSIS: Compare two data fields for all planets that meet specified criteria
+QUERY (GET): /planets/<data_field_1>/<data_field_2>& DODODOODOAIJSFOIAJ
+RESPONSE: A list of a list of all the values for the first data field that meet criteria and a list of all the values for the second data field that meet criteria
+EXAMPLE: http://whatever.com/planets/pl_orbper/plorbeccen& DO THIS
+.................
+
+SYNOPSIS: 
