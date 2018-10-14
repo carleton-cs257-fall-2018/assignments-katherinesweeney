@@ -5,7 +5,7 @@ import api
 import unittest
 
 
-#  The planet dictionaries are very long, so I will make global variables up here for each planet
+#  The planet and star dictionaries are very long, so I will make global variables up here for each planet and star
 
 planet1 = {'loc_rowid': '1', 'pl_hostname': '11 Com', 'pl_name': '11 Com b', 'pl_discmethod': 'Radial Velocity',
            'pl_pnum': 1.0, 'pl_orbper': 326.03, 'pl_orbpererr1': '0.32000000', 'pl_orbpererr2': '-0.32000000',
@@ -93,6 +93,31 @@ planet7 = {'loc_rowid': '7', 'pl_hostname': '24 Sex', 'pl_name': '24 Sex c', 'pl
            'st_mass': '1.54', 'st_masserr1': '0.08', 'st_masserr2': '-0.08', 'st_masslim': '0', 'st_rad': '4.90', 'st_raderr1': '0.08',
            'st_raderr2': '-0.08', 'st_radlim': '0', 'rowupdate': '2014-05-14', 'pl_facility': 'Lick Observatory'}
 
+star1 = {'st_name' : "11 Com", "st_pnum" : 1, "st_planet1" : "11 Com b", "st_planet2" : "", "st_planet3" : "", "st_planet4" : "",
+         "st_planet5" : "", "st_planet6" : "", "st_planet7" : "", "st_planet8" : "", "st_dist" : "993.366799293463927",
+         "st_teff" : 4742, "st_mass" : 2.7, "st_rad" : 19}
+
+star2 = {'st_name' : "11 UMi", "st_pnum" : 1 , "st_planet1" : "11 Umi b", "st_planet2" : "", "st_planet3" : "", "st_planet4" : ""
+    , "st_planet5" : "", "st_planet6" : "" , "st_planet7" : "" , "st_planet8" : "", "st_dist" : "125.72478364389276",
+         "st_teff" : 4213, "st_mass" : 2.78, "st_rad" : 29.79}
+
+star3 = {'st_name' : "14 And", "st_pnum" : 1, "st_planet1" : "14 Amd b", "st_planet2" : "", "st_planet3" : "", "st_planet4" : "",
+         "st_planet5" : "", "st_planet6" : "", "st_planet7" : "", "st_planet8" : "", "st_dist" : "75.592188544822534",
+         "st_teff" : 4813, "st_mass" : 2.2, "st_rad" : 11}
+
+star4 = {'st_name' : "14 Her", "st_pnum" : 1, "st_planet1" : "14 Her b", "st_planet2" : "", "st_planet3" : "", "st_planet4" : "",
+         "st_planet5" : "", "st_planet6" : "", "st_planet7" : "", "st_planet8" : "", "st_dist" : "17.941613695113364",
+         "st_teff" : 5338, "st_mass" : 0.90, "st_rad" : 0.93}
+
+star5 = {'st_name' : "16 Cyg B", "st_pnum" : 1, "st_planet1" : "16 Cyg B b", "st_planet2" : "", "st_planet3" : "", "st_planet4" : "",
+         "st_planet5" : "", "st_planet6" : "", "st_planet7" : "", "st_planet8" : "", "st_dist" : "21.41", "st_teff" : 5750,
+         "st_mass" : 1.08, "st_rad" : 1.13}
+
+star6 = {'st_name' : "24 Sex", "st_pnum" : 2, "st_planet1" : "24 Sex b", "st_planet2" : "24 Sex c", "st_planet3" : "", "st_planet4" : "",
+         "st_planet5" : "", "st_planet6" : "", "st_planet7" : "", "st_planet8" : "", "st_dist" : "72.208512761026697", "st_teff" : 5098,
+         "st_mass" : 1.54, "st_rad" : 4.9}
+
+
 
 
 class BooksDataSourceTest(unittest.TestCase):
@@ -111,6 +136,8 @@ class BooksDataSourceTest(unittest.TestCase):
 
     def test_planet_wrong_type(self):
         self.assertRaises(ValueError, self.data.planet(10))
+
+
 
     def test_planets_pl_name(self):
         self.assertEqual(self.data.planets(pl_name = "14"), [planet3,planet4])
@@ -199,7 +226,127 @@ class BooksDataSourceTest(unittest.TestCase):
     def test_planets_bad_input_pl_orbpermin(self):
         self.assertRaises(ValueError, self.data.planets(pl_orbpermin = "10"))
 
+    def test_planets_pl_facility_and_pl_massjmax(self):
+        self.assertEqual(self.data.planets(pl_massjmax="14", pl_facility="Lick Observatory"), [planet6, planet7])
+
+    def test_planets_pl_discmethod_and_pl_eccenmax(self):
+        self.assertEqual(self.data.planets(pl_discmethod="Radial Velocity",pl_eccenmax=.231), [planet2, planet3, planet6])
+
+    def test_planets_multiple_criteria(self):
+        self.assertEqual(self.data.planets(pl_massjmax="14", pl_facility="Lick Observatory", pl_discmethod="Radial Velocity",pl_eccenmax=.231, pl_pnummin=1), [planet6])
+
+
+
+    def test_compare_planet_pl_facility_discovery_method(self):
+        self.assertEqual(self.data.compare_planet("pl_facility", "pl_discmethod", [planet1, planet2, planet6]),
+                         (["Xinglong Station", "Thueringer Landessternwarte Tautenburg", "Lick Observatory"],
+                          ["Radial Velocity","Radial Velocity","Radial Velocity"]))
+
+    def test_compare_planet_pl_ttvflag_pl_massj(self):
+        self.assertEqual(self.data.compare_planet("pl_ttvflag", "pl_massj", [planet3, planet5],
+                                           (["0", "0"],["4.8", "1.78"])))
+
+    def test_compare_planet_int_input(self):
+        self.assertRaises(ValueError, self.data.compare_planet(10, "pl_massj", [planet5]))
+
+    def test_compare_planet_not_valid_input(self):
+        self.assertRaises(ValueError, self.data.compare_planet("goat", "pl_massj", [planet2]))
+
+
+
+    def test_star(self):
+        self.assertEqual(self.data.star("11 Com"), star1)
+
+    def test_star_bad_name(self):
+        self.assertRaises(ValueError, self.data.star("goat"))
+
+    def test_star_wrong_type(self):
+        self.assertRaises(ValueError, self.data.star(12))
+
+
+
+    def test_stars_st_name(self):
+        self.assertEqual(self.data.start(st_name = "e"), [star4, star6])
+
+    def test_stars_st_pnum(self):
+        self.assertEqual(self.data.start(st_pnum= 2), [star6])
+
+    def test_stars_st_pnummin(self):
+        self.assertEqual(self.data.start(st_pnummin=2), [star6])
+
+    def test_stars_st_pnummax(self):
+        self.assertEqual(self.data.start(st_pnummax=2), [star1, star2, star3, star4, star5])
+
+    def test_stars_st_planet_1_name(self):
+        self.assertEqual(self.data.start(st_planet_1_name="14 Her B"), [star4])
+
+    def test_stars_st_dist(self):
+        self.assertEqual(self.data.start(st_dist="21.41"), [star5])
+
+    def test_stars_st_distmax(self):
+        self.assertEqual(self.data.start(st_distmax="21.41"), [star4])
+
+    def test_stars_st_distmin(self):
+        self.assertEqual(self.data.start(st_distmin="21.41"), [star1, star2, star3, star6])
+
+    def test_stars_st_teff(self):
+        self.assertEqual(self.data.start(st_teff=4742), [star1])
+
+    def test_stars_st_teffmax(self):
+        self.assertEqual(self.data.start(st_teffmax=4742), [star2])
+
+    def test_stars_st_teffmin(self):
+        self.assertEqual(self.data.start(st_teffmin=4742), [star3, star4, star5, star6])
+
+    def test_stars_st_mass(self):
+        self.assertEqual(self.data.start(st_mass=2.7), [star1])
+
+    def test_stars_st_massmax(self):
+        self.assertEqual(self.data.start(st_massmax=2.7), [star3, star4, star5, star6])
+
+    def test_stars_st_massmin(self):
+        self.assertEqual(self.data.start(st_massmin=2.7), [star2])
+
+    def test_stars_st_rad(self):
+        self.assertEqual(self.data.start(st_rad=11), [star3])
+
+    def test_stars_st_radmax(self):
+        self.assertEqual(self.data.start(st_radmax=11), [star4, star5, star6])
+
+    def test_stars_st_radmin(self):
+        self.assertEqual(self.data.start(st_radmin=11), [star1, star2])
+
+    def test_stars_bad_input_st_massmax(self):
+        self.assertRaises(ValueError, self.data.start(st_massmax="goat"))
+
+    def test_stars_bad_input_mass(self):
+        self.assertRaises(ValueError, self.data.start(st_mass="2.7"))
+
+    def test_stars_st_radmax_st_massmax(self):
+        self.assertEqual(self.data.start(st_radmax=11, st_massmax = 2.7), [star4, star5, star6])
+
+    def test_stars_st_radmax_st_pnum_st_distmax(self):
+        self.assertEqual(self.data.start(st_radmax=11, st_pnum = 0, st_dist_max="21.41"), [star4])
+
+
+
+    def test_compare_star_st_rad_st_mass(self):
+        self.assertEqual(self.data.compare_star("st_rad", "st_mass", [star1, star3, star6]),
+                         ([19, 11, 4.9], [2.7, 2.2, 4.9]))
+
+    def test_compare_star_st_teff_st_mass(self):
+        self.assertEqual(self.data.compare_star("st_teff", "st_mass", [star1, star3, star6]),
+                         ([4742, 4813, 5098], [2.7, 2.2, 4.9]))
+
+    def test_compare_star_int_input(self):
+        self.assertRaises(ValueError, self.data.compare_star(12, "st_rad", [star3]))
+
+    def test_comapre_star_bad_input(self):
+        self.assertRaises(ValueError, self.data.compare_star("goat", "st_mass", [star5]))
+
+
 
 if __name__ == '__main__':
     unittest.main()
+
 
