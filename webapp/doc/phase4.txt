@@ -19,7 +19,7 @@ CREATE TABLE planets (
     pl_k2flag TEXT,
     pl_nnotes INT
     pl_facility_id INT,
-    row_update TEXT
+    row_update DATE
 );
 
 CREATE TABLE stars (
@@ -38,7 +38,7 @@ CREATE TABLE stars (
     st_teff INT,
     st_mass INT,
     st_rad INT,
-    row_update TEXT
+    row_update DATE
 );
 
 CREATE TABLE discovery_methods (
