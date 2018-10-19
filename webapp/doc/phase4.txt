@@ -1,37 +1,39 @@
 Authors: Owen Barnett and Katherine Sweeney
 
+CREATE TYPE mass AS ENUM ('Msini', 'Mass')
+
 CREATE TABLE planets (
-    id SERIAL,
-    pl_hostname TEXT,
-    pl_discmethod TEXT,
+    pl_id INT,
+    pl_host_star_id INT,
+    pl_discmethod_id INT,
     pl_pnum INT,
     pl_orbper INT,
     pl_orbsmax INT,
     pl_orbeccen INT,
     pl_massj INT,
-    pl_bmassprov TEXT,
+    pl_bmassprov mass,
     pl_radj INT,
     pl_dens INT,
     pl_ttvflag TEXT,
     pl_kepflag TEXT,
     pl_k2flag TEXT,
     pl_nnotes INT
-    pl_facility TEXT,
+    pl_facility_id INT,
     row_update TEXT
 );
 
 CREATE TABLE stars (
-    id SERIAL,
+    st_id INT,
     st_name TEXT,
     st_pnum INT,
-    st_planet_1_name TEXT,
-    st_planet_2_name TEXT,
-    st_planet_3_name TEXT,
-    st_planet_4_name TEXT,
-    st_planet_5_name TEXT,
-    st_planet_6_name TEXT,
-    st_planet_7_name TEXT,
-    st_planet_8_name TEXT,
+    st_planet_1_name_id INT,
+    st_planet_2_name_id INT,
+    st_planet_3_name_id INT,
+    st_planet_4_name_id INT,
+    st_planet_5_name_id INT,
+    st_planet_6_name_id INT,
+    st_planet_7_name_id INT,
+    st_planet_8_name_id INT,
     st_dist INT,
     st_teff INT,
     st_mass INT,
@@ -39,8 +41,15 @@ CREATE TABLE stars (
     row_update TEXT
 );
 
+CREATE TABLE discovery_methods (
+   discmeth_id INT,
+   name TEXT
+);
 
-
+CREATE TABLE discovery_facility (
+    disc_facil_id INT,
+    name TEXT
+);
 
 SYNOPSIS: Get a dictionary of all of a planet's data by name
 QUERY (GET): /planets/<pl_name>/
@@ -61,9 +70,9 @@ EXAMPLE: http://whatever.com/planets/11ComB/
 
 
 SYNOPSIS: Get a list of planets that meet specified criteria
-QUERY (GET): /planets/table?pl_name=<namecomponent>&pl_hostname=<starnamecomponent>&pl_discmethod=<methodofdiscoverycomponent>&pl_pnum=<numberofplanetsinsystem>&pl_pnummax=<maxnumberofplanetsinsys>&pl_pnummin=<minnumberofplanetsinsystem>&pl_orbper=<orbitalperiod>&pl_orbpermax=<maxorbitalperiod>&pl_orbpermin=<minorbitalperiod>&pl_orbsmax=<orbitsemimajoraxis>&pl_orbsmaxmax=<maxsemimajoraxis>&pl_orbsmaxmin=<minsemimajoraxis>&pl_eccen=<planeteccentricity>&pl_eccenmax=<maxplaneteccentricity>&pl_eccenmin=<minplaneteccentricity>&pl_massj=<planetmass>&pl_massjmax=<maxplanetmass>&pl_massjmin=<minplanetmass>&pl_massprov=<provenanceofmassmeasurementcomponent>&pl_radj=<radiusofplanet>&pl_radjmax=<maxradiusofplanet>&pl_radjmin=<minradiusofplanet>&pl_dens=<densityofplanet>&pl_densmax=<maxdensityofplanet>&pl_densmin<mindensityofplanet>&pl_ttvflag=<ttvmissioncomponent>&pl_kepflag=<keplermissioncomponent>&pl_k2flag=<kepler2missioncomponent>&pl_nnotes=<numberofnotes>&pl_nnotesmax=<maxnumberofnotes>&pl_nnotesmin=<minnumberofnotes>&pl_facility=<discoveryfacilitycomponent>&row_update=<timeoflastupdatecomponent>
+QUERY (GET): /planets?pl_name=<namecomponent>&pl_hostname=<starnamecomponent>&pl_discmethod=<methodofdiscoverycomponent>&pl_pnum=<numberofplanetsinsystem>&pl_pnummax=<maxnumberofplanetsinsys>&pl_pnummin=<minnumberofplanetsinsystem>&pl_orbper=<orbitalperiod>&pl_orbpermax=<maxorbitalperiod>&pl_orbpermin=<minorbitalperiod>&pl_orbsmax=<orbitsemimajoraxis>&pl_orbsmaxmax=<maxsemimajoraxis>&pl_orbsmaxmin=<minsemimajoraxis>&pl_eccen=<planeteccentricity>&pl_eccenmax=<maxplaneteccentricity>&pl_eccenmin=<minplaneteccentricity>&pl_massj=<planetmass>&pl_massjmax=<maxplanetmass>&pl_massjmin=<minplanetmass>&pl_massprov=<provenanceofmassmeasurementcomponent>&pl_radj=<radiusofplanet>&pl_radjmax=<maxradiusofplanet>&pl_radjmin=<minradiusofplanet>&pl_dens=<densityofplanet>&pl_densmax=<maxdensityofplanet>&pl_densmin<mindensityofplanet>&pl_ttvflag=<ttvmissioncomponent>&pl_kepflag=<keplermissioncomponent>&pl_k2flag=<kepler2missioncomponent>&pl_nnotes=<numberofnotes>&pl_nnotesmax=<maxnumberofnotes>&pl_nnotesmin=<minnumberofnotes>&pl_facility=<discoveryfacilitycomponent>&row_update=<timeoflastupdatecomponent>
 RESPONSE: A list of dictionaries of all keys for plants that meet the criteria
-EXAMPLE: http://whatever.com/planets/table?pl_discmethod=radialvelocity&max_distance=100&min_distance=75/
+EXAMPLE: http://whatever.com/planets?pl_discmethod=radialvelocity&max_distance=100&min_distance=75/
 [{'loc_rowid': '1', 'pl_hostname': '11 Com', 'pl_name': '11 Com b', 'pl_discmethod': 'Radial Velocity',
 'pl_pnum': 1.0, 'pl_orbper': 326.03, 'pl_orbpererr1': '0.32000000', 'pl_orbpererr2': '-0.32000000',
 'pl_orbperlim': '0', 'pl_orbsmax': 1.29, 'pl_orbsmaxerr1': '0.050000', 'pl_orbsmaxerr2': '-0.050000',
@@ -106,9 +115,9 @@ EXAMPLE: http://whatever.com/stars/11Com/
 
 
 SYNOPSIS: Get a list of stars that meet specified criteria
-QUERY (GET): /stars/table?st_name=<nameofstarcomponent>&st_pnum=<numberofplanetsinsys>&st_pnummax=<maxnumberofplanetsinsys>&st_pnummin=<minnumberofplanetsinsys>&st_planet_1_name=<planet1namecomponent>&st_planet_2_name=<planet2namecomponent>&st_planet_3_name=<planet3namecomponent>&st_planet_4_name=<planet4namecomponent>&st_planet_5_name=<planet5namecomponent>&st_planet_6_name=<planet6namecomponent>&st_planet_7_name=<planet7namecomponent>&st_planet_8_name=<planet8namecomponent>&st_dist=<distancefromearth>&st_distmax=<maxdistancefromearth>&st_distmin=<mindistancefromearth>&st_teff=<effectivetemp>&st_teffmax=<maxeffectivetemp>&st_teffmin=<mineffectivetemp>&st_mass=<starmass>&st_massmax=<maxstarmass>&st_massmin=<minstarmass>&st_rad=<radiusofstar>&st_radmax=<maxradiusofstar>&st_radmin=<minradiusofstar>&row_update=<timeoflastupdatecomponent>/
+QUERY (GET): /stars?st_name=<nameofstarcomponent>&st_pnum=<numberofplanetsinsys>&st_pnummax=<maxnumberofplanetsinsys>&st_pnummin=<minnumberofplanetsinsys>&st_planet_1_name=<planet1namecomponent>&st_planet_2_name=<planet2namecomponent>&st_planet_3_name=<planet3namecomponent>&st_planet_4_name=<planet4namecomponent>&st_planet_5_name=<planet5namecomponent>&st_planet_6_name=<planet6namecomponent>&st_planet_7_name=<planet7namecomponent>&st_planet_8_name=<planet8namecomponent>&st_dist=<distancefromearth>&st_distmax=<maxdistancefromearth>&st_distmin=<mindistancefromearth>&st_teff=<effectivetemp>&st_teffmax=<maxeffectivetemp>&st_teffmin=<mineffectivetemp>&st_mass=<starmass>&st_massmax=<maxstarmass>&st_massmin=<minstarmass>&st_rad=<radiusofstar>&st_radmax=<maxradiusofstar>&st_radmin=<minradiusofstar>&row_update=<timeoflastupdatecomponent>/
 RESPONSE: A list of dictionaries of all keys for stars that meet the criteria
-EXAMPLE: http://whatever.com/stars/table?st_pnummax=2&st_radmin=15&st_name=11
+EXAMPLE: http://whatever.com/stars?st_pnummax=2&st_radmin=15&st_name=11
 [{'st_name' : "11 Com", "st_pnum" : 1, "st_planet1" : "11 Com b", "st_planet2" : "", "st_planet3" : "", "st_planet4" : "",
 "st_planet5" : "", "st_planet6" : "", "st_planet7" : "", "st_planet8" : "", "st_dist" : "993.366799293463927",
 "st_teff" : 4742, "st_mass" : 2.7, "st_rad" : 19},
@@ -122,3 +131,13 @@ QUERY (GET): /stars/graph/<data_field_1>/<data_field_2>?st_name=<nameofstarcompo
 RESPONSE: A list of a list of all the values for the first data field that meet criteria and a list of all the values for the second data field that meet criteria
 EXAMPLE: http://whatever.com/stars/graph/st_teff/st_mass?st_radmin=3&st_radmax=20/
 [[4742, 4813, 5098], [2.7, 2.2, 4.9]]
+
+SYNOPSIS: List of possible data fields for planets
+QUERY (GET): /planets/datafields
+RESPONSE: A list of all potential data fields for planets
+EXAMPLE:
+
+SYNOPSIS: List of possible data fields for stars
+QUERY (GET): /stars/datafields
+RESPONSE: A list of all potential data fields for stars
+EXAMPLE:
