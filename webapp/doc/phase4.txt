@@ -3,7 +3,7 @@ Authors: Owen Barnett and Katherine Sweeney
 CREATE TYPE mass AS ENUM ('Msini', 'Mass')
 
 CREATE TABLE planets (
-    id SERIAL,
+    pl_id INT,
     pl_host_star_id INT,
     pl_discmethod_id INT,
     pl_pnum INT,
@@ -23,7 +23,7 @@ CREATE TABLE planets (
 );
 
 CREATE TABLE stars (
-    id SERIAL,
+    st_id INT,
     st_name TEXT,
     st_pnum INT,
     st_planet_1_name_id INT,
@@ -42,12 +42,12 @@ CREATE TABLE stars (
 );
 
 CREATE TABLE discovery_methods (
-   id SERIAL,
+   discmeth_id INT,
    name TEXT
 );
 
 CREATE TABLE discovery_facility (
-    id SERIAL,
+    disc_facil_id INT,
     name TEXT
 );
 
