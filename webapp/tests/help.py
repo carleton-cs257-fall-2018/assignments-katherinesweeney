@@ -1,10 +1,10 @@
 import csv
 
 
-look ="pl_pnum INT,pl_orbper INT,pl_orbsmax INT,pl_orbeccen INT,pl_massj INT,pl_radj INT,pl_dens INT,pl_nnotes INT"
+# look ="pl_pnum INT,pl_orbper INT,pl_orbsmax INT,pl_orbeccen INT,pl_massj INT,pl_radj INT,pl_dens INT,pl_nnotes INT"
 
 
-reader = csv.reader(open("test_planets.csv", newline=''))
+reader = csv.reader(open("new_planet.csv", newline=''))
 
 planets = []
 
@@ -17,15 +17,27 @@ for row in reader:
         else:
             planet = {}
             for k in range(0,len(found)):
-                if (found[k]+ " ") in look and row[k] != "":
-                    planet.update({found[k]:float(row[k])})
-                else:
-                    planet.update({found[k]: row[k]})
+                planet.update({found[k]: row[k]})
 
-            print(planet)
-            print()
+            # print(planet)
+            # print()
             planets.append(planet)
 
-#print(planets)
+print(planets)
+
+
+import csv
+
+
+keys = list(planets[0].keys())
+print(keys)
+
+with open('final_planets.csv', 'w') as csvfile:
+    fieldnames = keys
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+    writer.writeheader()
+    for k in planets:
+        writer.writerow(k)
 
 
