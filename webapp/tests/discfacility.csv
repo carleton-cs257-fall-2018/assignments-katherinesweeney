@@ -1,4 +1,4 @@
-loc_rowid,pl_facility
+disc_facil_id,name
 1,Acton Sky Portal Observatory
 2,Anglo-Australian Telescope
 3,Apache Point Observatory
