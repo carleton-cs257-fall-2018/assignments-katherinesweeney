@@ -115,7 +115,7 @@ def get_planets():
                AND planets.pl_discmethod_id = discovery_methods.discmeth_id
                AND discovery_methods.name LIKE %s
                AND (%s = -1 OR (
-               planets.pl_host_star_id = stars.st_id AND star.st_pnum = %s
+               planets.pl_host_star_id = stars.st_id AND stars.st_pnum = %s
                ))
                '''
     print("start")
