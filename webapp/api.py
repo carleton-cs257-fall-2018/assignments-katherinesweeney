@@ -72,7 +72,7 @@ def get_star(st_name):
     cursor = connection.cursor()
     query = '''SELECT *
                FROM stars
-               WHERE st_name = %s'''
+               WHERE st_name = %%s%'''
     try:
         cursor.execute(query, (st_name,))
     except Exception as e:
@@ -95,6 +95,17 @@ def get_planets_datafields():
 @app.route('/stars/datafields')
 def get_stars_datafields():
     return json.dumps(names_star)
+
+# @app.route('/planets')
+# def get_planets():
+#     start_year = flask.request.args.get('start_year', default=0, type=int)
+#
+#     query = '''SELECT *
+#                FROM stars
+#                WHERE st_name = %s'''
+
+
+
 
 
 # @app.route('/')
