@@ -20,10 +20,15 @@ from config import database
 from config import user
 
 
-names = ["pl_id", "pl_host_star_id", "pl_name", "pl_discmethod_id", "pl_orbper",
+names_planet = ["pl_id", "pl_host_star_id", "pl_name", "pl_discmethod_id", "pl_orbper",
          "pl_orbsmax", "pl_orbeccen", "pl_massj", "pl_bmassprov", "pl_radj",
          "pl_dens", "pl_ttvflag", "pl_kepflag", "pl_k2flag", "pl_nnotes",
          "row_update", "pl_facility_id"]
+
+names_star = ["st_id", "st_planet_1_name_id", "st_planet_2_name_id", "st_planet_3_name_id",
+              "st_planet_4_name_id", "st_planet_5_name_id", "st_planet_6_name_id",
+              "st_planet_7_name_id", "st_planet_8_name_id","st_name", "s_pnum", "st_dist",
+              "st_teff", "st_mass","st_rad", "row_update"]
 
 
 try:
@@ -52,7 +57,7 @@ def get_planet(pl_name):
     for row in cursor:
         planet = {}
         for i in range(0, len(row)):
-            planet.update({names[i]: str(row[i])})
+            planet.update({names_planet[i]: str(row[i])})
 
         planets.append(planet)
 
@@ -77,7 +82,7 @@ def get_star(st_name):
     for row in cursor:
         star = {}
         for i in range(0, len(row)):
-            star.update({names[i]: str(row[i])})
+            star.update({names_star[i]: str(row[i])})
 
         stars.append(star)
 
