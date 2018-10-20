@@ -105,9 +105,10 @@ def get_planets():
     planets = []
     cursor = connection.cursor()
     query = '''SELECT planets.*
-               FROM planets, stars, discovery_methods, discovery_facility
+               FROM planets, stars
                WHERE planets.pl_name LIKE %s
-               AND planets.pl_host_star_id = stars.st_id AND stars.st_name LIKE %s'''
+               AND planets.pl_host_star_id = stars.st_id 
+               AND stars.st_name LIKE %s'''
     print("start")
     try:
         cursor.execute(query, (("%" + pl_name + "%"),("%" + pl_hostname + "%")) )
@@ -119,7 +120,7 @@ def get_planets():
         planet = {}
         for i in range(0, len(row)):
             planet.update({names_planet[i]: str(row[i])})
-        print(len(planets))
+
         planets.append(planet)
 
     return json.dumps(planets)
