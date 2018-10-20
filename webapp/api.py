@@ -43,7 +43,8 @@ def get_planet(pl_name):
         exit()
     for row in cursor:
         planet = row
-	return (planet)
+    
+    return (planet)
 
 
 
