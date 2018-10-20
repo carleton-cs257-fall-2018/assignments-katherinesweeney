@@ -7,19 +7,19 @@ CREATE TABLE planets (
     pl_host_star_id INT,
     pl_name TEXT,
     pl_discmethod_id INT,
-    pl_orbper INT,
-    pl_orbsmax INT,
-    pl_orbeccen INT,
-    pl_massj INT,
+    pl_orbper FLOAT,
+    pl_orbsmax FLOAT,
+    pl_orbeccen FLOAT,
+    pl_massj FLOAT,
     pl_bmassprov mass,
-    pl_radj INT,
-    pl_dens INT,
+    pl_radj FLOAT,
+    pl_dens FLOAT,
     pl_ttvflag TEXT,
     pl_kepflag TEXT,
     pl_k2flag TEXT,
-    pl_nnotes INT
-    row_update DATE
-    pl_facility_id INT,
+    pl_nnotes INT,
+    row_update DATE,
+    pl_facility_id INT
    );
 
 CREATE TABLE stars (
@@ -34,10 +34,10 @@ CREATE TABLE stars (
     st_planet_8_name_id INT,
     st_name TEXT,
     st_pnum INT,
-    st_dist INT,
-    st_teff INT,
-    st_mass INT,
-    st_rad INT,
+    st_dist FLOAT,
+    st_teff FLOAT,
+    st_mass FLOAT,
+    st_rad FLOAT,
     row_update DATE
 );
 
