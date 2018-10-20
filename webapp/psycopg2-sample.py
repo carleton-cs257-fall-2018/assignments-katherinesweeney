@@ -28,6 +28,11 @@ from config import password
 from config import database
 from config import user
 
+names = ["pl_id", "pl_host_star_id", "pl_name", "pl_discmethod_id", "pl_orbper",
+         "pl_orbsmax", "pl_orbeccen", "pl_massj", "pl_bmassprov", "pl_radj",
+         "pl_dens", "pl_ttvflag", "pl_kepflag", "pl_k2flag", "pl_nnotes",
+         "row_update", "pl_facility_id"]
+
 # Connect to the database
 try:
     connection = psycopg2.connect(database=database, user=user, password=password)
@@ -48,7 +53,9 @@ except Exception as e:
 # We have a cursor now. Iterate over its rows to print the results.
 print('===== All authors =====')
 for row in cursor:
-    print(row)
+    dict = {}
+    for i in range (0, len(row)):
+        dict.update({names[i] : row[i]})
 print()
 
 

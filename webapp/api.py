@@ -19,6 +19,13 @@ from config import password
 from config import database
 from config import user
 
+
+names = ["pl_id", "pl_host_star_id", "pl_name", "pl_discmethod_id", "pl_orbper",
+         "pl_orbsmax", "pl_orbeccen", "pl_massj", "pl_bmassprov", "pl_radj",
+         "pl_dens", "pl_ttvflag", "pl_kepflag", "pl_k2flag", "pl_nnotes",
+         "row_update", "pl_facility_id"]
+
+
 try:
     connection = psycopg2.connect(database=database, user=user, password=password)
 except Exception as e:
@@ -31,7 +38,7 @@ def get_planet(pl_name):
     '''
     Gets a planet with the given name
     '''
-    planet = ""
+    planets = []
     cursor = connection.cursor()
     query = '''SELECT *
                FROM planets
@@ -41,10 +48,15 @@ def get_planet(pl_name):
     except Exception as e:
         print(e)
         exit()
+
     for row in cursor:
-        planet = row
-    
-    return (planet)
+        planet = {}
+        for i in range(0, len(row)):
+            planet.update({names[i]: row[i]})
+
+        planets.append(planet)
+
+    return (planets)
 
 
 
