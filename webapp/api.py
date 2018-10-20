@@ -58,6 +58,31 @@ def get_planet(pl_name):
 
     return json.dumps(planets)
 
+@app.route('/star/<st_name>')
+def get_star(st_name):
+    '''
+    Gets a star with the given name
+    '''
+    stars = []
+    cursor = connection.cursor()
+    query = '''SELECT *
+               FROM stars
+               WHERE st_name = %s'''
+    try:
+        cursor.execute(query, (st_name,))
+    except Exception as e:
+        print(e)
+        exit()
+
+    for row in cursor:
+        star = {}
+        for i in range(0, len(row)):
+            star.update({names[i]: str(row[i])})
+
+        stars.append(star)
+
+    return json.dumps(stars)
+
 
 
 
