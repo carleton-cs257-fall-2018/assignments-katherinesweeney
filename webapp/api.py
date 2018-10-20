@@ -12,17 +12,39 @@ import json
 
 app = flask.Flask(__name__)
 
+import psycopg2
+
+from config import password
+from config import database
+from config import user
+
+try:
+    connection = psycopg2.connect(database=database, user=user, password=password)
+except Exception as e:
+    print(e)
+    exit()
 
 
-
-@app.route('/planets/datafields')
-def get_planets_datafields():
+@app.route('/planets/<pl_name>')
+def get_planet():
     '''
-    Gets a list of all the columns in the planets data table
+    Gets a planet with the given name
     '''
+    planet = ""
+    cursor = connection.cursor()
+    query = '''SELECT *
+               FROM planets
+               WHERE pl_name = %s'''
+    try:
+        cursor.execute(query, (pl_name,))
+    except Exception as e:
+        print(e)
+        exit()
 
+    for row in cursor:
+        planet = planet+row
 
-    return json.dumps(["horse", "wren"])
+    return json.dumps(planet)
 
 
 
