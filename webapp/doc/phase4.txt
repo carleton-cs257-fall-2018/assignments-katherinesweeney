@@ -5,8 +5,8 @@ CREATE TYPE mass AS ENUM ('Msini', 'Mass')
 CREATE TABLE planets (
     pl_id INT,
     pl_host_star_id INT,
+    pl_name TEXT,
     pl_discmethod_id INT,
-    pl_pnum INT,
     pl_orbper INT,
     pl_orbsmax INT,
     pl_orbeccen INT,
@@ -18,14 +18,12 @@ CREATE TABLE planets (
     pl_kepflag TEXT,
     pl_k2flag TEXT,
     pl_nnotes INT
-    pl_facility_id INT,
     row_update DATE
-);
+    pl_facility_id INT,
+   );
 
 CREATE TABLE stars (
     st_id INT,
-    st_name TEXT,
-    st_pnum INT,
     st_planet_1_name_id INT,
     st_planet_2_name_id INT,
     st_planet_3_name_id INT,
@@ -34,6 +32,8 @@ CREATE TABLE stars (
     st_planet_6_name_id INT,
     st_planet_7_name_id INT,
     st_planet_8_name_id INT,
+    st_name TEXT,
+    st_pnum INT,
     st_dist INT,
     st_teff INT,
     st_mass INT,
