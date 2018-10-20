@@ -101,17 +101,22 @@ def get_planets():
 
     pl_name = flask.request.args.get('pl_name', default="", type=str)
     pl_hostname = flask.request.args.get('pl_hostname', default="", type=str)
+    pl_discmethod = flask.request.args.get('pl_discmethod', default="", type=str)
+
 
     planets = []
     cursor = connection.cursor()
     query = '''SELECT planets.*
-               FROM planets, stars
+               FROM planets, stars, discovery_methods
                WHERE planets.pl_name LIKE %s
                AND planets.pl_host_star_id = stars.st_id 
-               AND stars.st_name LIKE %s'''
+               AND stars.st_name LIKE %s
+               AND planets.pl_discmethod_id = discovery_methods.discmeth_id
+               AND discovery_methods.name LIKE %s'''
     print("start")
     try:
-        cursor.execute(query, (("%" + pl_name + "%"),("%" + pl_hostname + "%")) )
+        cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
+                                ("%" + pl_discmethod + "%") ))
     except Exception as e:
         print(e)
         exit()
