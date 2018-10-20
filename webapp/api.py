@@ -88,8 +88,13 @@ def get_star(st_name):
 
     return json.dumps(stars)
 
+@app.route('/planets/datafields')
+def get_planets_datafields():
+    return json.dumps(names_planet)
 
-
+@app.route('/stars/datafields')
+def get_stars_datafields():
+    return json.dumps(names_star)
 
 
 # @app.route('/')
