@@ -108,17 +108,18 @@ def get_planets():
                FROM planets, stars, discovery_methods, discovery_facility
                WHERE planets.pl_name LIKE %s
                AND planets.pl_host_star_id = stars.st_id AND stars.st_name LIKE %s'''
+    print("start")
     try:
         cursor.execute(query, (("%" + pl_name + "%"),("%" + pl_hostname + "%")) )
     except Exception as e:
         print(e)
         exit()
-
+    print("done")
     for row in cursor:
         planet = {}
         for i in range(0, len(row)):
             planet.update({names_planet[i]: str(row[i])})
-
+        print(len(planets))
         planets.append(planet)
 
     return json.dumps(planets)
