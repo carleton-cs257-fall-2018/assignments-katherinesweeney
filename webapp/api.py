@@ -13,6 +13,7 @@ import json
 app = flask.Flask(__name__)
 
 import psycopg2
+import psycopg2.extras
 
 from config import password
 from config import database
@@ -25,8 +26,8 @@ except Exception as e:
     exit()
 
 
-@app.route('/planets/<pl_name>')
-def get_planet():
+@app.route('/planet/<pl_name>')
+def get_planet(pl_name):
     '''
     Gets a planet with the given name
     '''
@@ -40,11 +41,8 @@ def get_planet():
     except Exception as e:
         print(e)
         exit()
-
     for row in cursor:
-        planet = planet+row
-
-    return json.dumps(planet)
+	return (row)
 
 
 
