@@ -72,9 +72,9 @@ def get_star(st_name):
     cursor = connection.cursor()
     query = '''SELECT *
                FROM stars
-               WHERE st_name = %%s%'''
+               WHERE st_name = %s'''
     try:
-        cursor.execute(query, (st_name,))
+        cursor.execute(query, (("%"+st_name+"%"),))
     except Exception as e:
         print(e)
         exit()
