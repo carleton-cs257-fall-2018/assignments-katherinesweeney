@@ -52,11 +52,11 @@ def get_planet(pl_name):
     for row in cursor:
         planet = {}
         for i in range(0, len(row)):
-            planet.update({names[i]: row[i]})
+            planet.update({names[i]: str(row[i])})
 
         planets.append(planet)
 
-    return (planets)
+    return json.dumps(planets)
 
 
 
