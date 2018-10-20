@@ -106,10 +106,10 @@ def get_planets():
     cursor = connection.cursor()
     query = '''SELECT planets.*
                FROM planets, stars, discovery_method, discovery_facility
-               WHERE planets.pl_name LIKE %s
-               AND planets.pl_host_star_id = stars.st_id AND stars.st_name LIKE %s'''
+               WHERE planets.pl_host_star_id = stars.st_id AND stars.st_name LIKE %s'''
     try:
-        cursor.execute(query, (("%" + pl_name + "%"),("%" + pl_hostname + "%")) )
+        # cursor.execute(query, (("%" + pl_name + "%"),("%" + pl_hostname + "%")) )
+        cursor.execute(query, (("%" + pl_hostname + "%"),))
     except Exception as e:
         print(e)
         exit()
