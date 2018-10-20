@@ -72,9 +72,9 @@ def get_star(st_name):
     cursor = connection.cursor()
     query = '''SELECT *
                FROM stars
-               WHERE st_name LIKE %s'''
+               WHERE st_name = %s'''
     try:
-        cursor.execute(query, (("%"+st_name+"%"),))
+        cursor.execute(query, (st_name,))
     except Exception as e:
         print(e)
         exit()
@@ -96,16 +96,32 @@ def get_planets_datafields():
 def get_stars_datafields():
     return json.dumps(names_star)
 
-# @app.route('/planets')
-# def get_planets():
-#     start_year = flask.request.args.get('start_year', default=0, type=int)
-#
-#     query = '''SELECT *
-#                FROM stars
-#                WHERE st_name = %s'''
+@app.route('/planets')
+def get_planets():
 
+    pl_name = flask.request.args.get('pl_name', default="", type=str)
+    pl_hostname = flask.request.args.get('pl_hostname', default="", type=str)
 
+    planets = []
+    cursor = connection.cursor()
+    query = '''SELECT planets.*
+               FROM planets, stars, discovery_method, discovery_facility
+               WHERE planets.pl_name LIKE %s
+               AND planets.pl_host_star_id = stars.st_id AND stars.st_name LIKE %s'''
+    try:
+        cursor.execute(query, (("%" + pl_name + "%"),("%" + pl_hostname + "%")))
+    except Exception as e:
+        print(e)
+        exit()
 
+    for row in cursor:
+        planet = {}
+        for i in range(0, len(row)):
+            planet.update({names_planet[i]: str(row[i])})
+
+        planets.append(planet)
+
+    return json.dumps(planets)
 
 
 # @app.route('/')
