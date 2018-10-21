@@ -111,9 +111,9 @@ def get_planets():
     pl_orbsmax = flask.request.args.get('pl_orbsmax', default=-1, type=float)
     pl_orbsmaxmax = flask.request.args.get('pl_orbsmaxmax', default=sys.maxsize, type=float)
     pl_orbsmaxmin = flask.request.args.get('pl_orbsmaxmin', default=0, type=float)
-    pl_eccen = flask.request.args.get('pl_eccen', default=0, type=float)
+    pl_eccen = flask.request.args.get('pl_eccen', default=-1, type=float)
     pl_eccenmax = flask.request.args.get('pl_eccenmax', default=sys.maxsize, type=float)
-    pl_eccenmin = flask.request.args.get('pl_eccenmin', default=-sys.maxsize, type=float)
+    pl_eccenmin = flask.request.args.get('pl_eccenmin', default=0, type=float)
     pl_massj = flask.request.args.get('pl_massj', default=-sys.maxsize, type=float)
     pl_massjmax = flask.request.args.get('pl_massjmax', default=sys.maxsize, type=float)
     pl_massjmin = flask.request.args.get('pl_massjmin', default=-sys.maxsize, type=float)
@@ -152,13 +152,17 @@ def get_planets():
                AND (planets.pl_orbsmax = %s OR %s = -1)
                AND planets.pl_orbsmax <= %s
                AND planets.pl_orbsmax >= %s
+               AND (planets.pl_orbeccen = %s OR %s = -1)
+               AND planets.pl_orbeccen <= %s
+               AND planets.pl_orbeccen >= %s
                '''
     print("start")
     try:
         cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
                                 ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax,
                                 pl_pnummin,pl_orbper,pl_orbper,pl_orbpermax,pl_orbpermin,
-                                pl_orbsmax,pl_orbsmax,pl_orbsmaxmax,pl_orbsmaxmin))
+                                pl_orbsmax,pl_orbsmax,pl_orbsmaxmax,pl_orbsmaxmin,
+                                pl_eccen,pl_eccen,pl_eccenmax,pl_eccenmin))
     except Exception as e:
         print(e)
         exit()
