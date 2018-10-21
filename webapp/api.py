@@ -247,6 +247,12 @@ def get_stars():
                AND (stars.st_teff = %s OR %s = -1)
                AND (stars.st_teff <= %s OR (stars.st_teff IS NULL AND %s = 60000))
                AND (stars.st_teff >= %s OR (stars.st_teff IS NULL AND %s = 0))
+               AND (stars.st_mass = %s OR %s = -1)
+               AND (stars.st_mass <= %s OR (stars.st_mass IS NULL AND %s = 25))
+               AND (stars.st_mass >= %s OR (stars.st_mass IS NULL AND %s = 0))
+               AND (stars.st_rad = %s OR %s = -1)
+               AND (stars.st_rad <= %s OR (stars.st_rad IS NULL AND %s = 75))
+               AND (stars.st_rad >= %s OR (stars.st_rad IS NULL AND %s = 0))
                '''
 
     try:
@@ -256,7 +262,8 @@ def get_stars():
                                 st_planet_5_name,("%" + st_planet_5_name + "%"),st_planet_6_name,("%" + st_planet_6_name + "%"),
                                 st_planet_7_name,("%" + st_planet_7_name + "%"),st_planet_8_name,("%" + st_planet_8_name + "%"),
                                 st_dist,st_dist,st_distmax,st_distmax,st_distmin,st_distmin,st_teff,st_teff,st_teffmax,st_teffmax,
-                                st_teffmin,st_teffmin))
+                                st_teffmin,st_teffmin,st_mass,st_mass,st_massmax,st_massmax,st_massmin,st_massmin,st_rad,st_rad,
+                                st_radmax,st_radmax,st_radmin,st_radmin))
     except Exception as e:
         print(e)
         exit()
@@ -266,7 +273,8 @@ def get_stars():
 
         for i in range(0, len(row)):
             star.update({names_star[i]: str(row[i])})
-        stars.append(star)
+        if not star in stars:
+            stars.append(star)
 
     return json.dumps(stars)
 
