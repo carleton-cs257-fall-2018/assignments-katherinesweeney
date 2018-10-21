@@ -244,6 +244,9 @@ def get_stars():
                AND (stars.st_dist = %s OR %s = -1)
                AND (stars.st_dist <= %s OR (stars.st_dist IS NULL AND %s = 900))
                AND (stars.st_dist >= %s OR (stars.st_dist IS NULL AND %s = 0))
+               AND (stars.st_teff = %s OR %s = -1)
+               AND (stars.st_teff <= %s OR (stars.st_teff IS NULL AND %s = 60000))
+               AND (stars.st_teff >= %s OR (stars.st_teff IS NULL AND %s = 0))
                '''
 
     try:
@@ -252,7 +255,8 @@ def get_stars():
                                 st_planet_3_name,("%" + st_planet_3_name + "%"),st_planet_4_name,("%" + st_planet_4_name + "%"),
                                 st_planet_5_name,("%" + st_planet_5_name + "%"),st_planet_6_name,("%" + st_planet_6_name + "%"),
                                 st_planet_7_name,("%" + st_planet_7_name + "%"),st_planet_8_name,("%" + st_planet_8_name + "%"),
-                                st_dist,st_dist,st_distmax,st_distmax,st_distmin,st_distmin))
+                                st_dist,st_dist,st_distmax,st_distmax,st_distmin,st_distmin,st_teff,st_teff,st_teffmax,st_teffmax,
+                                st_teffmin,st_teffmin))
     except Exception as e:
         print(e)
         exit()
