@@ -241,6 +241,9 @@ def get_stars():
                AND (%s = '' OR (stars.st_planet_6_name_id = planets.pl_id AND planets.pl_name LIKE %s))
                AND (%s = '' OR (stars.st_planet_7_name_id = planets.pl_id AND planets.pl_name LIKE %s))
                AND (%s = '' OR (stars.st_planet_8_name_id = planets.pl_id AND planets.pl_name LIKE %s))
+               AND (stars.st_dist = %s OR %s = -1)
+               AND (stars.st_dist <= %s OR (stars.st_dist IS NULL AND %s = 900))
+               AND (stars.st_dist >= %s OR (stars.st_dist IS NULL AND %s = 0))
                '''
 
     try:
@@ -248,7 +251,8 @@ def get_stars():
                                 st_planet_1_name,("%" + st_planet_1_name + "%"),st_planet_2_name,("%" + st_planet_2_name + "%"),
                                 st_planet_3_name,("%" + st_planet_3_name + "%"),st_planet_4_name,("%" + st_planet_4_name + "%"),
                                 st_planet_5_name,("%" + st_planet_5_name + "%"),st_planet_6_name,("%" + st_planet_6_name + "%"),
-                                st_planet_7_name,("%" + st_planet_7_name + "%"),st_planet_8_name,("%" + st_planet_8_name + "%")))
+                                st_planet_7_name,("%" + st_planet_7_name + "%"),st_planet_8_name,("%" + st_planet_8_name + "%"),
+                                st_dist,st_dist,st_distmax,st_distmax,st_distmin,st_distmin))
     except Exception as e:
         print(e)
         exit()
