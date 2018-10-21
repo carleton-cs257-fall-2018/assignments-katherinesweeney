@@ -245,9 +245,10 @@ def get_stars():
 
     for row in cursor:
         star = {}
+
         for i in range(0, len(row)):
             star.update({names_star[i]: str(row[i])})
-
+        print(star)
         stars.append(star)
 
     return json.dumps(stars)
