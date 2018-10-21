@@ -103,22 +103,22 @@ def get_planets():
     pl_hostname = flask.request.args.get('pl_hostname', default="", type=str)
     pl_discmethod = flask.request.args.get('pl_discmethod', default="", type=str)
     pl_pnum = flask.request.args.get('pl_pnum', default=-1, type=int)
-    pl_pnummax = flask.request.args.get('pl_pnummax', default=1000000000, type=int)
+    pl_pnummax = flask.request.args.get('pl_pnummax', default=sys.maxsize, type=int)
     pl_pnummin = flask.request.args.get('pl_pnummin', default=0, type=int)
     pl_orbper = flask.request.args.get('pl_orbper', default=-1, type=float)
-    pl_orbpermax = flask.request.args.get('pl_orbpermax', default=1000000000, type=float)
+    pl_orbpermax = flask.request.args.get('pl_orbpermax', default=sys.maxsize, type=float)
     pl_orbpermin = flask.request.args.get('pl_orbpermin', default=0, type=float)
     pl_orbsmax = flask.request.args.get('pl_orbsmax', default=-1, type=float)
-    pl_orbsmaxmax = flask.request.args.get('pl_orbsmaxmax', default=1000000000, type=float)
+    pl_orbsmaxmax = flask.request.args.get('pl_orbsmaxmax', default=sys.maxsize, type=float)
     pl_orbsmaxmin = flask.request.args.get('pl_orbsmaxmin', default=0, type=float)
     pl_eccen = flask.request.args.get('pl_eccen', default=-1, type=float)
-    pl_eccenmax = flask.request.args.get('pl_eccenmax', default=1000000000, type=float)
+    pl_eccenmax = flask.request.args.get('pl_eccenmax', default=sys.maxsize, type=float)
     pl_eccenmin = flask.request.args.get('pl_eccenmin', default=0, type=float)
     pl_massj = flask.request.args.get('pl_massj', default=-1, type=float)
-    pl_massjmax = flask.request.args.get('pl_massjmax', default=1000000000, type=float)
+    pl_massjmax = flask.request.args.get('pl_massjmax', default=sys.maxsize, type=float)
     pl_massjmin = flask.request.args.get('pl_massjmin', default=0, type=float)
     pl_radj = flask.request.args.get('pl_radj', default=-1, type=float)
-    pl_radjmax = flask.request.args.get('pl_radjmax', default=1000000000, type=float)
+    pl_radjmax = flask.request.args.get('pl_radjmax', default=sys.maxsize, type=float)
     pl_radjmin = flask.request.args.get('pl_radjmin', default=0, type=float)
     pl_dens = flask.request.args.get('pl_dens', default=-sys.maxsize, type=float)
     pl_densmax = flask.request.args.get('pl_densmax', default=sys.maxsize, type=float)
@@ -151,25 +151,43 @@ def get_planets():
                AND (planets.pl_orbsmax = %s OR %s = -1)
                AND planets.pl_orbsmax <= %s
                AND planets.pl_orbsmax >= %s
-               AND (planets.pl_orbeccen = %s OR %s = -1)
-               AND planets.pl_orbeccen <= %s
-               AND planets.pl_orbeccen >= %s
-               AND (planets.pl_massj = %s OR %s = -1)
-               AND planets.pl_massj <= %s
-               AND planets.pl_massj >= %s
-               AND (%s = -1 OR planets.pl_radj = %s)
-               AND planets.pl_radj <= %s
-               AND planets.pl_radj >= %s
+
                '''
     print("start")
     try:
-        cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
-                                ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax,
-                                pl_pnummin,pl_orbper,pl_orbper,pl_orbpermax,pl_orbpermin,
-                                pl_orbsmax,pl_orbsmax,pl_orbsmaxmax,pl_orbsmaxmin,
-                                pl_eccen,pl_eccen,pl_eccenmax,pl_eccenmin,pl_massj,
-                                pl_massj,pl_massjmax,pl_massjmin,pl_radj,pl_radj,pl_radjmax,
-                                pl_radjmin))
+        # cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
+        #                         ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax,
+        #                         pl_pnummin,pl_orbper,pl_orbper,pl_orbpermax,pl_orbpermin,
+        #                         pl_orbsmax,pl_orbsmax,pl_orbsmaxmax,pl_orbsmaxmin,
+        #                         pl_eccen,pl_eccen,pl_eccenmax,pl_eccenmin,pl_massj,
+        #                         pl_massj,pl_massjmax,pl_massjmin,pl_radj,pl_radj,pl_radjmax,
+        #                         pl_radjmin))
+
+        # AND(planets.pl_orbeccen = % s
+        # OR % s = -1)
+        # AND
+        # planets.pl_orbeccen <= % s
+        # AND
+        # planets.pl_orbeccen >= % s
+        # AND(planets.pl_massj = % s
+        # OR % s = -1)
+        # AND
+        # planets.pl_massj <= % s
+        # AND
+        # planets.pl_massj >= % s
+        # AND( % s = -1
+        # OR
+        # planets.pl_radj = % s)
+        # AND
+        # planets.pl_radj <= % s
+        # AND
+        # planets.pl_radj >= % s
+
+        cursor.execute(query, (("%" + pl_name + "%"), ("%" + pl_hostname + "%"),
+                               ("%" + pl_discmethod + "%"), pl_pnum, pl_pnum, pl_pnummax,
+                               pl_pnummin, pl_orbper, pl_orbper, pl_orbpermax, pl_orbpermin,
+                               pl_orbsmax, pl_orbsmax, pl_orbsmaxmax, pl_orbsmaxmin
+                               ))
     except Exception as e:
         print(e)
         exit()
