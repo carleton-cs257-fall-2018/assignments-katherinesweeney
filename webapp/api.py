@@ -144,13 +144,13 @@ def get_planets():
                AND planets.pl_discmethod_id = discovery_methods.discmeth_id
                AND discovery_methods.name LIKE %s
                AND (%s = -1 OR (
-               planets.pl_host_star_id = stars.st_id AND stars.st_pnum = %s
-               ))
+               planets.pl_host_star_id = stars.st_id AND stars.st_pnum = %s ))
+               AND star.st_pnum < %s
                '''
     print("start")
     try:
         cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
-                                ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum ))
+                                ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax))
     except Exception as e:
         print(e)
         exit()
