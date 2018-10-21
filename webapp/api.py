@@ -232,7 +232,7 @@ def get_stars():
                AND (%s = -1 OR stars.st_pnum = %s)
                AND (stars.st_pnum <= %s OR (stars.st_pnum IS NULL AND %s = 9))
                AND (stars.st_pnum >= %s OR (stars.st_pnum IS NULL AND %s = 0))
-               AND (%s = '' OR (stars.st_planets_1_name_id = planets.pl_id AND planets.pl_name LIKE %s))
+               AND (%s = '' OR (stars.st_planet_1_name_id = planets.pl_id AND planets.pl_name LIKE %s))
                '''
 
     try:
