@@ -160,6 +160,9 @@ def get_planets():
                AND (%s = -1 OR planets.pl_radj = %s)
                AND (planets.pl_radj <= %s OR (planets.pl_radj IS NULL AND %s = 7))
                AND (planets.pl_radj >= %s OR (planets.pl_radj IS NULL AND %s = 0))
+               AND (%s = -1 OR planets.pl_dens = %s)
+               AND (planets.pl_dens <= %s OR (planets.pl_dens IS NULL AND %s = 80))
+               AND (planets.pl_dens >= %s OR (planets.pl_dens IS NULL AND %s = 0))
                '''
     print("start")
     try:
@@ -169,7 +172,8 @@ def get_planets():
                                 pl_orbpermin,pl_orbpermin,pl_orbsmax,pl_orbsmax,pl_orbsmaxmax,pl_orbsmaxmax,
                                 pl_orbsmaxmin,pl_orbsmaxmin,pl_eccen,pl_eccen,pl_eccenmax,pl_eccenmax,pl_eccenmin,
                                 pl_eccenmin,pl_massj,pl_massj,pl_massjmax,pl_massjmax,pl_massjmin,pl_massjmin,
-                                pl_radj,pl_radj,pl_radjmax,pl_radjmax,pl_radjmin,pl_radjmin))
+                                pl_radj,pl_radj,pl_radjmax,pl_radjmax,pl_radjmin,pl_radjmin,pl_dens,pl_dens,
+                                pl_densmax,pl_densmax,pl_densmin,pl_densmin))
 
     except Exception as e:
         print(e)
