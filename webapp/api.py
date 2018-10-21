@@ -127,19 +127,19 @@ def get_planets():
     pl_kepflag = flask.request.args.get('pl_kepflag', default="", type=str)
     pl_k2flag = flask.request.args.get('pl_k2flag', default="", type=str)
     pl_nnotes = flask.request.args.get('pl_nnotes', default=-1, type=int)
-    pl_nnotesmax = flask.request.args.get('pl_nnotesmax', default=4, type=int)
+    pl_nnotesmax = flask.request.args.get('pl_nnotesmax', default=5, type=int)
     pl_nnotesmin = flask.request.args.get('pl_nnotesmin', default=0, type=int)
     pl_facility = flask.request.args.get('pl_facility', default="", type=str)
-    row_update = flask.request.args.get('row_update', default="", type=str)
 
 
     planets = []
     cursor = connection.cursor()
     query = '''SELECT planets.*
-               FROM planets, stars, discovery_methods
+               FROM planets, stars, discovery_methods, discovery_facility
                WHERE planets.pl_name LIKE %s
                AND planets.pl_host_star_id = stars.st_id 
                AND planets.pl_discmethod_id = discovery_methods.discmeth_id
+               AND planets.pl_facility_id = discovery_facility.disc_facil_id
                AND stars.st_name LIKE %s
                AND discovery_methods.name LIKE %s
                AND (%s = -1 OR (planets.pl_host_star_id = stars.st_id AND stars.st_pnum = %s ))
@@ -166,6 +166,10 @@ def get_planets():
                AND (%s = '' or planets.pl_ttvflag = %s)
                AND (%s = '' or planets.pl_kepflag = %s)
                AND (%s = '' or planets.pl_k2flag = %s)
+               AND (%s = -1 OR planets.pl_nnotes = %s)
+               AND (planets.pl_nnotes <= %s OR (planets.pl_nnotes IS NULL AND %s = 5))
+               AND (planets.pl_nnotes >= %s OR (planets.pl_nnotes IS NULL AND %s = 0))
+               AND (discovery_facility.name LIKE %s)
                '''
     print("start")
     try:
@@ -177,7 +181,8 @@ def get_planets():
                                 pl_eccenmin,pl_massj,pl_massj,pl_massjmax,pl_massjmax,pl_massjmin,pl_massjmin,
                                 pl_radj,pl_radj,pl_radjmax,pl_radjmax,pl_radjmin,pl_radjmin,pl_dens,pl_dens,
                                 pl_densmax,pl_densmax,pl_densmin,pl_densmin,pl_ttvflag,pl_ttvflag,pl_kepflag,
-                                pl_kepflag,pl_k2flag,pl_k2flag))
+                                pl_kepflag,pl_k2flag,pl_k2flag,pl_nnotes,pl_nnotes,pl_nnotesmax,pl_nnotesmax,
+                                pl_nnotesmin,pl_nnotesmin,("%" + pl_facility + "%")))
 
     except Exception as e:
         print(e)
