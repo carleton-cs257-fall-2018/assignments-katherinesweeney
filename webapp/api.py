@@ -163,7 +163,9 @@ def get_planets():
                AND (%s = -1 OR planets.pl_dens = %s)
                AND (planets.pl_dens <= %s OR (planets.pl_dens IS NULL AND %s = 80))
                AND (planets.pl_dens >= %s OR (planets.pl_dens IS NULL AND %s = 0))
-               ANd (%s = '' or planets.pl_ttvflag = %s)
+               AND (%s = '' or planets.pl_ttvflag = %s)
+               AND (%s = '' or planets.pl_kepfalg = %s)
+               AND (%s = '' or planets.pl_k2flag = %s)
                '''
     print("start")
     try:
@@ -174,7 +176,8 @@ def get_planets():
                                 pl_orbsmaxmin,pl_orbsmaxmin,pl_eccen,pl_eccen,pl_eccenmax,pl_eccenmax,pl_eccenmin,
                                 pl_eccenmin,pl_massj,pl_massj,pl_massjmax,pl_massjmax,pl_massjmin,pl_massjmin,
                                 pl_radj,pl_radj,pl_radjmax,pl_radjmax,pl_radjmin,pl_radjmin,pl_dens,pl_dens,
-                                pl_densmax,pl_densmax,pl_densmin,pl_densmin,pl_ttvflag,pl_ttvflag))
+                                pl_densmax,pl_densmax,pl_densmin,pl_densmin,pl_ttvflag,pl_ttvflag,pl_kepflag,
+                                pl_kepflag,pl_k2flag,pl_k2flag))
 
     except Exception as e:
         print(e)
