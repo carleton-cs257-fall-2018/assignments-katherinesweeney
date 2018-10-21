@@ -158,6 +158,7 @@ def get_planets():
                AND (planets.pl_massj = %s OR %s = -1)
                AND planets.pl_massj <= %s
                AND planets.pl_massj >= %s
+               AND planets.pl_bmassprov LIKE %s
                '''
     print("start")
     try:
@@ -166,7 +167,7 @@ def get_planets():
                                 pl_pnummin,pl_orbper,pl_orbper,pl_orbpermax,pl_orbpermin,
                                 pl_orbsmax,pl_orbsmax,pl_orbsmaxmax,pl_orbsmaxmin,
                                 pl_eccen,pl_eccen,pl_eccenmax,pl_eccenmin,pl_massj,
-                                pl_massj,pl_massjmax,pl_massjmin))
+                                pl_massj,pl_massjmax,pl_massjmin,("%" + pl_massprov + "%") ))
     except Exception as e:
         print(e)
         exit()
