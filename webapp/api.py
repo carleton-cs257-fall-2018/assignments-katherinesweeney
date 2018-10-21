@@ -233,11 +233,12 @@ def get_stars():
                AND (stars.st_pnum <= %s OR (stars.st_pnum IS NULL AND %s = 9))
                AND (stars.st_pnum >= %s OR (stars.st_pnum IS NULL AND %s = 0))
                AND planets.pl_host_star_id = stars.st_id 
+               AND (%s = '' OR (stars.st_planet_1_name_id = planets.pl_id AND planets.pl_name LIKE %s))
                '''
 
     try:
-        cursor.execute(query, ( ("%" + st_name + "%"),st_pnum,st_pnum,st_pnummax,st_pnummax,st_pnummin,st_pnummin
-                                ))
+        cursor.execute(query, ( ("%" + st_name + "%"),st_pnum,st_pnum,st_pnummax,st_pnummax,st_pnummin,st_pnummin,
+                                st_planet_1_name,("%" + st_planet_1_name + "%")))
     except Exception as e:
         print(e)
         exit()
@@ -247,7 +248,6 @@ def get_stars():
 
         for i in range(0, len(row)):
             star.update({names_star[i]: str(row[i])})
-        print(star)
         stars.append(star)
 
     return json.dumps(stars)
