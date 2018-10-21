@@ -227,15 +227,17 @@ def get_stars():
     stars = []
     cursor = connection.cursor()
     query = '''SELECT stars.*
-               FROM stars 
+               FROM stars, planets
                WHERE stars.st_name LIKE %s
                AND (%s = -1 OR stars.st_pnum = %s)
                AND (stars.st_pnum <= %s OR (stars.st_pnum IS NULL AND %s = 9))
                AND (stars.st_pnum >= %s OR (stars.st_pnum IS NULL AND %s = 0))
+               AND (%s = '' OR (stars.st_planets_1_name_id = planets.pl_id AND planets.pl_name LIKE %s))
                '''
 
     try:
-        cursor.execute(query, ( ("%" + st_name + "%"),st_pnum,st_pnum,st_pnummax,st_pnummax,st_pnummin,st_pnummin))
+        cursor.execute(query, ( ("%" + st_name + "%"),st_pnum,st_pnum,st_pnummax,st_pnummax,st_pnummin,st_pnummin,
+                                st_planet_1_name,("%" + st_planet_1_name + "%") ))
 
     except Exception as e:
         print(e)
