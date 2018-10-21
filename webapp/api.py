@@ -1,24 +1,16 @@
 #!/usr/bin/env python3
-'''
-    example_flask_app.py
-    Jeff Ondich, 22 April 2016
-
-    A slightly more complicated Flask sample app than the
-    "hello world" app found at http://flask.pocoo.org/.
-'''
+#Authors Owen Barnett and Katherine Sweeney
 import sys
 import flask
 import json
-
-app = flask.Flask(__name__)
-
 import psycopg2
-import psycopg2.extras
+
 
 from config import password
 from config import database
 from config import user
 
+app = flask.Flask(__name__)
 
 names_planet = ["pl_id", "pl_host_star_id", "pl_name", "pl_discmethod_id", "pl_orbper",
          "pl_orbsmax", "pl_orbeccen", "pl_massj", "pl_bmassprov", "pl_radj",
@@ -98,7 +90,10 @@ def get_stars_datafields():
 
 @app.route('/planets')
 def get_planets():
-
+    '''
+    Gets a list of dictionaries of the planets that satisfy the given constraints
+    from the URL and returns a json string
+    '''
     pl_name = flask.request.args.get('pl_name', default="", type=str)
     pl_hostname = flask.request.args.get('pl_hostname', default="", type=str)
     pl_discmethod = flask.request.args.get('pl_discmethod', default="", type=str)
@@ -199,6 +194,10 @@ def get_planets():
 
 @app.route('/stars')
 def get_stars():
+    '''
+    Gets a list of dictionaries of the planets that satisfy the given constraints
+    from the URL and returns a json string
+    '''
     st_name = flask.request.args.get('st_name', default="", type=str)
     st_pnum = flask.request.args.get('st_pnum', default=-1, type=int)
     st_pnummax = flask.request.args.get('st_pnummax', default=9, type=int)

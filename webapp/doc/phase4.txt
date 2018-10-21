@@ -1,6 +1,6 @@
 Authors: Owen Barnett and Katherine Sweeney
 
-CREATE TYPE mass AS ENUM ('Msini', 'Mass')
+CREATE TYPE mass AS ENUM ('Msini', 'Mass','Msin(i)/sin(i)')
 
 CREATE TABLE planets (
     pl_id INT,
