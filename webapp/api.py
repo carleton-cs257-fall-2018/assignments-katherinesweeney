@@ -164,7 +164,7 @@ def get_planets():
                AND (planets.pl_dens <= %s OR (planets.pl_dens IS NULL AND %s = 80))
                AND (planets.pl_dens >= %s OR (planets.pl_dens IS NULL AND %s = 0))
                AND (%s = '' or planets.pl_ttvflag = %s)
-               AND (%s = '' or planets.pl_kepfalg = %s)
+               AND (%s = '' or planets.pl_kepflag = %s)
                AND (%s = '' or planets.pl_k2flag = %s)
                '''
     print("start")
