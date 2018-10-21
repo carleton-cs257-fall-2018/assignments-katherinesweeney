@@ -105,12 +105,12 @@ def get_planets():
     pl_pnum = flask.request.args.get('pl_pnum', default=-1, type=int)
     pl_pnummax = flask.request.args.get('pl_pnummax', default=sys.maxsize, type=int)
     pl_pnummin = flask.request.args.get('pl_pnummin', default=-sys.maxsize, type=int)
-    pl_orbper = flask.request.args.get('pl_orbper', default=-sys.maxsize, type=float)
+    pl_orbper = flask.request.args.get('pl_orbper', default=-1, type=float)
     pl_orbpermax = flask.request.args.get('pl_orbpermax', default=sys.maxsize, type=float)
-    pl_orbpermin = flask.request.args.get('pl_orbpermin', default=-sys.maxsize, type=float)
+    pl_orbpermin = flask.request.args.get('pl_orbpermin', default=0, type=float)
     pl_orbsmax = flask.request.args.get('pl_orbsmax', default=-sys.maxsize, type=float)
     pl_orbsmaxmax = flask.request.args.get('pl_orbsmaxmax', default=sys.maxsize, type=float)
-    pl_orbsmaxmin = flask.request.args.get('pl_orbsmaxmin', default=-sys.maxsize, type=float)
+    pl_orbsmaxmin = flask.request.args.get('pl_orbsmaxmin', default=sys.maxsize, type=float)
     pl_eccen = flask.request.args.get('pl_eccen', default=0, type=float)
     pl_eccenmax = flask.request.args.get('pl_eccenmax', default=sys.maxsize, type=float)
     pl_eccenmin = flask.request.args.get('pl_eccenmin', default=-sys.maxsize, type=float)
@@ -146,7 +146,7 @@ def get_planets():
                AND (%s = -1 OR (planets.pl_host_star_id = stars.st_id AND stars.st_pnum = %s ))
                AND stars.st_pnum <= %s 
                AND stars.st_pnum >= %s
-               AND planets.pl_orbper = %s
+               AND (planets.pl_orbper = %s OR planets.pl_orbper = -1)
                AND planets.pl_orbper <= %s
                AND planets.pl_orbper >= %s
                '''
