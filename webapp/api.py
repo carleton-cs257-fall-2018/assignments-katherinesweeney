@@ -151,30 +151,16 @@ def get_planets():
                AND (planets.pl_orbsmax = %s OR %s = -1)
                AND planets.pl_orbsmax <= %s
                AND planets.pl_orbsmax >= %s
-
+               AND (planets.pl_orbeccen = %s OR %s = -1)
+               AND planets.pl_orbeccen <= %s
+               AND planets.pl_orbeccen >= %s
+               AND (planets.pl_massj = %s OR %s = -1)
+               AND planets.pl_massj <= %s
+               AND planets.pl_massj >= %s
+               
                '''
     print("start")
     try:
-        # cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
-        #                         ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax,
-        #                         pl_pnummin,pl_orbper,pl_orbper,pl_orbpermax,pl_orbpermin,
-        #                         pl_orbsmax,pl_orbsmax,pl_orbsmaxmax,pl_orbsmaxmin,
-        #                         pl_eccen,pl_eccen,pl_eccenmax,pl_eccenmin,pl_massj,
-        #                         pl_massj,pl_massjmax,pl_massjmin,pl_radj,pl_radj,pl_radjmax,
-        #                         pl_radjmin))
-
-        # AND(planets.pl_orbeccen = % s
-        # OR % s = -1)
-        # AND
-        # planets.pl_orbeccen <= % s
-        # AND
-        # planets.pl_orbeccen >= % s
-        # AND(planets.pl_massj = % s
-        # OR % s = -1)
-        # AND
-        # planets.pl_massj <= % s
-        # AND
-        # planets.pl_massj >= % s
         # AND( % s = -1
         # OR
         # planets.pl_radj = % s)
@@ -182,12 +168,19 @@ def get_planets():
         # planets.pl_radj <= % s
         # AND
         # planets.pl_radj >= % s
-
-        cursor.execute(query, (("%" + pl_name + "%"), ("%" + pl_hostname + "%"),
-                               ("%" + pl_discmethod + "%"), pl_pnum, pl_pnum, pl_pnummax,
-                               pl_pnummin, pl_orbper, pl_orbper, pl_orbpermax, pl_orbpermin,
-                               pl_orbsmax, pl_orbsmax, pl_orbsmaxmax, pl_orbsmaxmin
-                               ))
+        # cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
+        #                         ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax,
+        #                         pl_pnummin,pl_orbper,pl_orbper,pl_orbpermax,pl_orbpermin,
+        #                         pl_orbsmax,pl_orbsmax,pl_orbsmaxmax,pl_orbsmaxmin,
+        #                         pl_eccen,pl_eccen,pl_eccenmax,pl_eccenmin,pl_massj,
+        #                         pl_massj,pl_massjmax,pl_massjmin,pl_radj,pl_radj,pl_radjmax,
+        #                         pl_radjmin))
+        cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
+                                ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax,
+                                pl_pnummin,pl_orbper,pl_orbper,pl_orbpermax,pl_orbpermin,
+                                pl_orbsmax,pl_orbsmax,pl_orbsmaxmax,pl_orbsmaxmin,
+                                pl_eccen,pl_eccen,pl_eccenmax,pl_eccenmin,pl_massj,
+                                pl_massj,pl_massjmax,pl_massjmin))
     except Exception as e:
         print(e)
         exit()
