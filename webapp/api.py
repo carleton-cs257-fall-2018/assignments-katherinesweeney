@@ -227,12 +227,12 @@ def get_stars():
     stars = []
     cursor = connection.cursor()
     query = '''SELECT stars.*
-               FROM stars
+               FROM stars, planets
                WHERE stars.st_name LIKE %s
                AND (%s = -1 OR stars.st_pnum = %s)
                AND (stars.st_pnum <= %s OR (stars.st_pnum IS NULL AND %s = 9))
                AND (stars.st_pnum >= %s OR (stars.st_pnum IS NULL AND %s = 0))
-               
+               AND planets.pl_host_star_id = stars.st_id 
                '''
 
     try:
