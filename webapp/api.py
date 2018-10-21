@@ -158,7 +158,7 @@ def get_planets():
                AND (planets.pl_massj = %s OR %s = -1)
                AND planets.pl_massj <= %s
                AND planets.pl_massj >= %s
-               AND planets.pl_bmassprov LIKE '%m%'
+               AND planets.pl_bmassprov = 'Mass'
                '''
     print("start")
     try:
