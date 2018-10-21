@@ -159,7 +159,7 @@ def get_planets():
                AND planets.pl_massj <= %s
                AND planets.pl_massj >= %s
                AND (planets.pl_bmassprov = %s OR %s = '') 
-               AND (planets.pl_radj = %s OR %s = 'M')
+               AND (%s = 'M' OR planets.pl_radj = %s)
                AND planets.pl_radj <= %s
                AND planets.pl_radj >= %s
                '''
