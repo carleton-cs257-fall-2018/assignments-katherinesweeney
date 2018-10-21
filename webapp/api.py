@@ -234,11 +234,21 @@ def get_stars():
                AND (stars.st_pnum >= %s OR (stars.st_pnum IS NULL AND %s = 0))
                AND planets.pl_host_star_id = stars.st_id 
                AND (%s = '' OR (stars.st_planet_1_name_id = planets.pl_id AND planets.pl_name LIKE %s))
+               AND (%s = '' OR (stars.st_planet_2_name_id = planets.pl_id AND planets.pl_name LIKE %s))
+               AND (%s = '' OR (stars.st_planet_3_name_id = planets.pl_id AND planets.pl_name LIKE %s))
+               AND (%s = '' OR (stars.st_planet_4_name_id = planets.pl_id AND planets.pl_name LIKE %s))
+               AND (%s = '' OR (stars.st_planet_5_name_id = planets.pl_id AND planets.pl_name LIKE %s))
+               AND (%s = '' OR (stars.st_planet_6_name_id = planets.pl_id AND planets.pl_name LIKE %s))
+               AND (%s = '' OR (stars.st_planet_7_name_id = planets.pl_id AND planets.pl_name LIKE %s))
+               AND (%s = '' OR (stars.st_planet_8_name_id = planets.pl_id AND planets.pl_name LIKE %s))
                '''
 
     try:
         cursor.execute(query, ( ("%" + st_name + "%"),st_pnum,st_pnum,st_pnummax,st_pnummax,st_pnummin,st_pnummin,
-                                st_planet_1_name,("%" + st_planet_1_name + "%")))
+                                st_planet_1_name,("%" + st_planet_1_name + "%"),st_planet_2_name,("%" + st_planet_2_name + "%"),
+                                st_planet_3_name,("%" + st_planet_3_name + "%"),st_planet_4_name,("%" + st_planet_4_name + "%"),
+                                st_planet_5_name,("%" + st_planet_5_name + "%"),st_planet_6_name,("%" + st_planet_6_name + "%"),
+                                st_planet_7_name,("%" + st_planet_7_name + "%"),st_planet_8_name,("%" + st_planet_8_name + "%")))
     except Exception as e:
         print(e)
         exit()
