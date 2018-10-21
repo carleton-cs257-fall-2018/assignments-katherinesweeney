@@ -145,42 +145,32 @@ def get_planets():
                AND (%s = -1 OR (planets.pl_host_star_id = stars.st_id AND stars.st_pnum = %s ))
                AND stars.st_pnum <= %s 
                AND stars.st_pnum >= %s
-               AND (planets.pl_orbper = %s OR %s = -1)
-               AND planets.pl_orbper <= %s
-               AND planets.pl_orbper >= %s
-               AND (planets.pl_orbsmax = %s OR %s = -1)
-               AND planets.pl_orbsmax <= %s
-               AND planets.pl_orbsmax >= %s
-               AND (planets.pl_orbeccen = %s OR %s = -1)
-               AND planets.pl_orbeccen <= %s
-               AND planets.pl_orbeccen >= %s
-               AND (planets.pl_massj = %s OR %s = -1)
-               AND planets.pl_massj <= %s
-               AND planets.pl_massj >= %s
-               
+               AND (planets.pl_orbper = %s OR %s = -1 OR planets.pl_orbper IS NULL)
+               AND (planets.pl_orbper <= %s OR planets.pl_orbper IS NULL)
+               AND (planets.pl_orbper >= %s OR planets.pl_orbper IS NULL)
+               AND (planets.pl_orbsmax = %s OR %s = -1 OR planets.pl_orbsmax IS NULL)
+               AND (planets.pl_orbsmax <= %s OR planets.pl_orbsmax IS NULL)
+               AND (planets.pl_orbsmax >= %s OR planets.pl_orbsmax IS NULL)
+               AND (planets.pl_orbeccen = %s OR %s = -1 OR planets.pl_orbeccen IS NULL)
+               AND (planets.pl_orbeccen <= %s OR planets.pl_orbeccen IS NULL)
+               AND (planets.pl_orbeccen >= %s OR planets.pl_orbeccen IS NULL)
+               AND (planets.pl_massj = %s OR %s = -1 OR planets.pl_massj IS NULL)
+               AND (planets.pl_massj <= %s OR planets.pl_massj IS NULL)
+               AND (planets.pl_massj >= %s OR planets.pl_massj IS NULL)
+               AND (%s = -1 OR planets.pl_radj = %s OR planets.pl_radj IS NULL)
+               AND (planets.pl_radj <= %s OR planets.pl_radj IS NULL)
+               AND (planets.pl_radj >= %s OR planets.pl_radj IS NULL)
                '''
     print("start")
     try:
-        # AND( % s = -1
-        # OR
-        # planets.pl_radj = % s)
-        # AND
-        # planets.pl_radj <= % s
-        # AND
-        # planets.pl_radj >= % s
-        # cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
-        #                         ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax,
-        #                         pl_pnummin,pl_orbper,pl_orbper,pl_orbpermax,pl_orbpermin,
-        #                         pl_orbsmax,pl_orbsmax,pl_orbsmaxmax,pl_orbsmaxmin,
-        #                         pl_eccen,pl_eccen,pl_eccenmax,pl_eccenmin,pl_massj,
-        #                         pl_massj,pl_massjmax,pl_massjmin,pl_radj,pl_radj,pl_radjmax,
-        #                         pl_radjmin))
         cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
                                 ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax,
                                 pl_pnummin,pl_orbper,pl_orbper,pl_orbpermax,pl_orbpermin,
                                 pl_orbsmax,pl_orbsmax,pl_orbsmaxmax,pl_orbsmaxmin,
                                 pl_eccen,pl_eccen,pl_eccenmax,pl_eccenmin,pl_massj,
-                                pl_massj,pl_massjmax,pl_massjmin))
+                                pl_massj,pl_massjmax,pl_massjmin,pl_radj,pl_radj,pl_radjmax,
+                                pl_radjmin))
+
     except Exception as e:
         print(e)
         exit()
