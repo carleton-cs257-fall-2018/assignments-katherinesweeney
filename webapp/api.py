@@ -103,32 +103,32 @@ def get_planets():
     pl_hostname = flask.request.args.get('pl_hostname', default="", type=str)
     pl_discmethod = flask.request.args.get('pl_discmethod', default="", type=str)
     pl_pnum = flask.request.args.get('pl_pnum', default=-1, type=int)
-    pl_pnummax = flask.request.args.get('pl_pnummax', default=sys.maxsize, type=int)
+    pl_pnummax = flask.request.args.get('pl_pnummax', default=9, type=int)
     pl_pnummin = flask.request.args.get('pl_pnummin', default=0, type=int)
     pl_orbper = flask.request.args.get('pl_orbper', default=-1, type=float)
-    pl_orbpermax = flask.request.args.get('pl_orbpermax', default=sys.maxsize, type=float)
+    pl_orbpermax = flask.request.args.get('pl_orbpermax', default=8000000, type=float)
     pl_orbpermin = flask.request.args.get('pl_orbpermin', default=0, type=float)
     pl_orbsmax = flask.request.args.get('pl_orbsmax', default=-1, type=float)
-    pl_orbsmaxmax = flask.request.args.get('pl_orbsmaxmax', default=sys.maxsize, type=float)
+    pl_orbsmaxmax = flask.request.args.get('pl_orbsmaxmax', default=2600, type=float)
     pl_orbsmaxmin = flask.request.args.get('pl_orbsmaxmin', default=0, type=float)
     pl_eccen = flask.request.args.get('pl_eccen', default=-1, type=float)
-    pl_eccenmax = flask.request.args.get('pl_eccenmax', default=sys.maxsize, type=float)
+    pl_eccenmax = flask.request.args.get('pl_eccenmax', default=1, type=float)
     pl_eccenmin = flask.request.args.get('pl_eccenmin', default=0, type=float)
     pl_massj = flask.request.args.get('pl_massj', default=-1, type=float)
-    pl_massjmax = flask.request.args.get('pl_massjmax', default=sys.maxsize, type=float)
+    pl_massjmax = flask.request.args.get('pl_massjmax', default=60, type=float)
     pl_massjmin = flask.request.args.get('pl_massjmin', default=0, type=float)
     pl_radj = flask.request.args.get('pl_radj', default=-1, type=float)
-    pl_radjmax = flask.request.args.get('pl_radjmax', default=sys.maxsize, type=float)
+    pl_radjmax = flask.request.args.get('pl_radjmax', default=7, type=float)
     pl_radjmin = flask.request.args.get('pl_radjmin', default=0, type=float)
-    pl_dens = flask.request.args.get('pl_dens', default=-sys.maxsize, type=float)
-    pl_densmax = flask.request.args.get('pl_densmax', default=sys.maxsize, type=float)
-    pl_densmin = flask.request.args.get('pl_densmin', default=-sys.maxsize, type=float)
+    pl_dens = flask.request.args.get('pl_dens', default=-1, type=float)
+    pl_densmax = flask.request.args.get('pl_densmax', default=80, type=float)
+    pl_densmin = flask.request.args.get('pl_densmin', default=0, type=float)
     pl_ttvflag = flask.request.args.get('pl_ttvflag', default="", type=str)
     pl_kepflag = flask.request.args.get('pl_kepflag', default="", type=str)
     pl_k2flag = flask.request.args.get('pl_k2flag', default="", type=str)
-    pl_nnotes = flask.request.args.get('pl_nnotes', default=-sys.maxsize, type=int)
-    pl_nnotesmax = flask.request.args.get('pl_nnotesmax', default=sys.maxsize, type=int)
-    pl_nnotesmin = flask.request.args.get('pl_nnotesmin', default=-sys.maxsize, type=int)
+    pl_nnotes = flask.request.args.get('pl_nnotes', default=-1, type=int)
+    pl_nnotesmax = flask.request.args.get('pl_nnotesmax', default=4, type=int)
+    pl_nnotesmin = flask.request.args.get('pl_nnotesmin', default=0, type=int)
     pl_facility = flask.request.args.get('pl_facility', default="", type=str)
     row_update = flask.request.args.get('row_update', default="", type=str)
 
@@ -142,34 +142,34 @@ def get_planets():
                AND planets.pl_discmethod_id = discovery_methods.discmeth_id
                AND stars.st_name LIKE %s
                AND discovery_methods.name LIKE %s
-               AND (%s = -1 OR (planets.pl_host_star_id = stars.st_id AND stars.st_pnum = %s ))
-               AND stars.st_pnum <= %s 
-               AND stars.st_pnum >= %s
-               AND (planets.pl_orbper = %s OR %s = -1 OR planets.pl_orbper IS NULL)
-               AND (planets.pl_orbper <= %s OR planets.pl_orbper IS NULL)
-               AND (planets.pl_orbper >= %s OR planets.pl_orbper IS NULL)
-               AND (planets.pl_orbsmax = %s OR %s = -1 OR planets.pl_orbsmax IS NULL)
-               AND (planets.pl_orbsmax <= %s OR planets.pl_orbsmax IS NULL)
-               AND (planets.pl_orbsmax >= %s OR planets.pl_orbsmax IS NULL)
-               AND (planets.pl_orbeccen = %s OR %s = -1 OR planets.pl_orbeccen IS NULL)
-               AND (planets.pl_orbeccen <= %s OR planets.pl_orbeccen IS NULL)
-               AND (planets.pl_orbeccen >= %s OR planets.pl_orbeccen IS NULL)
-               AND (planets.pl_massj = %s OR %s = -1 OR planets.pl_massj IS NULL)
-               AND (planets.pl_massj <= %s OR planets.pl_massj IS NULL)
-               AND (planets.pl_massj >= %s OR planets.pl_massj IS NULL)
-               AND (%s = -1 OR planets.pl_radj = %s OR planets.pl_radj IS NULL)
-               AND (planets.pl_radj <= %s OR planets.pl_radj IS NULL)
-               AND (planets.pl_radj >= %s OR planets.pl_radj IS NULL)
+               AND (%s = -1) OR (planets.pl_host_star_id = stars.st_id AND stars.st_pnum = %s ))
+               AND (stars.st_pnum <= %s OR (stars.st_pnum IS NULL AND %s = 9))
+               AND (stars.st_pnum >= %s OR (stars.st_pnum IS NULL AND %s = 0))
+               AND (planets.pl_orbper = %s OR %s = -1)
+               AND (planets.pl_orbper <= %s OR (planets.pl_orbper IS NULL AND %s = 8000000))
+               AND (planets.pl_orbper >= %s OR (planets.pl_orbper IS NULL AND %s = 0))
+               AND (planets.pl_orbsmax = %s OR %s = -1)
+               AND (planets.pl_orbsmax <= %s OR (planets.pl_orbsmax IS NULL AND %s = 2600))
+               AND (planets.pl_orbsmax >= %s OR (planets.pl_orbsmax IS NULL AND %s = 0))
+               AND (planets.pl_orbeccen = %s OR %s = -1)
+               AND (planets.pl_orbeccen <= %s OR (planets.pl_orbeccen IS NULL AND %s = 1))
+               AND (planets.pl_orbeccen >= %s OR (planets.pl_orbeccen IS NULL AND %s = 0))
+               AND (planets.pl_massj = %s OR %s = -1)
+               AND (planets.pl_massj <= %s OR (planets.pl_massj IS NULL AND %s = 60))
+               AND (planets.pl_massj >= %s OR (planets.pl_massj IS NULL AND %s = 0))
+               AND (%s = -1 OR planets.pl_radj = %s)
+               AND (planets.pl_radj <= %s OR (planets.pl_radj IS NULL AND %s = 7))
+               AND (planets.pl_radj >= %s OR (planets.pl_radj IS NULL AND %s = 0))
                '''
     print("start")
     try:
         cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
-                                ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax,
-                                pl_pnummin,pl_orbper,pl_orbper,pl_orbpermax,pl_orbpermin,
-                                pl_orbsmax,pl_orbsmax,pl_orbsmaxmax,pl_orbsmaxmin,
-                                pl_eccen,pl_eccen,pl_eccenmax,pl_eccenmin,pl_massj,
-                                pl_massj,pl_massjmax,pl_massjmin,pl_radj,pl_radj,pl_radjmax,
-                                pl_radjmin))
+                                ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax,pl_pnummax,
+                                pl_pnummin,pl_pnummin,pl_orbper,pl_orbper,pl_orbpermax,pl_orbpermax,
+                                pl_orbpermin,pl_orbpermin,pl_orbsmax,pl_orbsmax,pl_orbsmaxmax,pl_orbsmaxmax,
+                                pl_orbsmaxmin,pl_orbsmaxmin,pl_eccen,pl_eccen,pl_eccenmax,pl_eccenmax,pl_eccenmin,
+                                pl_eccenmin,pl_massj,pl_massj,pl_massjmax,pl_massjmax,pl_massjmin,pl_massjmin,
+                                pl_radj,pl_radj,pl_radjmax,pl_radjmax,pl_radjmin,pl_radjmin))
 
     except Exception as e:
         print(e)
