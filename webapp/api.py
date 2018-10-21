@@ -117,7 +117,7 @@ def get_planets():
     pl_massj = flask.request.args.get('pl_massj', default=-1, type=float)
     pl_massjmax = flask.request.args.get('pl_massjmax', default=sys.maxsize, type=float)
     pl_massjmin = flask.request.args.get('pl_massjmin', default=0, type=float)
-    pl_massprov = flask.request.args.get('pl_massprov', default="", type=str)
+    pl_massprov = flask.request.args.get('pl_massprov', default="M", type=str)
     pl_radj = flask.request.args.get('pl_radj', default=-1, type=float)
     pl_radjmax = flask.request.args.get('pl_radjmax', default=sys.maxsize, type=float)
     pl_radjmin = flask.request.args.get('pl_radjmin', default=0, type=float)
@@ -158,7 +158,7 @@ def get_planets():
                AND (planets.pl_massj = %s OR %s = -1)
                AND planets.pl_massj <= %s
                AND planets.pl_massj >= %s
-               AND (planets.pl_bmassprov = %s OR %s = '') 
+               AND (planets.pl_bmassprov = %s OR %s = 'M') 
                AND (%s = -1 OR planets.pl_radj = %s)
                AND planets.pl_radj <= %s
                AND planets.pl_radj >= %s
