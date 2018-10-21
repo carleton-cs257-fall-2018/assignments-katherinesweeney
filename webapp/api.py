@@ -150,8 +150,8 @@ def get_planets():
     print("start")
     try:
         cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
-                                ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax),
-                                pl_pnummin)
+                                ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax,
+                                pl_pnummin))
     except Exception as e:
         print(e)
         exit()
