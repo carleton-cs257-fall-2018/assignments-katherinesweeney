@@ -171,7 +171,7 @@ def get_planets():
                AND (planets.pl_nnotes >= %s OR (planets.pl_nnotes IS NULL AND %s = 0))
                AND (discovery_facility.name LIKE %s)
                '''
-    print("start")
+
     try:
         cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
                                 ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax,pl_pnummax,
@@ -187,7 +187,7 @@ def get_planets():
     except Exception as e:
         print(e)
         exit()
-    print("done")
+
     for row in cursor:
         planet = {}
         for i in range(0, len(row)):
@@ -200,9 +200,9 @@ def get_planets():
 @app.route('/stars')
 def get_stars():
     st_name = flask.request.args.get('st_name', default="", type=str)
-    st_pnum = flask.request.args.get('st_pnum', default=-sys.maxsize, type=int)
-    st_pnummax = flask.request.args.get('st_pnummax', default=sys.maxsize, type=int)
-    st_pnummin = flask.request.args.get('st_pnummin', default=-sys.maxsize, type=int)
+    st_pnum = flask.request.args.get('st_pnum', default=-1, type=int)
+    st_pnummax = flask.request.args.get('st_pnummax', default=9, type=int)
+    st_pnummin = flask.request.args.get('st_pnummin', default=0, type=int)
     st_planet_1_name = flask.request.args.get('st_planet_1_name', default="", type=str)
     st_planet_2_name = flask.request.args.get('st_planet_2_name', default="", type=str)
     st_planet_3_name = flask.request.args.get('st_planet_3_name', default="", type=str)
@@ -211,62 +211,46 @@ def get_stars():
     st_planet_6_name = flask.request.args.get('st_planet_6_name', default="", type=str)
     st_planet_7_name = flask.request.args.get('st_planet_7_name', default="", type=str)
     st_planet_8_name = flask.request.args.get('st_planet_8_name', default="", type=str)
-    st_dist = flask.request.args.get('st_dist', default=-sys.maxsize, type=float)
-    st_distmax = flask.request.args.get('st_distmax', default=sys.maxsize, type=float)
-    st_distmin = flask.request.args.get('st_distmin', default=-sys.maxsize, type=float)
-    st_teff = flask.request.args.get('st_teff', default=-sys.maxsize, type=float)
-    st_teffmax= flask.request.args.get('st_teffmax', default=sys.maxsize, type=float)
-    st_teffmin = flask.request.args.get('st_teffmin', default=-sys.maxsize, type=float)
-    st_mass = flask.request.args.get('st_mass', default=-sys.maxsize, type=float)
-    st_massmax = flask.request.args.get('st_massmax', default=sys.maxsize, type=float)
-    st_massmin = flask.request.args.get('st_massmin', default=-sys.maxsize, type=float)
-    st_rad = flask.request.args.get('st_rad', default=-sys.maxsize, type=float)
-    st_radmax = flask.request.args.get('st_radmax', default=sys.maxsize, type=float)
-    st_radmin= flask.request.args.get('st_radmin', default=-sys.maxsize, type=float)
-    row_update = flask.request.args.get('row_update', default="", type=str)
+    st_dist = flask.request.args.get('st_dist', default=-1, type=float)
+    st_distmax = flask.request.args.get('st_distmax', default=9000, type=float)
+    st_distmin = flask.request.args.get('st_distmin', default=0, type=float)
+    st_teff = flask.request.args.get('st_teff', default=-1, type=float)
+    st_teffmax= flask.request.args.get('st_teffmax', default=60000, type=float)
+    st_teffmin = flask.request.args.get('st_teffmin', default=0, type=float)
+    st_mass = flask.request.args.get('st_mass', default=-1, type=float)
+    st_massmax = flask.request.args.get('st_massmax', default=25, type=float)
+    st_massmin = flask.request.args.get('st_massmin', default=0, type=float)
+    st_rad = flask.request.args.get('st_rad', default=-1, type=float)
+    st_radmax = flask.request.args.get('st_radmax', default=75, type=float)
+    st_radmin= flask.request.args.get('st_radmin', default=0, type=float)
 
-    pass
+    stars = []
+    cursor = connection.cursor()
+    query = '''SELECT stars.*
+               FROM planets, stars 
+               WHERE stars.st_name LIKE %s
+               AND (%s = -1 OR stars.st_pnum = %s)
+               AND (stars.st_pnum <= %s OR (stars.st_pnum IS NULL AND %s = 9))
+               AND (stars.st_pnum >= %s OR (stars.st_pnum IS NULL AND %s = 0))
+               '''
+
+    try:
+        cursor.execute(query, ( ("%" + st_name + "%"),st_pnum,st_pnum,st_pnummax,st_pnummax,st_pnummin,st_pnummin))
+
+    except Exception as e:
+        print(e)
+        exit()
+
+    for row in cursor:
+        star = {}
+        for i in range(0, len(row)):
+            star.update({names_star[i]: str(row[i])})
+
+        stars.append(star)
+
+    return json.dumps(stars)
 
 
-# @app.route('/')
-# def hello():
-#     return 'Hello, Citizen of CS257.'
-#
-# @app.route('/actor/<last_name>')
-# def get_actor(last_name):
-#     ''' Returns the first matching actor, or an empty dictionary if there's no match. '''
-#     actor_dictionary = {}
-#     lower_last_name = last_name.lower()
-#     for actor in actors:
-#         if actor['last_name'].lower().startswith(lower_last_name):
-#             actor_dictionary = actor
-#             break
-#     return json.dumps(actor_dictionary)
-#
-# @app.route('/movies')
-# def get_movies():
-#     ''' Returns the list of movies that match GET parameters:
-#           start_year, int: reject any movie released earlier than this year
-#           end_year, int: reject any movie released later than this year
-#           genre: reject any movie whose genre does not match this genre exactly
-#         If a GET parameter is absent, then any movie is treated as though
-#         it meets the corresponding constraint. (That is, accept a movie unless
-#         it is explicitly rejected by a GET parameter.)
-#     '''
-#     movie_list = []
-#     genre = flask.request.args.get('genre')
-#     start_year = flask.request.args.get('start_year', default=0, type=int)
-#     end_year = flask.request.args.get('end_year', default=10000, type=int)
-#     for movie in movies:
-#         if genre is not None and genre != movie['genre']:
-#             continue
-#         if movie['year'] < start_year:
-#             continue
-#         if movie['year'] > end_year:
-#             continue
-#         movie_list.append(movie)
-#
-#     return json.dumps(movie_list)
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
