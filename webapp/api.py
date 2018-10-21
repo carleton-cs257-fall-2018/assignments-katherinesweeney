@@ -146,7 +146,7 @@ def get_planets():
                AND (%s = -1 OR (planets.pl_host_star_id = stars.st_id AND stars.st_pnum = %s ))
                AND stars.st_pnum <= %s 
                AND stars.st_pnum >= %s
-               AND (planets.pl_orbper = %s OR planets.pl_orbper = -1)
+               AND (planets.pl_orbper = %s OR %s = -1)
                AND planets.pl_orbper <= %s
                AND planets.pl_orbper >= %s
                '''
@@ -154,7 +154,7 @@ def get_planets():
     try:
         cursor.execute(query, ( ("%" + pl_name + "%"),("%" + pl_hostname + "%"),
                                 ("%" + pl_discmethod + "%"),pl_pnum,pl_pnum,pl_pnummax,
-                                pl_pnummin,pl_orbper,pl_orbpermax,pl_orbpermin))
+                                pl_pnummin,pl_orbper,pl_orbper,pl_orbpermax,pl_orbpermin))
     except Exception as e:
         print(e)
         exit()
