@@ -142,7 +142,7 @@ def get_planets():
                AND planets.pl_discmethod_id = discovery_methods.discmeth_id
                AND stars.st_name LIKE %s
                AND discovery_methods.name LIKE %s
-               AND (%s = -1) OR (planets.pl_host_star_id = stars.st_id AND stars.st_pnum = %s ))
+               AND (%s = -1 OR (planets.pl_host_star_id = stars.st_id AND stars.st_pnum = %s ))
                AND (stars.st_pnum <= %s OR (stars.st_pnum IS NULL AND %s = 9))
                AND (stars.st_pnum >= %s OR (stars.st_pnum IS NULL AND %s = 0))
                AND (planets.pl_orbper = %s OR %s = -1)
