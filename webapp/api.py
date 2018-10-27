@@ -12,15 +12,16 @@ from config import user
 
 app = flask.Flask(__name__)
 
-names_planet = ["pl_id", "pl_host_star_id", "pl_name", "pl_discmethod_id", "pl_orbper",
-         "pl_orbsmax", "pl_orbeccen", "pl_massj", "pl_bmassprov", "pl_radj",
-         "pl_dens", "pl_ttvflag", "pl_kepflag", "pl_k2flag", "pl_nnotes",
-         "row_update", "pl_facility_id"]
+names_planet = ["Planet Id", "Host Star Name", "Planet Name", "Planet Discovery Method", "Planet Orbital Period (Days)",
+                "Planet Orbital Period Semi-Major Axis (AU)", "Planet Orbital Eccentricity", "Planet Jupiter Mass",
+                "Planet Mass Provenance ", "Planet Jupiter Radius", "Planet Density (g/cm^3)", "Planet TTV Flag",
+                "Planet Kepler Flag", "Planet Kepler 2 Flag", "Number of Notes on Planet", "Last Updated",
+                "Planet Discovery Facility"]
 
-names_star = ["st_id", "st_planet_1_name_id", "st_planet_2_name_id", "st_planet_3_name_id",
-              "st_planet_4_name_id", "st_planet_5_name_id", "st_planet_6_name_id",
-              "st_planet_7_name_id", "st_planet_8_name_id","st_name", "s_pnum", "st_dist",
-              "st_teff", "st_mass","st_rad", "row_update"]
+names_star = ["Star Id", "First Planet in System", "Second Planet in System", "Third Planet in System",
+              "Fourth Planet in System", "Fifth Planet in System", "Sixth Planet in System",
+              "Seventh Planet in System", "Eighth Planet in System","Star Name", "Number of Planets In System",
+              "Distance From Earth (pc)", "Tempurature (K)", "Mass (Solar Masses)","Radius (Solar Radii)", "Last Updated"]
 
 
 try:
