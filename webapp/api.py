@@ -172,28 +172,6 @@ def get_star(disc_method_id):
         methods.append(method)
     return json.dumps(methods)
 
-@app.route('/star_id/<st_id>')
-def get_star(st_id):
-    '''
-    Gets a star with the given name
-    '''
-    stars = []
-    cursor = connection.cursor()
-    query = '''SELECT *
-               FROM stars
-               WHERE st_id = %s'''
-    try:
-        cursor.execute(query, (st_id,))
-    except Exception as e:
-        print(e)
-        exit()
-    for row in cursor:
-        star = {}
-        for i in range(0, len(row)):
-            star.update({names_star[i]: str(row[i])})
-        stars.append(star)
-    return json.dumps(stars)
-
 @app.route('/planets')
 def get_planets():
     '''
