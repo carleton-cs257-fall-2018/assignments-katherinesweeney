@@ -88,6 +88,112 @@ def get_planets_datafields():
 def get_stars_datafields():
     return json.dumps(names_star)
 
+@app.route('/star_id/<st_id>')
+def get_star(st_id):
+    '''
+    Gets a star with the given name
+    '''
+    stars = []
+    cursor = connection.cursor()
+    query = '''SELECT *
+               FROM stars
+               WHERE st_id = %s'''
+    try:
+        cursor.execute(query, (st_id,))
+    except Exception as e:
+        print(e)
+        exit()
+    for row in cursor:
+        star = {}
+        for i in range(0, len(row)):
+            star.update({names_star[i]: str(row[i])})
+        stars.append(star)
+    return json.dumps(stars)
+
+@app.route('/planet_id/<pl_id>')
+def get_planet(pl_id):
+    '''
+    Gets a planet with the given name
+    '''
+    planets = []
+    cursor = connection.cursor()
+    query = '''SELECT *
+               FROM planets
+               WHERE pl_id = %s'''
+    try:
+        cursor.execute(query, (pl_id,))
+    except Exception as e:
+        print(e)
+        exit()
+    for row in cursor:
+        planet = {}
+        for i in range(0, len(row)):
+            planet.update({names_planet[i]: str(row[i])})
+        planets.append(planet)
+    return json.dumps(planets)
+
+@app.route('/facility_id/<facility_id>')
+def get_star(facility_id):
+    '''
+    Gets a star with the given name
+    '''
+    facilities = []
+    cursor = connection.cursor()
+    query = '''SELECT *
+               FROM pl_facility_id
+               WHERE disc_facil_id = %s'''
+    try:
+        cursor.execute(query, (facility_id,))
+    except Exception as e:
+        print(e)
+        exit()
+    for row in cursor:
+        facility = {"disc_facil_id":row[0], "name":row[1]}
+        facilities.append(facility)
+    return json.dumps(facilities)
+
+@app.route('/disc_method/<disc_method_id>')
+def get_star(disc_method_id):
+    '''
+    Gets a star with the given name
+    '''
+    methods = []
+    cursor = connection.cursor()
+    query = '''SELECT *
+               FROM discovery_methods
+               WHERE discmeth_id = %s'''
+    try:
+        cursor.execute(query, (disc_method_id,))
+    except Exception as e:
+        print(e)
+        exit()
+    for row in cursor:
+        method = {"discmeth_id":row[0], "name":row[1]}
+        methods.append(method)
+    return json.dumps(methods)
+
+@app.route('/star_id/<st_id>')
+def get_star(st_id):
+    '''
+    Gets a star with the given name
+    '''
+    stars = []
+    cursor = connection.cursor()
+    query = '''SELECT *
+               FROM stars
+               WHERE st_id = %s'''
+    try:
+        cursor.execute(query, (st_id,))
+    except Exception as e:
+        print(e)
+        exit()
+    for row in cursor:
+        star = {}
+        for i in range(0, len(row)):
+            star.update({names_star[i]: str(row[i])})
+        stars.append(star)
+    return json.dumps(stars)
+
 @app.route('/planets')
 def get_planets():
     '''
