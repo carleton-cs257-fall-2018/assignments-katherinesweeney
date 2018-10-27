@@ -89,7 +89,7 @@ def get_stars_datafields():
     return json.dumps(names_star)
 
 @app.route('/star_id/<st_id>')
-def get_star(st_id):
+def get_star_id(st_id):
     '''
     Gets a star with the given name
     '''
@@ -111,7 +111,7 @@ def get_star(st_id):
     return json.dumps(stars)
 
 @app.route('/planet_id/<pl_id>')
-def get_planet(pl_id):
+def get_planet_id(pl_id):
     '''
     Gets a planet with the given name
     '''
@@ -133,7 +133,7 @@ def get_planet(pl_id):
     return json.dumps(planets)
 
 @app.route('/facility_id/<facility_id>')
-def get_star(facility_id):
+def get_facility_id(facility_id):
     '''
     Gets a star with the given name
     '''
@@ -153,7 +153,7 @@ def get_star(facility_id):
     return json.dumps(facilities)
 
 @app.route('/disc_method/<disc_method_id>')
-def get_star(disc_method_id):
+def get_discmethod_id(disc_method_id):
     '''
     Gets a star with the given name
     '''
