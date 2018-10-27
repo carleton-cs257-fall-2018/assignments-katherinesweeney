@@ -1,0 +1,63 @@
+# This file was produced by the NASA Exoplanet Archive  http://exoplanetarchive.ipac.caltech.edu
+# Fri Oct 12 13:39:48 2018
+#
+# COLUMN pl_hostname:    Host Name
+# COLUMN pl_name:        Planet Name
+# COLUMN pl_discmethod:  Discovery Method
+# COLUMN pl_pnum:        Number of Planets in System
+# COLUMN pl_orbper:      Orbital Period [days]
+# COLUMN pl_orbpererr1:  Orbital Period Upper Unc. [days]
+# COLUMN pl_orbpererr2:  Orbital Period Lower Unc. [days]
+# COLUMN pl_orbperlim:   Orbital Period Limit Flag
+# COLUMN pl_orbsmax:     Orbit Semi-Major Axis [AU])
+# COLUMN pl_orbsmaxerr1: Orbit Semi-Major Axis Upper Unc. [AU]
+# COLUMN pl_orbsmaxerr2: Orbit Semi-Major Axis Lower Unc. [AU]
+# COLUMN pl_orbsmaxlim:  Orbit Semi-Major Axis Limit Flag
+# COLUMN pl_orbeccen:    Eccentricity
+# COLUMN pl_orbeccenerr1: Eccentricity Upper Unc.
+# COLUMN pl_orbeccenerr2: Eccentricity Lower Unc.
+# COLUMN pl_orbeccenlim: Eccentricity Limit Flag
+# COLUMN pl_bmassj:      Planet Mass or M*sin(i) [Jupiter mass]
+# COLUMN pl_bmassjerr1:  Planet Mass or M*sin(i) Upper Unc. [Jupiter mass]
+# COLUMN pl_bmassjerr2:  Planet Mass or M*sin(i) Lower Unc. [Jupiter mass]
+# COLUMN pl_bmassjlim:   Planet Mass or M*sin(i) Limit Flag
+# COLUMN pl_bmassprov:   Planet Mass or M*sin(i) Provenance
+# COLUMN pl_radj:        Planet Radius [Jupiter radii]
+# COLUMN pl_radjerr1:    Planet Radius Upper Unc. [Jupiter radii]
+# COLUMN pl_radjerr2:    Planet Radius Lower Unc. [Jupiter radii]
+# COLUMN pl_radjlim:     Planet Radius Limit Flag
+# COLUMN pl_dens:        Planet Density [g/cm**3]
+# COLUMN pl_denserr1:    Planet Density Upper Unc. [g/cm**3]
+# COLUMN pl_denserr2:    Planet Density Lower Unc. [g/cm**3]
+# COLUMN pl_denslim:     Planet Density Limit Flag
+# COLUMN pl_ttvflag:     TTV Flag
+# COLUMN pl_kepflag:     Kepler Field Flag
+# COLUMN pl_k2flag:      K2 Mission Flag
+# COLUMN pl_nnotes:      Number of Notes
+# COLUMN st_dist:        Distance [pc]
+# COLUMN st_disterr1:    Distance Upper Unc. [pc]
+# COLUMN st_disterr2:    Distance Lower Unc. [pc]
+# COLUMN st_distlim:     Distance Limit Flag
+# COLUMN st_teff:        Effective Temperature [K]
+# COLUMN st_tefferr1:    Effective Temperature Upper Unc. [K]
+# COLUMN st_tefferr2:    Effective Temperature Lower Unc. [K]
+# COLUMN st_tefflim:     Effective Temperature Limit Flag
+# COLUMN st_mass:        Stellar Mass [Solar mass]
+# COLUMN st_masserr1:    Stellar Mass Upper Unc. [Solar mass]
+# COLUMN st_masserr2:    Stellar Mass Lower Unc. [Solar mass]
+# COLUMN st_masslim:     Stellar Mass Limit Flag
+# COLUMN st_rad:         Stellar Radius [Solar radii]
+# COLUMN st_raderr1:     Stellar Radius Upper Unc. [Solar radii]
+# COLUMN st_raderr2:     Stellar Radius Lower Unc. [Solar radii]
+# COLUMN st_radlim:      Stellar Radius Limit Flag
+# COLUMN rowupdate:      Date of Last Update
+# COLUMN pl_facility:    Discovery Facility
+#
+loc_rowid,pl_hostname,pl_name,pl_discmethod,pl_pnum,pl_orbper,pl_orbpererr1,pl_orbpererr2,pl_orbperlim,pl_orbsmax,pl_orbsmaxerr1,pl_orbsmaxerr2,pl_orbsmaxlim,pl_orbeccen,pl_orbeccenerr1,pl_orbeccenerr2,pl_orbeccenlim,pl_bmassj,pl_bmassjerr1,pl_bmassjerr2,pl_bmassjlim,pl_bmassprov,pl_radj,pl_radjerr1,pl_radjerr2,pl_radjlim,pl_dens,pl_denserr1,pl_denserr2,pl_denslim,pl_ttvflag,pl_kepflag,pl_k2flag,pl_nnotes,st_dist,st_disterr1,st_disterr2,st_distlim,st_teff,st_tefferr1,st_tefferr2,st_tefflim,st_mass,st_masserr1,st_masserr2,st_masslim,st_rad,st_raderr1,st_raderr2,st_radlim,rowupdate,pl_facility
+1,11 Com,11 Com b,Radial Velocity,1,326.03000000,0.32000000,-0.32000000,0,1.290000,0.050000,-0.050000,0,0.231000,0.005000,-0.005000,0,19.40000,1.50000,-1.50000,0,Msini,,,,,,,,,0,0,0,0,93.37,1.92,-1.92,0,4742.00,100.00,-100.00,0,2.70,0.30,-0.30,0,19.00,2.00,-2.00,0,2014-05-14,Xinglong Station
+2,11 UMi,11 UMi b,Radial Velocity,1,516.21997000,3.20000000,-3.20000000,0,1.530000,0.070000,-0.070000,0,0.080000,0.030000,-0.030000,0,14.74000,2.50000,-2.50000,0,Msini,,,,0,,,,0,0,0,0,0,125.72,1.97,-1.97,0,4213.00,46.00,-46.00,0,2.78,0.69,-0.69,0,29.79,2.84,-2.84,0,2018-09-06,Thueringer Landessternwarte Tautenburg
+3,14 And,14 And b,Radial Velocity,1,185.84000000,0.23000000,-0.23000000,0,0.830000,,,0,0.000000,,,0,4.80000,,,0,Msini,,,,,,,,,0,0,0,0,75.59,0.71,-0.71,0,4813.00,20.00,-20.00,0,2.20,0.10,-0.20,0,11.00,1.00,-1.00,0,2014-05-14,Okayama Astrophysical Observatory
+4,14 Her,14 Her b,Radial Velocity,1,1773.40002000,2.50000000,-2.50000000,0,2.930000,0.080000,-0.080000,0,0.370000,0.000000,0.000000,0,4.66000,0.15000,-0.15000,0,Msini,,,,0,,,,0,0,0,0,0,17.94,0.01,-0.01,0,5338.00,25.00,-25.00,0,0.90,0.04,-0.04,0,0.93,0.01,-0.01,0,2018-09-06,W. M. Keck Observatory
+5,16 Cyg B,16 Cyg B b,Radial Velocity,1,798.50000000,1.00000000,-1.00000000,0,1.660000,0.030000,-0.030000,0,0.680000,0.020000,-0.020000,0,1.78000,0.08000,-0.08000,0,Msini,,,,0,,,,0,0,0,0,0,21.41,0.23,-0.23,0,5750.00,8.00,-8.00,0,1.08,0.04,-0.04,0,1.13,0.01,-0.01,0,2018-09-06,Multiple Observatories
+6,24 Sex,24 Sex b,Radial Velocity,2,452.80000000,2.10000000,-4.50000000,0,1.333000,0.004000,-0.009000,0,0.090000,0.140000,-0.060000,0,1.99000,0.26000,-0.38000,0,Msini,,,,,,,,,0,0,0,0,72.21,0.68,-0.68,0,5098.00,44.00,-44.00,0,1.54,0.08,-0.08,0,4.90,0.08,-0.08,0,2014-05-14,Lick Observatory
+7,24 Sex,24 Sex c,Radial Velocity,2,883.00000000,32.40000000,-13.80000000,0,2.080000,0.050000,-0.020000,0,0.290000,0.160000,-0.090000,0,0.86000,0.35000,-0.22000,0,Msini,,,,,,,,,0,0,0,0,72.21,0.68,-0.68,0,5098.00,44.00,-44.00,0,1.54,0.08,-0.08,0,4.90,0.08,-0.08,0,2014-05-14,Lick Observatory
