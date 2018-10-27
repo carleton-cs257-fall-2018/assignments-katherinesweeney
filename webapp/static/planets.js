@@ -28,90 +28,110 @@
 // before books.js is loaded, so the functions in books.js (like
 // getBaseURL) can access api_port as needed.
 
-initialize();
+// initialize();
+//
+// function initialize() {
+//     var element = document.getElementById('authors_button');
+//     if (element) {
+//         element.onclick = onAuthorsButtonClicked;
+//     }
+// }
+//
+// function getBaseURL() {
+//     var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + api_port;
+//     return baseURL;
+// }
+//
+// function onAuthorsButtonClicked() {
+//     var url = getBaseURL() + '/authors/';
+//
+//     // Send the request to the Books API /authors/ endpoint
+//     fetch(url, {method: 'get'})
+//
+//     // When the results come back, transform them from JSON string into
+//     // a Javascript object (in this case, a list of author dictionaries).
+//     .then((response) => response.json())
+//
+//     // Once you have your list of author dictionaries, use it to build
+//     // an HTML table displaying the author names and lifespan.
+//     .then(function(authorsList) {
+//         // Build the table body.
+//         var tableBody = '';
+//         for (var k = 0; k < authorsList.length; k++) {
+//             tableBody += '<tr>';
+//
+//             tableBody += '<td><a onclick="getAuthor(' + authorsList[k]['id'] + ",'"
+//                             + authorsList[k]['first_name'] + ' ' + authorsList[k]['last_name'] + "')\">"
+//                             + authorsList[k]['last_name'] + ', '
+//                             + authorsList[k]['first_name'] + '</a></td>';
+//
+//             tableBody += '<td>' + authorsList[k]['birth_year'] + '-';
+//             if (authorsList[k]['death_year'] != 0) {
+//                 tableBody += authorsList[k]['death_year'];
+//             }
+//             tableBody += '</td>';
+//             tableBody += '</tr>';
+//         }
+//
+//         // Put the table body we just built inside the table that's already on the page.
+//         var resultsTableElement = document.getElementById('results_table');
+//         if (resultsTableElement) {
+//             resultsTableElement.innerHTML = tableBody;
+//         }
+//     })
+//
+//     // Log the error if anything went wrong during the fetch.
+//     .catch(function(error) {
+//         console.log(error);
+//     });
+// }
+//
+// function getAuthor(authorID, authorName) {
+//     // Very similar pattern to onAuthorsButtonClicked, so I'm not
+//     // repeating those comments here. Read through this code
+//     // and see if it makes sense to you.
+//     var url = getBaseURL() + '/books/author/' + authorID;
+//
+//     fetch(url, {method: 'get'})
+//
+//     .then((response) => response.json())
+//
+//     .then(function(booksList) {
+//         var tableBody = '<tr><th>' + authorName + '</th></tr>';
+//         for (var k = 0; k < booksList.length; k++) {
+//             tableBody += '<tr>';
+//             tableBody += '<td>' + booksList[k]['title'] + '</td>';
+//             tableBody += '<td>' + booksList[k]['publication_year'] + '</td>';
+//             tableBody += '</tr>';
+//         }
+//         var resultsTableElement = document.getElementById('results_table');
+//         if (resultsTableElement) {
+//             resultsTableElement.innerHTML = tableBody;
+//         }
+//     })
+//
+//     .catch(function(error) {
+//         console.log(error);
+//     });
+// }
+//
 
-function initialize() {
-    var element = document.getElementById('authors_button');
-    if (element) {
-        element.onclick = onAuthorsButtonClicked;
-    }
-}
+window.onload = function() {
+    fetch("http://perlman.mathcs.carleton.edu:5137/planets/datafields", {method: 'get'})
 
-function getBaseURL() {
-    var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + api_port;
-    return baseURL;
-}
-
-function onAuthorsButtonClicked() {
-    var url = getBaseURL() + '/authors/';
-
-    // Send the request to the Books API /authors/ endpoint
-    fetch(url, {method: 'get'})
-
-    // When the results come back, transform them from JSON string into
-    // a Javascript object (in this case, a list of author dictionaries).
     .then((response) => response.json())
 
-    // Once you have your list of author dictionaries, use it to build
-    // an HTML table displaying the author names and lifespan.
-    .then(function(authorsList) {
-        // Build the table body.
-        var tableBody = '';
-        for (var k = 0; k < authorsList.length; k++) {
-            tableBody += '<tr>';
-
-            tableBody += '<td><a onclick="getAuthor(' + authorsList[k]['id'] + ",'"
-                            + authorsList[k]['first_name'] + ' ' + authorsList[k]['last_name'] + "')\">"
-                            + authorsList[k]['last_name'] + ', '
-                            + authorsList[k]['first_name'] + '</a></td>';
-
-            tableBody += '<td>' + authorsList[k]['birth_year'] + '-';
-            if (authorsList[k]['death_year'] != 0) {
-                tableBody += authorsList[k]['death_year'];
-            }
-            tableBody += '</td>';
-            tableBody += '</tr>';
-        }
-
-        // Put the table body we just built inside the table that's already on the page.
-        var resultsTableElement = document.getElementById('results_table');
-        if (resultsTableElement) {
-            resultsTableElement.innerHTML = tableBody;
-        }
+    .then(function(test) {
+        console.log("test")
     })
 
-    // Log the error if anything went wrong during the fetch.
     .catch(function(error) {
         console.log(error);
     });
+
+};
+
+function remove_parent(current) {
+    parent = current.parentElement;
+    parent.parentElement.removeChild(parent);
 }
-
-function getAuthor(authorID, authorName) {
-    // Very similar pattern to onAuthorsButtonClicked, so I'm not
-    // repeating those comments here. Read through this code
-    // and see if it makes sense to you.
-    var url = getBaseURL() + '/books/author/' + authorID;
-
-    fetch(url, {method: 'get'})
-
-    .then((response) => response.json())
-
-    .then(function(booksList) {
-        var tableBody = '<tr><th>' + authorName + '</th></tr>';
-        for (var k = 0; k < booksList.length; k++) {
-            tableBody += '<tr>';
-            tableBody += '<td>' + booksList[k]['title'] + '</td>';
-            tableBody += '<td>' + booksList[k]['publication_year'] + '</td>';
-            tableBody += '</tr>';
-        }
-        var resultsTableElement = document.getElementById('results_table');
-        if (resultsTableElement) {
-            resultsTableElement.innerHTML = tableBody;
-        }
-    })
-
-    .catch(function(error) {
-        console.log(error);
-    });
-}
-
