@@ -152,7 +152,7 @@ def get_facility_id(facility_id):
         facilities.append(facility)
     return json.dumps(facilities)
 
-@app.route('/disc_method/<disc_method_id>')
+@app.route('/disc_method_id/<disc_method_id>')
 def get_discmethod_id(disc_method_id):
     '''
     Gets a star with the given name
