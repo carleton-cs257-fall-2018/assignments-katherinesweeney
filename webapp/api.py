@@ -140,7 +140,7 @@ def get_facility_id(facility_id):
     facilities = []
     cursor = connection.cursor()
     query = '''SELECT *
-               FROM pl_facility_id
+               FROM discovery_facility
                WHERE disc_facil_id = %s'''
     try:
         cursor.execute(query, (facility_id,))
