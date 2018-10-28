@@ -10,7 +10,7 @@ from config import password
 from config import database
 from config import user
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 
 names_planet = ["Planet Id", "Host Star Name", "Planet Name", "Planet Discovery Method", "Planet Orbital Period (Days)",
                 "Planet Orbital Period Semi-Major Axis (AU)", "Planet Orbital Eccentricity", "Planet Jupiter Mass",
