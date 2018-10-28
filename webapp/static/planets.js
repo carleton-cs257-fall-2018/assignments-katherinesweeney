@@ -304,7 +304,7 @@ function display(button) {
     }
 
 
-    fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_star_list) {
+    fetch(query).then((response) => response.json()).then(function(planet_star_list) {
         document.getElementById("results_table").innerText = planet_star_list
     })
 }
