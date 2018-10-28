@@ -149,7 +149,6 @@ var star_search_feilds = {'Name': 'st_name', 'Number of Planets Orbiting': 'st_p
 var planet_star_search_fields = {};
 Object.assign(planet_star_search_fields, star_search_feilds, planet_search_fields);
 
-console.log(planet_star_search_fields)
 
 
 window.onload = function() {
