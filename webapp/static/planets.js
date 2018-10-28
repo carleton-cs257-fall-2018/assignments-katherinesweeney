@@ -306,8 +306,12 @@ function display(button) {
     fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_star_list) {
         console.log(planet_star_list)
         for (var index = 0; index < planet_star_list.length; index++){
-            document.getElementById("results_table").innerText+=planet_star_list[index]
-        };
+            for (var i = 0; i < planet_star_list[index].length; i++){
+                document.getElementById("results_table").innerText+=(planet_star_list[i]+",")
+            }
+            document.getElementById("results_table").innerText+=" | "
+
+        }
     })
 
 }
