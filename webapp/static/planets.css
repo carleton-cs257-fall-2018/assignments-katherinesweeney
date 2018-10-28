@@ -7,11 +7,12 @@
     for CS 257, Spring 2016. 
 */
 
+
 #left_side {
     width: 50%;
     height: auto;
-    background-color: blue;
     float:left;
+    text-align: center;
     padding-top: 40px;
 }
 
@@ -42,31 +43,83 @@
 
 #get_results:hover {
     box-shadow: 0 24px 36px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    font-weight: bold;
 }
 
 #features_to_display {
-    width: 70%;
-    height: auto;
+    width: 85%;
+    overflow: auto;
     background-color: white;
     text-align: center;
     margin-left: 5%;
     outline-style: solid;
 }
 
+#search_criteria {
+    width:85%;
+    margin-left: 10%;
+    overflow: auto;
+    background-color: white;
+    text-align: center;
+    outline-style: solid;
+}
+
+#add_feature_css {
+    width: 85%;
+    height: 40px;
+    text-align: center;
+    outline-style: solid;
+    margin-top: 4px;
+    margin-left: 5%;
+}
+
+#add_criteria_css {
+    width: 85%;
+    height: 40px;
+    text-align: center;
+    outline-style: solid;
+    margin-top: 4px;
+    margin-left: 10%;
+}
+
+#add_feature {
+    height: 40px;
+    font-size: x-large;
+    width: 100%;
+}
+
+#add_criteria {
+    height: 40px;
+    font-size: x-large;
+    width: 100%;
+}
+
+#planet_star_buttons {
+    width:60%;
+    margin-left: 20%;
+    margin-bottom: 30px;
+    overflow:auto;
+
+}
+
 .big {
     height: 50px;
     font-size: xx-large;
+    font-weight: bold;
 }
 
 .small {
-    height: 32px;
+    height: 34px;
     font-size: x-large;
+    margin-top: 4px;
 }
 
 .inner_features_to_display {
     width: 100%;
     outline-style: solid;
-    outline-width: 1px;
+    outline-width: 3px;
+    text-align: center;
+    padding-top: 6px;
 }
 
 .x_button {
@@ -75,7 +128,7 @@
     float: right;
     background-color: white;
     margin-right: 10px;
-    margin-top: 3px;
+    margin-top: 2px;
     border-style: solid;
     border-width: 1px;
     border-color: black;
@@ -83,4 +136,35 @@
 
 .x_button:hover {
     background-color: #Ef1313;
+    font-weight: bold;
 }
+
+.button {
+    width: 50%;
+    height:60px;
+    float: left;
+    font-size: 30pt;
+    border-style: solid;
+    border-width: 4px;
+    border-color: black;
+    border-radius: 12px;
+}
+
+.button_selected {
+    background-color: #868A81;
+}
+
+.button_not_selected{
+    background-color: #ffffff;
+}
+
+.button_not_selected:hover{
+    background-color: #EEEEEE;
+    font-weight: bold;
+}
+
+.text_box {
+    margin-left: 20px;
+    font-size:20px;
+}
+
