@@ -212,6 +212,7 @@ def get_planets():
     pl_facility = flask.request.args.get('pl_facility', default="", type=str)
 
 
+
     planets = []
     cursor = connection.cursor()
     query = '''SELECT planets.*

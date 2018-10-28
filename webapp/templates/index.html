@@ -1,49 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='planets.css') }}" />
-    <script>var api_port = {{ api_port }};</script>
-    <script type="text/javascript" src="{{ url_for('static', filename='planets.js') }}" defer></script>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
-    <title>Planets and Stars</title>
-
     <!--<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />-->
-    <!--<link rel="stylesheet" type="text/css" href="planets.css" />-->
-
-    <!--<script type="text/javascript" src="planets.js"></script>-->
+    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='planets.css') }}" />-->
+    <!--<script>var api_port = {{ api_port }};</script>-->
+    <!--<script type="text/javascript" src="{{ url_for('static', filename='planets.js') }}" defer></script>-->
+    <!--<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />-->
     <!--<title>Planets and Stars</title>-->
+
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="planets.css" />
+
+    <script type="text/javascript" src="planets.js"></script>
+    <title>Planets and Stars</title>
 </head>
 
 <body>
 
     <p><table id="results_table"></table></p>
-    <div id = "left_side">test</div>
-    <div id = "right_side">
-        <div id = "features_to_display">
-            <div class = "inner_features_to_display big">Features To Display</div>
-            <div class = "inner_features_to_display small">Planet Name
-                <button onclick="remove_parent(this)" type="button" class = "x_button">x</button>
-            </div>
-            <div class = "inner_features_to_display small">Planet Name
-                <button onclick="remove_parent(this)" type="button" class = "x_button">x</button>
-            </div>
-            <div class = "inner_features_to_display small">Planet Name
-                <button onclick="remove_parent(this)" type="button" class = "x_button">x</button>
-            </div>
 
+    <div id = "planet_star_buttons">
+        <button id = "planet_buttton" class = "button button_selected">Planets</button>
+        <button id = "star_button" onclick = "click_star()" class = "button button_not_selected">Stars</button>
+    </div>
 
-            <select id = "Add Feature">
-              <option>Add Feature</option>
-              <option>Saab</option>
-              <option>Fiat</option>
-              <option>Audi</option>
-            </select>
-
-
-
+    <div id = "left_side">
+        <div id = "search_criteria"></div>
+        <div id = "add_criteria_css">
+            <select id = "add_criteria" onchange="pick_criteria(this)"></select>
         </div>
     </div>
+
+
+
+    <div id = "right_side">
+        <div id = "features_to_display"></div>
+        <div id = "add_feature_css">
+            <select id = "add_feature" onchange="pick_option(this)"></select>
+        </div>
+
+    </div>
+
+
+
     <div id = "bottom">
         <button type="button" id = "get_results">Display Planets</button>
     </div>

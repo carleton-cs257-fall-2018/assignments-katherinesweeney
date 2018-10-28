@@ -117,19 +117,13 @@
 //
 
 window.onload = function() {
-    fetch("http://perlman.mathcs.carleton.edu:5137/planets/datafields", {method: 'get'})
 
-    .then((response) => response.json())
+}
 
-    .then(function(test) {
-        console.log("test")
-    })
-
-    .catch(function(error) {
-        console.log(error);
-    });
-
-};
+function getBaseURL() {
+    var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + api_port;
+    return baseURL;
+}
 
 function remove_parent(current) {
     parent = current.parentElement;
