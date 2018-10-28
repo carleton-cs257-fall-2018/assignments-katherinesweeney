@@ -288,7 +288,7 @@ function click_planet() {
 function display(button) {
     var criteria = document.getElementById("search_criteria");
     var children = criteria.children;
-    query = "BASE";
+    query = getBaseURL();
     if (button.innerText == "Display Planets"){
         query+="/planets?"
     }
@@ -302,5 +302,12 @@ function display(button) {
             query+="&"
         }
     }
-    document.getElementById("results_table").innerText = query
+
+
+    fetch(query, {method: 'get'})
+
+    .then((response) => response.json())
+    .then(function(planet_star_list) {
+        document.getElementById("results_table").innerText = planet_star_list
+    })
 }
