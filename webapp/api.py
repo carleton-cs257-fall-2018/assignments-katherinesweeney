@@ -5,10 +5,7 @@ import flask
 import json
 import psycopg2
 
-
-from config import password
-from config import database
-from config import user
+import config
 
 app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 
@@ -24,11 +21,30 @@ names_star = ["Star Id", "First Planet in System", "Second Planet in System", "T
               "Distance From Earth (pc)", "Tempurature (K)", "Mass (Solar Masses)","Radius (Solar Radii)", "Last Updated"]
 
 
-try:
-    connection = psycopg2.connect(database=database, user=user, password=password)
-except Exception as e:
-    print(e)
-    exit()
+def get_connection():
+
+    connection = None
+    try:
+        connection = psycopg2.connect(database=config.database,
+                                      user=config.user,
+                                      password=config.password)
+    except Exception as e:
+        print(e, file=sys.stderr)
+    return connection
+
+def get_select_query_results(connection, query, parameters=None):
+    '''
+    Executes the specified query with the specified tuple of
+    parameters. Returns a cursor for the query results.
+
+    Raises an exception if the query fails for any reason.
+    '''
+    cursor = connection.cursor()
+    if parameters is not None:
+        cursor.execute(query, parameters)
+    else:
+        cursor.execute(query)
+    return cursor
 
 
 @app.route('/planet/<pl_name>')
@@ -37,6 +53,7 @@ def get_planet(pl_name):
     Gets a planet with the given name
     '''
     planets = []
+    connection = get_connection()
     cursor = connection.cursor()
     query = '''SELECT *
                FROM planets
@@ -62,6 +79,7 @@ def get_star(st_name):
     Gets a star with the given name
     '''
     stars = []
+    connection = get_connection()
     cursor = connection.cursor()
     query = '''SELECT *
                FROM stars
@@ -95,6 +113,7 @@ def get_star_id(st_id):
     Gets a star with the given name
     '''
     stars = []
+    connection = get_connection()
     cursor = connection.cursor()
     query = '''SELECT *
                FROM stars
@@ -117,6 +136,7 @@ def get_planet_id(pl_id):
     Gets a planet with the given name
     '''
     planets = []
+    connection = get_connection()
     cursor = connection.cursor()
     query = '''SELECT *
                FROM planets
@@ -139,6 +159,7 @@ def get_facility_id(facility_id):
     Gets a star with the given name
     '''
     facilities = []
+    connection = get_connection()
     cursor = connection.cursor()
     query = '''SELECT *
                FROM discovery_facility
@@ -159,6 +180,7 @@ def get_discmethod_id(disc_method_id):
     Gets a star with the given name
     '''
     methods = []
+    connection = get_connection()
     cursor = connection.cursor()
     query = '''SELECT *
                FROM discovery_methods
@@ -214,6 +236,7 @@ def get_planets():
 
 
     planets = []
+    connection = get_connection()
     cursor = connection.cursor()
     query = '''SELECT planets.*
                FROM planets, stars, discovery_methods, discovery_facility
@@ -310,6 +333,7 @@ def get_stars():
     st_radmin= flask.request.args.get('st_radmin', default=0, type=float)
 
     stars = []
+    connection = get_connection()
     cursor = connection.cursor()
     query = '''SELECT stars.*
                FROM stars, planets
@@ -367,10 +391,9 @@ def get_stars():
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
-        print('Usage: {0} host port'.format(sys.argv[0]))
-        print('  Example: {0} perlman.mathcs.carleton.edu 5101'.format(sys.argv[0]))
+        print('Usage: {0} host port'.format(sys.argv[0]), file=sys.stderr)
         exit()
-    
+
     host = sys.argv[1]
-    port = int(sys.argv[2])
-    app.run(host=host, port=port, debug=True)
+    port = sys.argv[2]
+    app.run(host=host, port=int(port), debug=True)
