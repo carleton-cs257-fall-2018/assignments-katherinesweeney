@@ -302,9 +302,11 @@ function display(button) {
             query+="&"
         }
     }
-
+    console.log(query)
 
     fetch(query, {method: 'get'}).then(function(planet_star_list) {
-        document.getElementById("results_table").innerText = planet_star_list
+        console.log(planet_star_list)
+        document.getElementById("results_table").innerHTML = planet_star_list
     })
+
 }
