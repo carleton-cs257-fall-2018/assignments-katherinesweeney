@@ -387,7 +387,10 @@ def get_stars():
 
     return json.dumps(stars)
 
-
+@app.after_request
+def set_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
