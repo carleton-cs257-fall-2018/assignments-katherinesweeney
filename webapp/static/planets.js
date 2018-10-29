@@ -330,9 +330,9 @@ function display(button) {
             planet_star = planet_star_list[index];
             tableBody+="<tr>";
             for (var display_index = 0; display_index < display_features.length; display_index++) {
-                // tableBody+="<td>";
-                // tableBody+=planet_star[display_features[display_index]];
-                // tableBody+="</td>";
+                tableBody+="<td>";
+                tableBody+=planet_star[display_features[display_index]];
+                tableBody+="</td>";
                 console.log(planet_star[display_features[display_index]])
             }
             tableBody+="</tr>"
