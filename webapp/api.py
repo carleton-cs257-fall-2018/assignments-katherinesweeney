@@ -238,7 +238,7 @@ def get_planets():
     planets = []
     connection = get_connection()
     cursor = connection.cursor()
-    query = '''SELECT planets.*
+    query = '''SELECT planets.*, discovery_methods.name, discovery_facility.name
                FROM planets, stars, discovery_methods, discovery_facility
                WHERE planets.pl_name LIKE %s
                AND planets.pl_host_star_id = stars.st_id 
