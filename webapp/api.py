@@ -9,11 +9,11 @@ import config
 
 app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 
-names_planet = ["Planet Id", "Host Star Name", "Planet Name", "Planet Discovery Method", "Planet Orbital Period (Days)",
+names_planet = ["Planet Id", "Host Star Name", "Planet Name", "Planet Discovery Method ID", "Planet Orbital Period (Days)",
                 "Planet Orbital Period Semi-Major Axis (AU)", "Planet Orbital Eccentricity", "Planet Jupiter Mass",
                 "Planet Mass Provenance ", "Planet Jupiter Radius", "Planet Density (g/cm^3)", "Planet TTV Flag",
                 "Planet Kepler Flag", "Planet Kepler 2 Flag", "Number of Notes on Planet", "Last Updated",
-                "Planet Discovery Facility"]
+                "Planet Discovery Facility ID", "Planet Discovery Method", "Planet Discovery Facility ID"]
 
 names_star = ["Star Id", "First Planet in System", "Second Planet in System", "Third Planet in System",
               "Fourth Planet in System", "Fifth Planet in System", "Sixth Planet in System",
@@ -238,7 +238,7 @@ def get_planets():
     planets = []
     connection = get_connection()
     cursor = connection.cursor()
-    query = '''SELECT planets.*
+    query = '''SELECT planets.*, discovery_methods.name, discovery_facility.name
                FROM planets, stars, discovery_methods, discovery_facility
                WHERE planets.pl_name LIKE %s
                AND planets.pl_host_star_id = stars.st_id 
