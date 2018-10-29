@@ -289,7 +289,8 @@ function get_display_features() {
     var children = document.getElementById("features_to_display").children;
     for (var index = 1; index < children.length; index++) {
         child = children[index];
-        features_to_display.push(child.value);
+        var text = child.innerText;
+        features_to_display.push(text.substring(0,text.length-2));
     }
     return features_to_display
 
