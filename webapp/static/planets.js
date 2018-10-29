@@ -117,7 +117,7 @@
 //
 var planet_fields = ["Planet Discovery Method", "Planet Orbital Period (Days)",
                 "Planet Orbital Period Semi-Major Axis (AU)", "Planet Orbital Eccentricity", "Planet Jupiter Mass",
-                "Planet Mass Provenance ", "Planet Jupiter Radius", "Planet Density (g/cm^3)", "Planet TTV Flag",
+                "Planet Mass Provenance", "Planet Jupiter Radius", "Planet Density (g/cm^3)", "Planet TTV Flag",
                 "Planet Kepler Flag", "Planet Kepler 2 Flag", "Number of Notes on Planet", "Last Updated",
                 "Planet Discovery Facility"];
 
@@ -136,7 +136,7 @@ var planet_search_fields = {'Planet Name': 'pl_name', "Planet's Host Star Name":
     'Max Radius (Jupiter Radii)': 'pl_radjmax', 'Min Radius (Jupiter Radii)': 'pl_radjmin', 'Density (g/cm^3)': 'pl_dens',
     'Max Density (g/cm^3)': 'pl_densmax', 'Min Density (g/cm^3)': 'pl_densmin', 'Orbit Exhibits TTV (Yes: 1; No: 0)': 'pl_ttvflag',
     'Found on Kepler Mission (Yes: 1; No: 0)': 'pl_kepflag', 'Found on Kepler2 Mission (Yes: 1; No: 0)': 'pl_k2flag',
-    'Number of Notes': 'pl_nnotes', 'Max Number of Notes': 'pl_nnotesmax', 'Min Number of Notes': 'pl_nnotesmin', 'Discovery Facility': 'pl_facility'}
+    'Number of Notes': 'pl_nnotes', 'Max Number of Notes': 'pl_nnotesmax', 'Min Number of Notes': 'pl_nnotesmin', 'Discovery Facility': 'pl_facility'};
 
 var star_search_feilds = {'Star Name': 'st_name', 'Number of Planets Orbiting': 'st_pnum', 'Max Number of Planets Orbiting': 'st_pnummax',
     'Min Number of Planets Orbiting': 'st_pnummin', 'Name of First Planet': 'st_planet_1_name', 'Name of Second Planet': 'st_planet_2_name',
@@ -145,7 +145,7 @@ var star_search_feilds = {'Star Name': 'st_name', 'Number of Planets Orbiting': 
     'Distance From Earth (pc)': 'st_dist', 'Max Distance From Earth (pc)': 'st_distmax', 'Min Distance From Earth (pc)': 'st_distmin',
     'Temperature (K)': 'st_teff', 'Max Temperature (K)': 'st_teffmax', 'Min Temperature (K)': 'st_teffmin',
     'Mass (Solar Masses)': 'st_mass', 'Max Mass (Solar Masses)': 'st_massmax', 'Min Mass (Solar Masses)': 'st_massmin',
-    'Radius (Solar Radii)': 'st_rad', 'Max Radius (Solar Radii)': 'st_radmax', 'Min Radius (Solar Radii)': 'st_radmin'}
+    'Radius (Solar Radii)': 'st_rad', 'Max Radius (Solar Radii)': 'st_radmax', 'Min Radius (Solar Radii)': 'st_radmin'};
 var planet_star_search_fields = {};
 Object.assign(planet_star_search_fields, star_search_feilds, planet_search_fields);
 

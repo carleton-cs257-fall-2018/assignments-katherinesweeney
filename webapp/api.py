@@ -11,7 +11,7 @@ app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 
 names_planet = ["Planet Id", "Host Star ID", "Planet Name", "Planet Discovery Method ID", "Planet Orbital Period (Days)",
                 "Planet Orbital Period Semi-Major Axis (AU)", "Planet Orbital Eccentricity", "Planet Jupiter Mass",
-                "Planet Mass Provenance ", "Planet Jupiter Radius", "Planet Density (g/cm^3)", "Planet TTV Flag",
+                "Planet Mass Provenance", "Planet Jupiter Radius", "Planet Density (g/cm^3)", "Planet TTV Flag",
                 "Planet Kepler Flag", "Planet Kepler 2 Flag", "Number of Notes on Planet", "Last Updated",
                 "Planet Discovery Facility ID", "Planet Discovery Method", "Planet Discovery Facility", "Host Star Name"]
 
