@@ -329,9 +329,9 @@ function display(button) {
         for (var index = 0; index < planet_star_list.length; index++) {
             planet_star = planet_star_list[index];
             tableBody+="<tr>"
-            for (var index = 0; index < display_features.length; index++) {
+            for (var display_index = 0; display_index < display_features.length; display_index++) {
                 tableBody+="<td>"
-                tableBody+=planet_star[display_features[index]]
+                tableBody+=planet_star[display_features[display_index]]
                 tableBody+="</td>"
             }
             tableBody+="</tr>"
