@@ -284,6 +284,14 @@ function click_planet() {
     document.getElementById("get_results").innerText="Display Planets"
 }
 
+function get_display_features() {
+    features_to_display = [];
+    for (child in document.getElementById("features_to_display".children)){
+        features_to_display.update(child.text)
+    }
+
+}
+
 function display(button) {
     var criteria = document.getElementById("search_criteria");
     var children = criteria.children;
@@ -305,6 +313,8 @@ function display(button) {
 
     fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_star_list) {
         console.log(planet_star_list)
+        console.log(get_display_features())
+
     })
 
 }
