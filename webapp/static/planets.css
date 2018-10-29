@@ -103,6 +103,16 @@
 }
 
 #results_table {
+
+}
+
+.table_data {
+    border-style: solid;
+    border-width: 4px;
+    border-color: black;
+}
+
+.table_header {
     border-style: solid;
     border-width: 4px;
     border-color: black;
