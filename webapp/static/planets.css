@@ -104,6 +104,7 @@
 
 #results_table {
     border-collapse: collapse;
+    text-align: center;
 }
 
 .table_data {
