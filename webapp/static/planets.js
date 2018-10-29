@@ -331,7 +331,11 @@ function display(button) {
             tableBody+="<tr class = 'table_row'>";
             for (var display_index = 0; display_index < display_features.length; display_index++) {
                 tableBody+="<td class = 'table_data'>";
-                tableBody+=planet_star[display_features[display_index]];
+                var value = planet_star[display_features[display_index]];
+                if (display_features[display_index].includes("Planet in System")){
+                    value = "Temp"
+                }
+                tableBody+=value;
                 tableBody+="</td>";
                 console.log(planet_star[display_features[display_index]])
             }
