@@ -285,9 +285,11 @@ function click_planet() {
 }
 
 function get_display_features() {
-    features_to_display = [];
-    for (child in document.getElementById("features_to_display".children)){
-        features_to_display.update(child.text)
+    var features_to_display = [];
+    var children = document.getElementById("features_to_display").children;
+    for (var index = 1; index < children.length; index++) {
+        child = children[index]
+        features_to_display.push(child.text)
     }
 
 }
