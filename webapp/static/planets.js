@@ -288,9 +288,10 @@ function get_display_features() {
     var features_to_display = [];
     var children = document.getElementById("features_to_display").children;
     for (var index = 1; index < children.length; index++) {
-        child = children[index]
-        features_to_display.push(child.text)
+        child = children[index];
+        features_to_display.push(child.text);
     }
+    return features_to_display
 
 }
 
@@ -306,7 +307,7 @@ function display(button) {
     }
     for (var index = 1; index < children.length; index++) {
         textbox = children[index].children[0];
-        query+=(textbox.name + "=" +textbox.value)
+        query+=(textbox.name + "=" +textbox.value);
         if (index != children.length -1){
             query+="&"
         }
