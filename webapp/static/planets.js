@@ -316,7 +316,21 @@ function display(button) {
 
     fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_star_list) {
         console.log(planet_star_list)
-        console.log(get_display_features())
+        display_features = get_display_features();
+        var tableBody = '<tr>'
+        for (var index = 0; index < display_features.length; index++) {
+            tableBody+='<th>'
+            tableBody+=display_features[index]
+            tableBody+="</th>"
+        }
+        tableBody+="</tr>"
+
+        // for (var index = 0; index < planet_star_list.length; index++) {
+        //     planet_star = planet_star_list[index];
+        //
+        // }
+
+        document.getElementById('results_table').innerHTML=tableBody;
 
     })
 
