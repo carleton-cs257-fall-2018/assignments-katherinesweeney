@@ -320,7 +320,7 @@ function display(button) {
         display_features = get_display_features();
         var tableBody = '<tr>';
         for (var index = 0; index < display_features.length; index++) {
-            tableBody+='<th>';
+            tableBody+="<th class = 'table_header'>";
             tableBody+=display_features[index];
             tableBody+="</th>";
         }
@@ -330,7 +330,7 @@ function display(button) {
             planet_star = planet_star_list[index];
             tableBody+="<tr>";
             for (var display_index = 0; display_index < display_features.length; display_index++) {
-                tableBody+="<td>";
+                tableBody+="<td class = 'table_data'>";
                 tableBody+=planet_star[display_features[display_index]];
                 tableBody+="</td>";
                 console.log(planet_star[display_features[display_index]])
