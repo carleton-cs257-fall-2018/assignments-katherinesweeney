@@ -326,10 +326,16 @@ function display(button) {
         }
         tableBody+="</tr>"
 
-        // for (var index = 0; index < planet_star_list.length; index++) {
-        //     planet_star = planet_star_list[index];
-        //
-        // }
+        for (var index = 0; index < planet_star_list.length; index++) {
+            planet_star = planet_star_list[index];
+            tableBody+="<tr>"
+            for (var index = 0; index < display_features.length; index++) {
+                tableBody+="<td>"
+                tableBody+=planet_star[display_features[index]]
+                tableBody+="</td>"
+            }
+            tableBody+="</tr>"
+        }
 
         document.getElementById('results_table').innerHTML=tableBody;
 
