@@ -111,6 +111,7 @@
     border-width: 2px;
     border-color: black;
     padding: 5px;
+    text-align: center;
 }
 
 .table_header {
@@ -118,6 +119,10 @@
     border-width: 2px;
     border-color: black;
     padding: 5px;
+}
+
+.table_row:hover {
+    background-color: grey;
 }
 
 .big {

@@ -318,7 +318,7 @@ function display(button) {
     fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_star_list) {
         console.log(planet_star_list)
         display_features = get_display_features();
-        var tableBody = '<tr>';
+        var tableBody = "<tr class = 'table_row'>";
         for (var index = 0; index < display_features.length; index++) {
             tableBody+="<th class = 'table_header'>";
             tableBody+=display_features[index];
