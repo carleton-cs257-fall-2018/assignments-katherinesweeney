@@ -303,13 +303,13 @@ function get_planet_name(value) {
     query = getBaseURL() + "/planet/" + value;
     window.planet_name = "";
     fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
-        console.log(planet_list);
         var planet = planet_list[0];
         var planet_name = planet['Planet Name'];
         console.log(planet_name)
         window.planet_name = planet_name;
         console.log(window.planet_name)
     })
+    console.log("test")
     console.log(window.planet_name)
     return window.planet_name
 
