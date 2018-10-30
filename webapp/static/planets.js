@@ -308,8 +308,8 @@ function get_planet_name(value) {
         var planet_name = planet['Planet Name'];
         console.log(planet);
         console.log(planet_name)
-        return planet_name;
     })
+    return planet_name;
 }
 
 function display(button) {
