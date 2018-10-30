@@ -302,7 +302,7 @@ function get_planet_name(value) {
     }
     query = getBaseURL() + "/star/" + value
     fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
-        return planet_list[0]["Planet Name"]
+        return (planet_list[0])["Planet Name"]
     })
 }
 
