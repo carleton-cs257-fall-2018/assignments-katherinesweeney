@@ -315,7 +315,7 @@ async function get_planet_name(value) {
 
 }
 
-function display(button) {
+async function display(button) {
     var criteria = document.getElementById("search_criteria");
     var children = criteria.children;
     query = getBaseURL();
@@ -350,7 +350,7 @@ function display(button) {
                 tableBody+="<td class = 'table_data'>";
                 var value = planet_star[display_features[display_index]];
                 if (display_features[display_index].includes("Planet in System")){
-                    test = get_planet_name(value)
+                    await test = get_planet_name(value)
                     console.log(test)
                     console.log(window.planet_name)
                 }
