@@ -307,6 +307,7 @@ async function get_planet_name(value) {
         var planet_name = planet['Planet Name'];
         window.planet_name = planet_name;
     })
+    console.log(window.planet_name)
     return window.planet_name
     // console.log("break")
     // console.log(window.planet_name)
