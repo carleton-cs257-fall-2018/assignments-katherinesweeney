@@ -343,7 +343,7 @@ function display(button) {
                 tableBody+="<td class = 'table_data'>";
                 var value = planet_star[display_features[display_index]];
                 if (display_features[display_index].includes("Planet in System")){
-                    value = get_star_name(value)
+                    value = get_planet_name(value)
                 }
                 tableBody+=value;
                 tableBody+="</td>";
