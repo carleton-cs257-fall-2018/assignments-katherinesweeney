@@ -313,6 +313,7 @@ function get_planet_name(value) {
     console.log(planet_name)
     console.log("break")
     console.log(window.planet_name)
+    return planet_name[[PromiseValue]]
 
 }
 
