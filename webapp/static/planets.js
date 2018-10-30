@@ -333,7 +333,7 @@ function display(button) {
         }
     }
 
-    async fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_star_list) {
+    fetch(query, {method: 'get'}).then((response) => response.json()).then(async function(planet_star_list) {
         display_features = get_display_features();
         var tableBody = "<tr class = 'table_row'>";
         for (var index = 0; index < display_features.length; index++) {
