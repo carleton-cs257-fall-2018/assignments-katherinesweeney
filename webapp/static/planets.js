@@ -348,6 +348,7 @@ function display(button) {
                 var value = planet_star[display_features[display_index]];
                 if (display_features[display_index].includes("Planet in System")){
                     value = get_planet_name(value)
+                    console.log(value)
                 }
                 tableBody+=value;
                 tableBody+="</td>";
