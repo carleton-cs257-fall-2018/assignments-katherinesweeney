@@ -302,18 +302,13 @@ function get_planet_name(value) {
     }
     query = getBaseURL() + "/planet/" + value;
     window.planet_name = "";
-    window.isFinsihed= false
     fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
         var planet = planet_list[0];
         var planet_name = planet['Planet Name'];
         console.log(planet_name)
         window.planet_name = planet_name;
         console.log(window.planet_name)
-        window.isFinsihed = true
-    });
-    while (window.isFinsihed == false){
-        console.log(window.planet_name)
-    }
+    }).then(console.log(window.planet_name))
     console.log(window.planet_name)
     // console.log("break")
     // console.log(window.planet_name)
