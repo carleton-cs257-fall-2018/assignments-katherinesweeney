@@ -309,11 +309,11 @@ function get_planet_name(value) {
         window.planet_name = planet_name;
         console.log(window.planet_name)
         return planet_name
-    })
-    console.log(planet_name)
-    console.log("break")
-    console.log(window.planet_name)
-    return planet_name[[PromiseValue]]
+    }).then(return window.planet_name)
+    // console.log(planet_name)
+    // console.log("break")
+    // console.log(window.planet_name)
+    // return planet_name[[PromiseValue]]
 
 }
 
