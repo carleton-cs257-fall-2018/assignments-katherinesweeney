@@ -302,7 +302,7 @@ function get_planet_name(value) {
     }
     query = getBaseURL() + "/planet/" + value;
     window.planet_name = "";
-    const planet_name = await fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
+    planet_name = fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
         var planet = planet_list[0];
         var planet_name = planet['Planet Name'];
         console.log(planet_name)
