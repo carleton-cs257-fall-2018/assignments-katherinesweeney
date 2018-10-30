@@ -15,9 +15,9 @@ names_planet = ["Planet Id", "Host Star ID", "Planet Name", "Planet Discovery Me
                 "Planet Kepler Flag", "Planet Kepler 2 Flag", "Number of Notes on Planet", "Last Updated",
                 "Planet Discovery Facility ID", "Planet Discovery Method", "Planet Discovery Facility", "Host Star Name"]
 
-names_star = ["Star Id", "First Planet in System", "Second Planet in System", "Third Planet in System",
-              "Fourth Planet in System", "Fifth Planet in System", "Sixth Planet in System",
-              "Seventh Planet in System", "Eighth Planet in System","Star Name", "Number of Planets In System",
+names_star = ["Star Id", "First Planet in System Id", "Second Planet in System Id", "Third Planet in System Id",
+              "Fourth Planet in System Id", "Fifth Planet in System Id", "Sixth Planet in System Id",
+              "Seventh Planet in System Id", "Eighth Planet in System Id","Star Name", "Number of Planets In System",
               "Distance From Earth (pc)", "Tempurature (K)", "Mass (Solar Masses)","Radius (Solar Radii)", "Last Updated"]
 
 
