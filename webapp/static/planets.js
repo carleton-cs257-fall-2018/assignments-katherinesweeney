@@ -296,41 +296,6 @@ function get_display_features() {
 
 }
 
-var getJSON = function(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status === 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status, xhr.response);
-      }
-    };
-    xhr.send();
-};
-
-function get_planet_name(value) {
-    if (value == "None") {
-        return "None"
-    }
-    query = getBaseURL() + "/planet/" + value;
-    console.log(getJSON(query))
-    // window.planet_name = "w";
-    // await fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
-    //     var planet = planet_list[0];
-    //     var planet_name = planet['Planet Name'];
-    //     window.planet_name = planet_name;
-    // })
-    // console.log(window.planet_name)
-    // return window.planet_name
-    // console.log("break")
-    // console.log(window.planet_name)
-    // return planet_name[[PromiseValue]]
-
-}
-
 function display(button) {
     var criteria = document.getElementById("search_criteria");
     var children = criteria.children;
@@ -365,11 +330,6 @@ function display(button) {
             for (var display_index = 0; display_index < display_features.length; display_index++) {
                 tableBody+="<td class = 'table_data'>";
                 var value = planet_star[display_features[display_index]];
-                if (display_features[display_index].includes("Planet in System")){
-                    var test = get_planet_name(value)
-                    console.log(test)
-                    console.log(window.planet_name)
-                }
                 tableBody+=value;
                 tableBody+="</td>";
             }
