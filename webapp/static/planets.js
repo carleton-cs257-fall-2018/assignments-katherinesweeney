@@ -308,7 +308,7 @@ function get_planet_name(value) {
         console.log(planet_name)
         window.planet_name = planet_name;
         console.log(window.planet_name)
-    }).then(console.log(window.planet_name))
+    }).finally("test" + console.log(window.planet_name))
     console.log(window.planet_name)
     // console.log("break")
     // console.log(window.planet_name)
