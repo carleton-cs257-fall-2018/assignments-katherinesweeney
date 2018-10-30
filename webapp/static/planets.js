@@ -315,7 +315,7 @@ async function get_planet_name(value) {
 
 }
 
-asyn function display(button) {
+async function display(button) {
     var criteria = document.getElementById("search_criteria");
     var children = criteria.children;
     query = getBaseURL();
