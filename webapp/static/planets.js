@@ -315,7 +315,7 @@ async function get_planet_name(value) {
 
 }
 
-async function display(button) {
+function display(button) {
     var criteria = document.getElementById("search_criteria");
     var children = criteria.children;
     query = getBaseURL();
@@ -333,7 +333,7 @@ async function display(button) {
         }
     }
 
-    await fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_star_list) {
+    fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_star_list) {
         display_features = get_display_features();
         var tableBody = "<tr class = 'table_row'>";
         for (var index = 0; index < display_features.length; index++) {
@@ -350,7 +350,7 @@ async function display(button) {
                 tableBody+="<td class = 'table_data'>";
                 var value = planet_star[display_features[display_index]];
                 if (display_features[display_index].includes("Planet in System")){
-                    await test = get_planet_name(value)
+                    test = get_planet_name(value)
                     console.log(test)
                     console.log(window.planet_name)
                 }
