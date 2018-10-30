@@ -309,7 +309,7 @@ function get_planet_name(value) {
         window.planet_name = planet_name;
         console.log(window.planet_name)
     })
-    console.log("test")
+    while (window.planet_name == ""){}
     console.log(window.planet_name)
     return window.planet_name
 
