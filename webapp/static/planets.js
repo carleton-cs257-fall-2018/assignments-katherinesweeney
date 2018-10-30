@@ -31,10 +31,9 @@ var star_search_feilds = {'Star Name': 'st_name', 'Number of Planets Orbiting': 
     'Temperature (K)': 'st_teff', 'Max Temperature (K)': 'st_teffmax', 'Min Temperature (K)': 'st_teffmin',
     'Mass (Solar Masses)': 'st_mass', 'Max Mass (Solar Masses)': 'st_massmax', 'Min Mass (Solar Masses)': 'st_massmin',
     'Radius (Solar Radii)': 'st_rad', 'Max Radius (Solar Radii)': 'st_radmax', 'Min Radius (Solar Radii)': 'st_radmin'};
+
 var planet_star_search_fields = {};
 Object.assign(planet_star_search_fields, star_search_feilds, planet_search_fields);
-
-
 
 window.onload = function() {
     make_table_right_side(["Planet Name", "Host Star Name"], planet_fields);
@@ -49,11 +48,8 @@ function getBaseURL() {
 function remove_parent_display(current) {
     var parent = current.parentElement;
     current.parentElement.removeChild(current);
-
     var text = parent.textContent;
-
     var select = document.getElementById('add_feature');
-
     var option = document.createElement("option");
     option.text = text;
     select.add(option);
@@ -63,11 +59,8 @@ function remove_parent_display(current) {
 function remove_parent_criteria(current) {
     var parent = current.parentElement;
     current.parentElement.removeChild(current);
-
     var text = parent.textContent;
-
     var select = document.getElementById('add_criteria');
-
     var option = document.createElement("option");
     option.text = text;
     select.add(option);
@@ -76,15 +69,10 @@ function remove_parent_criteria(current) {
 
 function pick_option(option) {
     var text = option.value;
-
     var div = document.createElement('div');
-
     div.className = "inner_features_to_display small";
-
     div.innerHTML = text+"<button onclick='remove_parent_display(this)' type='button' class = 'x_button'>x</button>";
-
     document.getElementById('features_to_display').appendChild(div);
-
     for (var i=0; i<option.length; i++){
         if (option.options[i].text == text )
             option.remove(i);
@@ -93,15 +81,10 @@ function pick_option(option) {
 
 function pick_criteria(criteria) {
     var text = criteria.value;
-
     var div = document.createElement('div');
-
     div.className = "inner_features_to_display small";
-
     div.innerHTML = text+"<input type='text' class = 'text_box' name="+planet_star_search_fields[text]+"><button onclick='remove_parent_criteria(this)' type='button' class = 'x_button'>x</button>";
-
     document.getElementById('search_criteria').appendChild(div);
-
     for (var i=0; i<criteria.length; i++){
         if (criteria.options[i].text == text)
             criteria.remove(i);
@@ -177,7 +160,7 @@ function get_display_features() {
         var text = child.innerText;
         features_to_display.push(text.substring(0,text.length-2));
     }
-    return features_to_display
+    return features_to_display;
 
 }
 
@@ -186,16 +169,16 @@ function display(button) {
     var children = criteria.children;
     query = getBaseURL();
     if (button.innerText == "Display Planets"){
-        query+="/planets?"
+        query+="/planets?";
     }
     else {
-        query+="/stars?"
+        query+="/stars?";
     }
     for (var index = 1; index < children.length; index++) {
         textbox = children[index].children[0];
         query+=(textbox.name + "=" +textbox.value);
         if (index != children.length -1){
-            query+="&"
+            query+="&";
         }
     }
 
@@ -218,7 +201,7 @@ function display(button) {
                 tableBody+=value;
                 tableBody+="</td>";
             }
-            tableBody+="</tr>"
+            tableBody+="</tr>";
         }
 
         document.getElementById('results_table').innerHTML=tableBody;
