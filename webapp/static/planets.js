@@ -301,7 +301,7 @@ async function get_planet_name(value) {
         return "None"
     }
     query = getBaseURL() + "/planet/" + value;
-    window.planet_name = "";
+    window.planet_name = "w";
     await fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
         var planet = planet_list[0];
         var planet_name = planet['Planet Name'];
@@ -350,7 +350,7 @@ function display(button) {
                 tableBody+="<td class = 'table_data'>";
                 var value = planet_star[display_features[display_index]];
                 if (display_features[display_index].includes("Planet in System")){
-                    test = get_planet_name(value)
+                    var test = get_planet_name(value)
                     console.log(test)
                     console.log(window.planet_name)
                 }
