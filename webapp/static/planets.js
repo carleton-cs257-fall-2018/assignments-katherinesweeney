@@ -301,16 +301,14 @@ function get_planet_name(value) {
         return "None"
     }
     query = getBaseURL() + "/planet/" + value;
-    console.log(query)
-    fetch(query, {method: 'get'}).then((response) => response.json()).then(planet_name = (function(planet_list) {
+    window.planet_name = "";
+    fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
         console.log(planet_list);
         var planet = planet_list[0];
         var planet_name = planet['Planet Name'];
-        console.log(planet);
-        console.log(planet_name)
-        return planet_name
-    }))
-    return planet_name
+        window.planet_name = planet_name;
+    })
+    return window.planet_name
 
 }
 
