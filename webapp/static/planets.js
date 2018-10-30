@@ -126,7 +126,7 @@ var star_fields = ["First Planet in System", "Second Planet in System", "Third P
               "Seventh Planet in System", "Eighth Planet in System", "Distance From Earth (pc)",
               "Tempurature (K)", "Mass (Solar Masses)","Radius (Solar Radii)", "Last Updated"];
 
-var planet_search_fields = {'Planet Name': 'pl_name', "Planet's Host Star Name": 'pl_hostname', 'Discovery Method': 'pl_discmethod',
+var planet_search_fields = {'Planet Id':"pl_id",'Planet Name': 'pl_name', "Planet's Host Star Name": 'pl_hostname', 'Discovery Method': 'pl_discmethod',
     'Number of Planets Orbiting Same Star': 'pl_pnum', 'Max Number of Planets Orbiting Same Star': 'pl_pnummax',
     'Min Number of Planets Orbiting Same Star': 'pl_pnummin', 'Orbital Period (days)': 'pl_orbper',
     'Max Orbital Period (days)': 'pl_orbpermax', 'Min Orbital Period (days)': 'pl_orbpermin', 'Orbit Semi-Major Axis (AU)': 'pl_orbsmax',
@@ -139,9 +139,9 @@ var planet_search_fields = {'Planet Name': 'pl_name', "Planet's Host Star Name":
     'Number of Notes': 'pl_nnotes', 'Max Number of Notes': 'pl_nnotesmax', 'Min Number of Notes': 'pl_nnotesmin', 'Discovery Facility': 'pl_facility'};
 
 var star_search_feilds = {'Star Name': 'st_name', 'Number of Planets Orbiting': 'st_pnum', 'Max Number of Planets Orbiting': 'st_pnummax',
-    'Min Number of Planets Orbiting': 'st_pnummin', 'Name of First Planet': 'st_planet_1_name', 'Name of Second Planet': 'st_planet_2_name',
-    'Name of Third Planet': 'st_planet_3_name', 'Name of Fourth Planet': 'st_planet_4_name', 'Name of Fifth Planet': 'st_planet_5_name',
-    'Name of Sixth Planet': 'st_planet_6_name', 'Name of Seventh Planet': 'st_planet_7_name', 'Name of Eighth Planet': 'st_planet_8_name',
+    'Min Number of Planets Orbiting': 'st_pnummin', 'Id of First Planet': 'st_planet_1_name', 'Id of Second Planet': 'st_planet_2_name',
+    'Id of Third Planet': 'st_planet_3_name', 'Id of Fourth Planet': 'st_planet_4_name', 'Id of Fifth Planet': 'st_planet_5_name',
+    'Id of Sixth Planet': 'st_planet_6_name', 'Id of Seventh Planet': 'st_planet_7_name', 'Id of Eighth Planet': 'st_planet_8_name',
     'Distance From Earth (pc)': 'st_dist', 'Max Distance From Earth (pc)': 'st_distmax', 'Min Distance From Earth (pc)': 'st_distmin',
     'Temperature (K)': 'st_teff', 'Max Temperature (K)': 'st_teffmax', 'Min Temperature (K)': 'st_teffmin',
     'Mass (Solar Masses)': 'st_mass', 'Max Mass (Solar Masses)': 'st_massmax', 'Min Mass (Solar Masses)': 'st_massmin',

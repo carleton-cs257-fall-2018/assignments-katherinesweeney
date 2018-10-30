@@ -201,6 +201,7 @@ def get_planets():
     Gets a list of dictionaries of the planets that satisfy the given constraints
     from the URL and returns a json string
     '''
+    pl_id = flask.request.args.get('pl_id', default=-1, type=int)
     pl_name = flask.request.args.get('pl_name', default="", type=str)
     pl_hostname = flask.request.args.get('pl_hostname', default="", type=str)
     pl_discmethod = flask.request.args.get('pl_discmethod', default="", type=str)
@@ -274,6 +275,7 @@ def get_planets():
                AND (planets.pl_nnotes <= %s OR (planets.pl_nnotes IS NULL AND %s = 5))
                AND (planets.pl_nnotes >= %s OR (planets.pl_nnotes IS NULL AND %s = 0))
                AND (discovery_facility.name LIKE %s)
+               AND (%s = -1 OR planets.pl_id = %s)
                '''
 
     try:
@@ -286,7 +288,7 @@ def get_planets():
                                 pl_radj,pl_radj,pl_radjmax,pl_radjmax,pl_radjmin,pl_radjmin,pl_dens,pl_dens,
                                 pl_densmax,pl_densmax,pl_densmin,pl_densmin,pl_ttvflag,pl_ttvflag,pl_kepflag,
                                 pl_kepflag,pl_k2flag,pl_k2flag,pl_nnotes,pl_nnotes,pl_nnotesmax,pl_nnotesmax,
-                                pl_nnotesmin,pl_nnotesmin,("%" + pl_facility + "%")))
+                                pl_nnotesmin,pl_nnotesmin,("%" + pl_facility + "%"),pl_id,pl_id))
 
     except Exception as e:
         print(e)
