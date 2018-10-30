@@ -296,19 +296,19 @@ function get_display_features() {
 
 }
 
-function get_planet_name(value) {
+async function get_planet_name(value) {
     if (value == "None") {
         return "None"
     }
     query = getBaseURL() + "/planet/" + value;
     window.planet_name = "";
-    fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
+    await fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
         var planet = planet_list[0];
         var planet_name = planet['Planet Name'];
         console.log(planet_name)
         window.planet_name = planet_name;
         console.log(window.planet_name)
-    }).finally("test" + console.log(window.planet_name))
+    })
     console.log(window.planet_name)
     // console.log("break")
     // console.log(window.planet_name)
