@@ -306,7 +306,9 @@ function get_planet_name(value) {
         console.log(planet_list);
         var planet = planet_list[0];
         var planet_name = planet['Planet Name'];
+        console.log(planet_name)
         window.planet_name = planet_name;
+        console.log(window.planet_name)
     })
     return window.planet_name
 
