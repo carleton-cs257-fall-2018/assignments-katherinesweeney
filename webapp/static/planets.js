@@ -296,6 +296,16 @@ function get_display_features() {
 
 }
 
+function get_planet_name(value) {
+    if (value == "None") {
+        return "None"
+    }
+    query = getBaseURL() + "/star/" + value
+    fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
+        return planet_list[0]["Planet Name"]
+    })
+}
+
 function display(button) {
     var criteria = document.getElementById("search_criteria");
     var children = criteria.children;
@@ -333,7 +343,7 @@ function display(button) {
                 tableBody+="<td class = 'table_data'>";
                 var value = planet_star[display_features[display_index]];
                 if (display_features[display_index].includes("Planet in System")){
-                    value = "Temp"
+                    value = get_star_name(value)
                 }
                 tableBody+=value;
                 tableBody+="</td>";

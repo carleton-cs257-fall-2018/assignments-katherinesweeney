@@ -47,8 +47,8 @@ def get_select_query_results(connection, query, parameters=None):
     return cursor
 
 
-@app.route('/planet/<pl_name>')
-def get_planet(pl_name):
+@app.route('/planet/<pl_id>')
+def get_planet(pl_id):
     '''
     Gets a planet with the given name
     '''
@@ -57,9 +57,9 @@ def get_planet(pl_name):
     cursor = connection.cursor()
     query = '''SELECT *
                FROM planets
-               WHERE pl_name = %s'''
+               WHERE pl_id = %s'''
     try:
-        cursor.execute(query, (pl_name,))
+        cursor.execute(query, (pl_id,))
     except Exception as e:
         print(e)
         exit()
@@ -73,8 +73,8 @@ def get_planet(pl_name):
 
     return json.dumps(planets)
 
-@app.route('/star/<st_name>')
-def get_star(st_name):
+@app.route('/star/<st_id>')
+def get_star(st_id):
     '''
     Gets a star with the given name
     '''
@@ -83,9 +83,9 @@ def get_star(st_name):
     cursor = connection.cursor()
     query = '''SELECT *
                FROM stars
-               WHERE st_name = %s'''
+               WHERE st_id = %s'''
     try:
-        cursor.execute(query, (st_name,))
+        cursor.execute(query, (st_id,))
     except Exception as e:
         print(e)
         exit()
