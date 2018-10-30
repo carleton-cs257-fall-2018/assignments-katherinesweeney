@@ -301,14 +301,15 @@ async function get_planet_name(value) {
         return "None"
     }
     query = getBaseURL() + "/planet/" + value;
-    window.planet_name = "w";
-    await fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
-        var planet = planet_list[0];
-        var planet_name = planet['Planet Name'];
-        window.planet_name = planet_name;
-    })
-    console.log(window.planet_name)
-    return window.planet_name
+    console.log(getJSON(query))
+    // window.planet_name = "w";
+    // await fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
+    //     var planet = planet_list[0];
+    //     var planet_name = planet['Planet Name'];
+    //     window.planet_name = planet_name;
+    // })
+    // console.log(window.planet_name)
+    // return window.planet_name
     // console.log("break")
     // console.log(window.planet_name)
     // return planet_name[[PromiseValue]]
@@ -333,7 +334,7 @@ function display(button) {
         }
     }
 
-    async fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_star_list) {
+    fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_star_list) {
         display_features = get_display_features();
         var tableBody = "<tr class = 'table_row'>";
         for (var index = 0; index < display_features.length; index++) {
@@ -350,7 +351,7 @@ function display(button) {
                 tableBody+="<td class = 'table_data'>";
                 var value = planet_star[display_features[display_index]];
                 if (display_features[display_index].includes("Planet in System")){
-                    var test = await get_planet_name(value)
+                    var test = get_planet_name(value)
                     console.log(test)
                     console.log(window.planet_name)
                 }
