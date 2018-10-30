@@ -304,9 +304,9 @@ function get_planet_name(value) {
     console.log(query)
     fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_list) {
         console.log(planet_list)
-        var planet = planet_list[0]
+        var planet = planet_list["Planet Name"]
         console.log(planet)
-        return planet["Planet Name"]
+        return planet;
     })
 }
 
@@ -327,10 +327,8 @@ function display(button) {
             query+="&"
         }
     }
-    console.log(query)
 
     fetch(query, {method: 'get'}).then((response) => response.json()).then(function(planet_star_list) {
-        console.log(planet_star_list)
         display_features = get_display_features();
         var tableBody = "<tr class = 'table_row'>";
         for (var index = 0; index < display_features.length; index++) {
@@ -351,7 +349,6 @@ function display(button) {
                 }
                 tableBody+=value;
                 tableBody+="</td>";
-                console.log(planet_star[display_features[display_index]])
             }
             tableBody+="</tr>"
         }
