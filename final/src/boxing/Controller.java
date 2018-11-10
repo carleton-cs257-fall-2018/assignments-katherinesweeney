@@ -6,8 +6,6 @@ public class Controller implements EventHandler<KeyEvent> {
 
     public void initialize() { }
 
-    public double getBoardWidth() { }
-
     private void updateView() { }
 
     @Override
