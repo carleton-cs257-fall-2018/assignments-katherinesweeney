@@ -1,6 +1,11 @@
 package boxing;
 
-
+/**
+ * Boxer.java
+ * A Model class that represents the upderlying data for Boxers
+ *
+ * @author Owen Barnett, Justin Hahn, Kate Sweeney
+ */
 public class Boxer {
 
     /**
@@ -20,28 +25,72 @@ public class Boxer {
     public void addOpponent(Boxer opponent) { }
 
     /**
-     * 
+     * Updates Boxer position
      *
-     * @param moveRight
+     * @param move distance Boxer moves right
      */
-    public void move(boolean moveRight) { }
+    public void move(int move) { }
 
-    public int getPosition() { return 1 }
+    /**
+     * Returns position of the Boxer
+     *
+     * @return position of Boxer
+     */
+    public int getPosition() { return 1; }
 
+    /**
+     * Executes a punch
+     */
     public void punch() { }
 
+    /**
+     * Executes a block
+     */
     public void block() { }
 
+    /**
+     * Execute a kick
+     */
     public void kick() { }
 
+    /**
+     * Called when in hit box of opponent's punch
+     * and updates health
+     */
     public void getPunched() { }
 
+    /**
+     * Called when in hit box of oppenent's kick
+     * and updates health
+     */
     public void getKicked() { }
 
-    public int getHealth() { return 1 }
+    /**
+     * Returns health of Boxer
+     *
+     * @return health of Boxer
+     */
+    public int getHealth() { return 1; }
 
-    public int getEnergy() { return 1 }
+    /**
+     * Returns energy of Boxer
+     *
+     * @return energy of Boxer
+     */
+    public int getEnergy() { return 1; }
 
+    /**
+     * Adds energy to Boxer's energy
+     *
+     * @param energy energy to add to Boxer
+     */
     public void addEnergy(int energy) { }
+
+    /**
+     * Retreives the location of the image that represents the Boxer
+     *
+     * @return image file path
+     */
+    public string getImage () { return "Hello, world!"; }
 
 }
