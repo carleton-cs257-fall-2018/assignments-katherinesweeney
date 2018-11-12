@@ -1,5 +1,7 @@
 package boxing;
 
+import javafx.scene.input.KeyEvent;
+
 /**
  * Controller.java
  * A Controller that takes keyboard inputs and interfaces with BoxerView and Boxer

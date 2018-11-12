@@ -6,7 +6,7 @@ package boxing;
  *
  * @author Owen Barnett, Justin Hahn, Kate Sweeney
  */
-public class BoxerView extends Group {
+public class BoxerView{
 
     /**
      * Initializes the BoxerView

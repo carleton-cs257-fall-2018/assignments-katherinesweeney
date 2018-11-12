@@ -15,7 +15,7 @@ public class Boxer {
      * @param start_position position boxer starts at
      * @param width width of the boxer on the screen
      */
-    public boxer(boolean isRight, int start_position, int width) { }
+    public Boxer(boolean isRight, int start_position, int width) { }
 
     /**
      * Sets the opponent Boxer reference
@@ -91,6 +91,6 @@ public class Boxer {
      *
      * @return image file path
      */
-    public string getImage () { return "Hello, world!"; }
+    public String getImage () { return "Hello, world!"; }
 
 }
