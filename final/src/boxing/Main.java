@@ -1,23 +1,22 @@
 package boxing;
 
-
 import javafx.application.Application;
 
 /**
  * Main.java
  * Main class for boxing game. Initializes start up process
+ * @author Owen Barnett, Justin Hahn, Kate Sweeney
  */
 public class Main extends Application {
 
-
     /**
-     * Sets up stade.
-     * @param left boxer on left side
-     * @param right boxer on right side
-     * @throws Exception error in set ut
+     * Sets up stage.
+     *
+     * @param primaryStage main javafx stage for game
+     * @throws Exception error in set up
      */
     @Override
-    public void start(Boxer left, Boxer right) throws Exception{ }
+    public void start(javafx.stage.Stage primaryStage) throws Exception{ }
 
     /**
      * Launches game

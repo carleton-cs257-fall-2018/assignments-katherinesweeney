@@ -1,6 +1,7 @@
 package boxing;
 
 import javafx.scene.input.KeyEvent;
+import javafx.event.EventHandler;
 
 /**
  * Controller.java

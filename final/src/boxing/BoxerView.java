@@ -2,7 +2,7 @@ package boxing;
 
 /**
  * BoxerView.java
- * A View calss that sets up the user's view
+ * A View class that sets up the user's view
  *
  * @author Owen Barnett, Justin Hahn, Kate Sweeney
  */
