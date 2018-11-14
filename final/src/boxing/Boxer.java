@@ -7,15 +7,17 @@ package boxing;
  * @author Owen Barnett, Justin Hahn, Kate Sweeney
  */
 public class Boxer {
-
+    private int startPosition;
     /**
      * Initializes a new boxer
      *
      * @param isRight boxer is the right boxer on screen
-     * @param start_position position boxer starts at
+     * @param startPosition position boxer starts at
      * @param width width of the boxer on the screen
      */
-    public Boxer(boolean isRight, int start_position, int width) { }
+    public Boxer(boolean isRight, int startPosition, int width) {
+        this.startPosition=startPosition;
+    }
 
     /**
      * Sets the opponent Boxer reference
@@ -29,14 +31,16 @@ public class Boxer {
      *
      * @param move distance Boxer moves right
      */
-    public void move(int move) { }
+    public void move(int move) {
+        this.startPosition +=move;
+    }
 
     /**
      * Returns position of the Boxer
      *
      * @return position of Boxer
      */
-    public int getPosition() { return 1; }
+    public int getPosition() { return this.startPosition; }
 
     /**
      * Executes a punch

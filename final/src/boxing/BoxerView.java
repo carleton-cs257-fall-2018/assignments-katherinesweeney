@@ -9,22 +9,28 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.awt.*;
+
 /**
  * BoxerView.java
  * A View class that sets up the user's view
  *
  * @author Owen Barnett, Justin Hahn, Kate Sweeney
  */
-public class BoxerView{
-    public final static double CELL_WIDTH = 5.0;
-    public final static double CELL_HEIGHT = 75.0;
-    @FXML private int cellCount;
+public class BoxerView extends Group {
+    public final static double CELL_WIDTH = 20.0;
+    public final static double CELL_HEIGHT = 300;
+    @FXML private int cellCount = 50;
     private Rectangle[] cellViews;
 
     /**
      * Initializes the BoxerView
      */
-    public BoxerView() { }
+    public BoxerView() { this.initializeGame();}
+
+    public int getCellCount() {
+        return this.cellCount;
+    }
 
     /**
      * Starts the fight from the title screen
@@ -56,11 +62,14 @@ public class BoxerView{
             this.cellViews = new Rectangle[this.cellCount];
             for (int row = 0; row < this.cellCount; row++) {
                 Rectangle rectangle = new Rectangle();
-                rectangle.setX(CELL_HEIGHT/2); // FIX MAYBE TODO FIX ME
-                rectangle.setY((double)row * CELL_WIDTH);
+                rectangle.setX((double)row * CELL_WIDTH);
+                rectangle.setY(0);
                 rectangle.setWidth(CELL_WIDTH);
                 rectangle.setHeight(CELL_HEIGHT);
+                if (row%2==0){
+                rectangle.setFill(Color.RED);}
                 this.cellViews[row]= rectangle;
+
                 this.getChildren().add(rectangle);
             }
         }
@@ -72,5 +81,8 @@ public class BoxerView{
      * @param left Boxer on the left side
      * @param right Boxer on the right side
      */
-    public void update(Boxer left, Boxer right) { }
+    public void update(Boxer left, Boxer right) {
+        this.cellViews[left.getPosition()].setFill(Color.WHITE);
+        this.cellViews[right.getPosition()].setFill(Color.WHITE);
+    }
 }
