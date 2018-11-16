@@ -14,6 +14,8 @@ import javafx.scene.input.KeyEvent;
  */
 public class Controller implements EventHandler<KeyEvent> {
     @FXML private BoxerView boxerView;
+    @FXML private Label leftHealth;
+    @FXML private Label rightHealth;
     private Boxer boxerLeft;
     private Boxer boxerRight;
 
@@ -28,6 +30,8 @@ public class Controller implements EventHandler<KeyEvent> {
      */
     private void updateView() {
         this.boxerView.update(boxerLeft, boxerRight);
+        this.leftHealth.setText(String.format("Health: %d", this.boxerLeft.getHealth()));
+        this.rightHealth.setText(String.format("Health: %d", this.boxerRight.getHealth()));
     }
 
     /**
@@ -43,9 +47,23 @@ public class Controller implements EventHandler<KeyEvent> {
         if (s.length() > 0) {
             char theCharacterWeWant = s.charAt(0);
         }
-        if (code == KeyCode.M){
+        if (code == KeyCode.A){
+            boxerLeft.move(-1);
+        }
+        if (code == KeyCode.D){
             boxerLeft.move(1);
+        }
+        if (code == KeyCode.LEFT){
             boxerRight.move(-1);
+        }
+        if (code == KeyCode.RIGHT){
+            boxerRight.move(1);
+        }
+        if (code == KeyCode.DIGIT1){
+            boxerLeft.punch();
+        }
+        if (code == KeyCode.L){
+            boxerRight.punch();
         }
         this.updateView();
     }
@@ -55,9 +73,12 @@ public class Controller implements EventHandler<KeyEvent> {
     }
 
     public void initialize() {
-
-
         this.boxerLeft = new Boxer(true,10,5);
         this.boxerRight = new Boxer(false,40,5);
+
+        this.boxerLeft.addOpponent(this.boxerRight);
+        this.boxerRight.addOpponent(this.boxerLeft);
+
+        this.updateView();
     }
 }

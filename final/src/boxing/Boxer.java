@@ -1,5 +1,7 @@
 package boxing;
 
+
+
 /**
  * Boxer.java
  * A Model class that represents the upderlying data for Boxers
@@ -7,7 +9,10 @@ package boxing;
  * @author Owen Barnett, Justin Hahn, Kate Sweeney
  */
 public class Boxer {
-    private int startPosition;
+    private int position;
+    private Boxer opponent;
+    private int cellCount = 50;
+    private int health = 100;
     /**
      * Initializes a new boxer
      *
@@ -16,7 +21,7 @@ public class Boxer {
      * @param width width of the boxer on the screen
      */
     public Boxer(boolean isRight, int startPosition, int width) {
-        this.startPosition=startPosition;
+        this.position=startPosition;
     }
 
     /**
@@ -24,7 +29,9 @@ public class Boxer {
      *
      * @param opponent Oponent Boxer object
      */
-    public void addOpponent(Boxer opponent) { }
+    public void addOpponent(Boxer opponent) {
+        this.opponent = opponent;
+    }
 
     /**
      * Updates Boxer position
@@ -32,7 +39,9 @@ public class Boxer {
      * @param move distance Boxer moves right
      */
     public void move(int move) {
-        this.startPosition +=move;
+        if(this.position+move < cellCount-3 && this.position+move > 3 && Math.abs(this.position+move-opponent.getPosition())>2) {
+            this.position += move;
+        }
     }
 
     /**
@@ -40,12 +49,14 @@ public class Boxer {
      *
      * @return position of Boxer
      */
-    public int getPosition() { return this.startPosition; }
+    public int getPosition() { return this.position; }
 
     /**
      * Executes a punch
      */
-    public void punch() { }
+    public void punch() {
+        opponent.getPunched();
+    }
 
     /**
      * Executes a block
@@ -61,7 +72,17 @@ public class Boxer {
      * Called when in hit box of opponent's punch
      * and updates health
      */
-    public void getPunched() { }
+    public void getPunched() {
+        if (Math.abs(opponent.position-this.position)==4){
+            this.health-=10;
+        }
+        if (Math.abs(opponent.position-this.position)==3){
+            this.health-=6;
+        }
+        if (Math.abs(opponent.position-this.position)==5){
+            this.health-=2;
+        }
+    }
 
     /**
      * Called when in hit box of oppenent's kick
@@ -74,7 +95,7 @@ public class Boxer {
      *
      * @return health of Boxer
      */
-    public int getHealth() { return 1; }
+    public int getHealth() { return this.health; }
 
     /**
      * Returns energy of Boxer

@@ -26,7 +26,7 @@ public class Main extends Application {
 
         Controller controller = loader.getController();
         root.setOnKeyPressed(controller);
-        double sceneWidth = 1000.0;
+        double sceneWidth = 1250.0;
         double sceneHeight = 400.0;
         primaryStage.setScene(new Scene(root, sceneWidth, sceneHeight));
         primaryStage.show();

@@ -8,8 +8,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 
 import java.awt.*;
+import java.io.FileInputStream;
+
 
 /**
  * BoxerView.java
@@ -18,8 +23,8 @@ import java.awt.*;
  * @author Owen Barnett, Justin Hahn, Kate Sweeney
  */
 public class BoxerView extends Group {
-    public final static double CELL_WIDTH = 20.0;
-    public final static double CELL_HEIGHT = 300;
+    public final static double CELL_WIDTH = 25.0;
+    public final static double CELL_HEIGHT = 150;
     @FXML private int cellCount = 50;
     private Rectangle[] cellViews;
 
@@ -66,12 +71,20 @@ public class BoxerView extends Group {
                 rectangle.setY(0);
                 rectangle.setWidth(CELL_WIDTH);
                 rectangle.setHeight(CELL_HEIGHT);
-                if (row%2==0){
-                rectangle.setFill(Color.RED);}
+                rectangle.setFill(Color.WHITE);
                 this.cellViews[row]= rectangle;
 
                 this.getChildren().add(rectangle);
             }
+        }
+    }
+
+    /**
+     * Clears the images from the board
+     */
+    private void clearBoard() {
+        for(Rectangle rectangle : this.cellViews){
+            rectangle.setFill(Color.GRAY);
         }
     }
 
@@ -81,8 +94,24 @@ public class BoxerView extends Group {
      * @param left Boxer on the left side
      * @param right Boxer on the right side
      */
-    public void update(Boxer left, Boxer right) {
-        this.cellViews[left.getPosition()].setFill(Color.WHITE);
-        this.cellViews[right.getPosition()].setFill(Color.WHITE);
+    public void update(Boxer left, Boxer right){
+        this.clearBoard();
+        Image leftImg = new Image("file:/Users/owenbarnett/Software_Design/assignments-katherinesweeney/final/assets/playerPunch.png");
+        addImage(left.getPosition()-1, 5, leftImg);
+
+        Image rightImg = new Image("file:/Users/owenbarnett/Software_Design/assignments-katherinesweeney/final/assets/enemyPunch.png");
+        addImage(right.getPosition()-1, 5, rightImg);
+    }
+
+    public void addImage(int startPosition, int length, Image img){
+        PixelReader reader = img.getPixelReader();
+        int width = (int)(img.getWidth());
+        int height = (int)(img.getHeight());
+
+        for(int i = 0; i<length; i++){
+            WritableImage imagePart = new WritableImage(reader, i*(width/length),0, width/length, height);
+            cellViews[startPosition+i].setFill(new ImagePattern(imagePart));
+        }
+
     }
 }
