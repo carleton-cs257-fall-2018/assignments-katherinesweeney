@@ -24,3 +24,5 @@ Core Classes:
 	- BoxerView.java
 	- Controller.java
 	- Main.java
+
+Credit to Assets: Street Fighter II on the SNES
