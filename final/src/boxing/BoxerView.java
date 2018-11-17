@@ -84,7 +84,7 @@ public class BoxerView extends Group {
      */
     private void clearBoard() {
         for(Rectangle rectangle : this.cellViews){
-            rectangle.setFill(Color.GRAY);
+            rectangle.setFill(Color.WHITE);
         }
     }
 
@@ -115,6 +115,7 @@ public class BoxerView extends Group {
 
         for(int i = 0; i<length; i++){
             WritableImage imagePart = new WritableImage(reader, i*(width/length),0, width/length, height);
+
             cellViews[startPosition+i].setFill(new ImagePattern(imagePart));
 
         }

@@ -59,22 +59,32 @@ public class Controller implements EventHandler<KeyEvent> {
         KeyCode code = keyEvent.getCode();
 
         if (code == KeyCode.A){
+            boxerLeft.setBlockingFalse();
             boxerLeft.move(-1);
         }
         if (code == KeyCode.D){
+            boxerLeft.setBlockingFalse();
             boxerLeft.move(1);
         }
         if (code == KeyCode.LEFT){
+            boxerRight.setBlockingFalse();
             boxerRight.move(-1);
         }
         if (code == KeyCode.RIGHT){
+            boxerRight.setBlockingFalse();
             boxerRight.move(1);
         }
         if (code == KeyCode.DIGIT1){
             boxerLeft.punch();
         }
-        if (code == KeyCode.L){
+        if (code == KeyCode.K){
             boxerRight.punch();
+        }
+        if (code == KeyCode.DIGIT2){
+            boxerLeft.block();
+        }
+        if (code == KeyCode.L){
+            boxerRight.block();
         }
 
     }
@@ -111,7 +121,12 @@ public class Controller implements EventHandler<KeyEvent> {
 
     private void updateState() {
         this.updateView();
-        this.boxerLeft.addEnergy(1);
-        this.boxerRight.addEnergy(1);
+        if(!boxerLeft.isBlocking()) {
+            this.boxerLeft.addEnergy(1);
+        }
+        if(!boxerRight.isBlocking()){
+            this.boxerRight.addEnergy(1);
+        }
+
     }
 }
