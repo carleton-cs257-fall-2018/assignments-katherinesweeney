@@ -1,11 +1,15 @@
 package boxing;
 
-import javafx.fxml.FXML;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,13 +25,17 @@ public class Controller implements EventHandler<KeyEvent> {
     @FXML private Label rightHealth;
     @FXML private Label leftEnergy;
     @FXML private Label rightEnergy;
+
     private Boxer boxerLeft;
     private Boxer boxerRight;
+    private Timer timer;
+    final private double FRAMES_PER_SECOND = 5.0;
 
     /**
      * Initializes controller
      */
     public Controller() {
+        this.startTimer();
     }
 
     /**
@@ -68,7 +76,7 @@ public class Controller implements EventHandler<KeyEvent> {
         if (code == KeyCode.L){
             boxerRight.punch();
         }
-        this.updateView();
+
     }
 
     public double getBoardWidth() {
@@ -76,8 +84,8 @@ public class Controller implements EventHandler<KeyEvent> {
     }
 
     public void initialize() {
-        this.boxerLeft = new Boxer(true,10,5);
-        this.boxerRight = new Boxer(false,40,5);
+        this.boxerLeft = new Boxer(false,10,5);
+        this.boxerRight = new Boxer(true,40,5);
 
         this.boxerLeft.addOpponent(this.boxerRight);
         this.boxerRight.addOpponent(this.boxerLeft);
@@ -85,19 +93,25 @@ public class Controller implements EventHandler<KeyEvent> {
         this.updateView();
     }
 
-//    private void startTimer() {
-//        this.timer = new java.util.Timer();
-//        TimerTask timerTask = new TimerTask() {
-//            public void run() {
-//                Platform.runLater(new Runnable() {
-//                    public void run() {
-//                        updateAnimation();
-//                    }
-//                });
-//            }
-//        };
-//
-//        long frameTimeInMilliseconds = (long)(1000.0 / FRAMES_PER_SECOND);
-//        this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
-//    }
+    private void startTimer() {
+        this.timer = new java.util.Timer();
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        updateState();
+                    }
+                });
+            }
+        };
+
+        long frameTimeInMilliseconds = (long)(1000.0 / FRAMES_PER_SECOND);
+        this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
+    }
+
+    private void updateState() {
+        this.updateView();
+        this.boxerLeft.addEnergy(1);
+        this.boxerRight.addEnergy(1);
+    }
 }

@@ -14,6 +14,8 @@ public class Boxer {
     private int cellCount = 50;
     private int health = 100;
     private int energy = 100;
+    private boolean isRight;
+    private boolean isPunching = false;
     /**
      * Initializes a new boxer
      *
@@ -23,6 +25,7 @@ public class Boxer {
      */
     public Boxer(boolean isRight, int startPosition, int width) {
         this.position=startPosition;
+        this.isRight = isRight;
     }
 
     /**
@@ -56,7 +59,11 @@ public class Boxer {
      * Executes a punch
      */
     public void punch() {
-        opponent.getPunched();
+        if(this.energy>9) {
+            opponent.getPunched();
+            this.energy-=10;
+            this.isPunching = true;
+        }
     }
 
     /**
@@ -122,6 +129,23 @@ public class Boxer {
      *
      * @return image file path
      */
-    public String getImage () { return "Hello, world!"; }
+    public String getImage () {
+        String imagePath = "assets/";
+
+        if (this.isRight){
+            imagePath+="enemy";
+        }
+        else{
+            imagePath+="player";
+        }
+
+        if (this.isPunching){
+            imagePath+="Punch";
+            this.isPunching = false;
+        }
+
+        imagePath+=".png";
+        return imagePath;
+    }
 
 }

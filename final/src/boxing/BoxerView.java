@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
-
+import javafx.scene.*;
 import java.awt.*;
 import java.io.FileInputStream;
 
@@ -71,7 +71,7 @@ public class BoxerView extends Group {
                 rectangle.setY(0);
                 rectangle.setWidth(CELL_WIDTH);
                 rectangle.setHeight(CELL_HEIGHT);
-                rectangle.setFill(Color.WHITE);
+//                rectangle.setFill(Color.WHITE);
                 this.cellViews[row]= rectangle;
 
                 this.getChildren().add(rectangle);
@@ -96,21 +96,27 @@ public class BoxerView extends Group {
      */
     public void update(Boxer left, Boxer right){
         this.clearBoard();
-        Image leftImg = new Image("file:assets/player.png");
-        addImage(left.getPosition()-1, 3, leftImg);
+        Image leftImg = new Image("file:"+left.getImage());
+        addImage(left.getPosition()-1, leftImg, false);
 
-        Image rightImg = new Image("file:assets/enemy.png");
-        addImage(right.getPosition()-1, 3, rightImg);
+        Image rightImg = new Image("file:"+right.getImage());
+        addImage(right.getPosition()-1, rightImg, true);
     }
 
-    public void addImage(int startPosition, int length, Image img){
+    public void addImage(int startPosition, Image img, boolean right){
         PixelReader reader = img.getPixelReader();
         int width = (int)(img.getWidth());
         int height = (int)(img.getHeight());
 
+        int length = width/15;
+        if (right && length==5) {
+            startPosition-=2;
+        }
+
         for(int i = 0; i<length; i++){
             WritableImage imagePart = new WritableImage(reader, i*(width/length),0, width/length, height);
             cellViews[startPosition+i].setFill(new ImagePattern(imagePart));
+
         }
 
     }
