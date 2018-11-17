@@ -6,10 +6,16 @@
 <BorderPane fx:controller="boxing.Controller" xmlns:fx="http://javafx.com/fxml">
 
     <top>
-        <BorderPane prefHeight="35" style="-fx-background-color: #0B5091; -fx-padding: 10px, 5px, 10px, 5px" >
-            <left><Label fx:id="leftHealth" style="-fx-font-size: 150%; -fx-text-fill: white" /></left>
-            <right><Label fx:id="rightHealth" style="-fx-font-size: 150%; -fx-text-fill: white" /></right>
-        </BorderPane>
+            <BorderPane prefHeight="35" style="-fx-background-color: #0B5091; -fx-padding: 10px, 5px, 10px, 5px" >
+                <left><Label fx:id="leftHealth" style="-fx-font-size: 150%; -fx-text-fill: white" /></left>
+                <right><Label fx:id="rightHealth" style="-fx-font-size: 150%; -fx-text-fill: white" /></right>
+            <!--</BorderPane>-->
+
+            <!--<BorderPane prefHeight="35" style="-fx-background-color: #0B5091; -fx-padding: 10px, 5px, 10px, 5px" >-->
+                <top><Label fx:id="leftEnergy" style="-fx-font-size: 150%; -fx-text-fill: white" /></top>
+                <bottom_right><Label fx:id="rightEnergy" style="-fx-font-size: 150%; -fx-text-fill: white" /></bottom_right>
+            </BorderPane>
+
     </top>
 
     <center>

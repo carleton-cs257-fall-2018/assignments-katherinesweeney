@@ -13,6 +13,7 @@ public class Boxer {
     private Boxer opponent;
     private int cellCount = 50;
     private int health = 100;
+    private int energy = 100;
     /**
      * Initializes a new boxer
      *
@@ -102,14 +103,19 @@ public class Boxer {
      *
      * @return energy of Boxer
      */
-    public int getEnergy() { return 1; }
+    public int getEnergy() { return this.energy; }
 
     /**
      * Adds energy to Boxer's energy
      *
      * @param energy energy to add to Boxer
      */
-    public void addEnergy(int energy) { }
+    public void addEnergy(int energy) {
+        this.energy+=energy;
+        if(this.energy>100){
+            this.energy = 100;
+        }
+    }
 
     /**
      * Retreives the location of the image that represents the Boxer

@@ -96,11 +96,11 @@ public class BoxerView extends Group {
      */
     public void update(Boxer left, Boxer right){
         this.clearBoard();
-        Image leftImg = new Image("file:/Users/owenbarnett/Software_Design/assignments-katherinesweeney/final/assets/playerPunch.png");
-        addImage(left.getPosition()-1, 5, leftImg);
+        Image leftImg = new Image("file:assets/player.png");
+        addImage(left.getPosition()-1, 3, leftImg);
 
-        Image rightImg = new Image("file:/Users/owenbarnett/Software_Design/assignments-katherinesweeney/final/assets/enemyPunch.png");
-        addImage(right.getPosition()-1, 5, rightImg);
+        Image rightImg = new Image("file:assets/enemy.png");
+        addImage(right.getPosition()-1, 3, rightImg);
     }
 
     public void addImage(int startPosition, int length, Image img){

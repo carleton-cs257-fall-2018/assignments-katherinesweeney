@@ -6,6 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller.java
  * A Controller that takes keyboard inputs and interfaces with BoxerView and Boxer
@@ -16,6 +19,8 @@ public class Controller implements EventHandler<KeyEvent> {
     @FXML private BoxerView boxerView;
     @FXML private Label leftHealth;
     @FXML private Label rightHealth;
+    @FXML private Label leftEnergy;
+    @FXML private Label rightEnergy;
     private Boxer boxerLeft;
     private Boxer boxerRight;
 
@@ -32,6 +37,8 @@ public class Controller implements EventHandler<KeyEvent> {
         this.boxerView.update(boxerLeft, boxerRight);
         this.leftHealth.setText(String.format("Health: %d", this.boxerLeft.getHealth()));
         this.rightHealth.setText(String.format("Health: %d", this.boxerRight.getHealth()));
+        this.leftEnergy.setText(String.format("Energy: %d", this.boxerLeft.getEnergy()));
+        this.rightEnergy.setText(String.format("Energy: %d", this.boxerRight.getEnergy()));
     }
 
     /**
@@ -43,10 +50,6 @@ public class Controller implements EventHandler<KeyEvent> {
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
 
-        String s = code.getChar();
-        if (s.length() > 0) {
-            char theCharacterWeWant = s.charAt(0);
-        }
         if (code == KeyCode.A){
             boxerLeft.move(-1);
         }
@@ -81,4 +84,20 @@ public class Controller implements EventHandler<KeyEvent> {
 
         this.updateView();
     }
+
+//    private void startTimer() {
+//        this.timer = new java.util.Timer();
+//        TimerTask timerTask = new TimerTask() {
+//            public void run() {
+//                Platform.runLater(new Runnable() {
+//                    public void run() {
+//                        updateAnimation();
+//                    }
+//                });
+//            }
+//        };
+//
+//        long frameTimeInMilliseconds = (long)(1000.0 / FRAMES_PER_SECOND);
+//        this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
+//    }
 }
