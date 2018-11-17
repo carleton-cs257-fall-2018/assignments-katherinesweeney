@@ -148,11 +148,18 @@ public class Controller implements EventHandler<KeyEvent> {
 
     private void updateState() {
         this.updateView();
-        if(!boxerLeft.isBlocking()) {
+        if (!boxerLeft.isBlocking()) {
             this.boxerLeft.addEnergy(1);
         }
-        if(!boxerRight.isBlocking()){
+        if (!boxerRight.isBlocking()) {
             this.boxerRight.addEnergy(1);
+        }
+        if(boxerRight.getHealth() < 1){
+            this.timer.cancel();
+        }
+
+        else if(boxerLeft.getHealth() < 1){
+            this.timer.cancel();
         }
 
     }

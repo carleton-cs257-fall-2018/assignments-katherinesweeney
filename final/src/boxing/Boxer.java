@@ -18,6 +18,7 @@ public class Boxer {
     private boolean isPunching = false;
     private boolean isBlocking = false;
     private boolean isKicking = false;
+    private boolean isHit = false;
     private int idle = 0;
     /**
      * Initializes a new boxer
@@ -99,6 +100,13 @@ public class Boxer {
         }
     }
 
+    private void takeHealth(int health){
+        this.health-=health;
+        if (this.health < 0) {
+            this.health = 0;
+        }
+    }
+
     /**
      * Called when in hit box of opponent's punch
      * and updates health
@@ -110,19 +118,20 @@ public class Boxer {
         }
         if (Math.abs(opponent.position-this.position)==8 || Math.abs(opponent.position-this.position)==9){
             if(this.isBlocking) {
-                this.health -= 2;
+                this.takeHealth(2);
                 this.addEnergy(-5);
                 this.isBlocking = false;
             }
             else{
-                this.health -= 10;
+                this.takeHealth(10);
+                this.isHit = true;
             }
             this.move(moveDirection);
         }
         if (Math.abs(opponent.position-this.position)==6 || Math.abs(opponent.position-this.position)==7){
             if(!this.isBlocking) {
-                this.health -= 6;
-
+                this.takeHealth(6);
+                this.isHit = true;
             }
             else{
                 this.addEnergy(-5);
@@ -131,7 +140,7 @@ public class Boxer {
         }
         if (Math.abs(opponent.position-this.position)==10 || Math.abs(opponent.position-this.position)==11){
             if(!this.isBlocking) {
-                this.health -= 2;
+                this.takeHealth(2);
             }
             else{
                 this.addEnergy(-5);
@@ -196,6 +205,10 @@ public class Boxer {
         }
         else if (this.isBlocking){
             imagePath+="Block";
+        }
+        else if (this.isHit){
+            imagePath+="Hit";
+            this.isHit = false;
         }
         else{
             imagePath+="Idle";
