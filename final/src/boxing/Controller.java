@@ -29,6 +29,7 @@ public class Controller implements EventHandler<KeyEvent> {
     @FXML private Label rightHealth;
     @FXML private Label leftEnergy;
     @FXML private Label rightEnergy;
+    @FXML private Label restart;
     @FXML private ImageView rightImageView;
     @FXML private ImageView leftImageView;
     @FXML private ImageView background;
@@ -36,6 +37,8 @@ public class Controller implements EventHandler<KeyEvent> {
     private Boxer boxerLeft;
     private Boxer boxerRight;
     private Timer timer;
+    private boolean isPaused;
+    private boolean isOver = false;
     final private double FRAMES_PER_SECOND = 5.0;
 
     /**
@@ -83,36 +86,65 @@ public class Controller implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
-
-        if (code == KeyCode.A){
-            boxerLeft.setBlockingFalse();
-            boxerLeft.move(-1);
+        if(!this.isOver) {
+            if (!this.isPaused) {
+                if (code == KeyCode.A) {
+                    boxerLeft.move(-1);
+                }
+                if (code == KeyCode.D) {
+                    boxerLeft.move(1);
+                }
+                if (code == KeyCode.LEFT) {
+                    boxerRight.move(-1);
+                }
+                if (code == KeyCode.RIGHT) {
+                    boxerRight.move(1);
+                }
+                if (code == KeyCode.DIGIT1) {
+                    boxerLeft.punch();
+                }
+                if (code == KeyCode.K) {
+                    boxerRight.punch();
+                }
+                if (code == KeyCode.DIGIT2) {
+                    boxerLeft.block();
+                }
+                if (code == KeyCode.L) {
+                    boxerRight.block();
+                }
+                if (code == KeyCode.DIGIT3) {
+                    boxerLeft.kick();
+                }
+                if (code == KeyCode.SEMICOLON) {
+                    boxerRight.kick();
+                }
+            }
+            if (code == KeyCode.SPACE) {
+                if (this.isPaused == false) {
+                    this.timer.cancel();
+                    Image backgroundImage = new Image("file:" + "assets/backgroundPaused.png");
+                    this.background.setImage(backgroundImage);
+                    this.background.setFitWidth(1200);
+                    this.background.setFitHeight(290);
+                    this.isPaused = true;
+                } else {
+                    this.startTimer();
+                    Image backgroundImage = new Image("file:" + "assets/background.png");
+                    this.background.setImage(backgroundImage);
+                    this.background.setFitWidth(1200);
+                    this.background.setFitHeight(290);
+                    this.isPaused = false;
+                }
+            }
         }
-        if (code == KeyCode.D){
-            boxerLeft.setBlockingFalse();
-            boxerLeft.move(1);
+        else{
+            if (code == KeyCode.R) {
+                this.initialize();
+                this.isOver = false;
+                this.startTimer();
+                this.restart.setText("Player 1: Move A D, Punch 1, Block 2, Kick 3|| Player 2: Move Left/Right Arrow, Punch K, Block L, Kick ; || Pause: Space");
+            }
         }
-        if (code == KeyCode.LEFT){
-            boxerRight.setBlockingFalse();
-            boxerRight.move(-1);
-        }
-        if (code == KeyCode.RIGHT){
-            boxerRight.setBlockingFalse();
-            boxerRight.move(1);
-        }
-        if (code == KeyCode.DIGIT1){
-            boxerLeft.punch();
-        }
-        if (code == KeyCode.K){
-            boxerRight.punch();
-        }
-        if (code == KeyCode.DIGIT2){
-            boxerLeft.block();
-        }
-        if (code == KeyCode.L){
-            boxerRight.block();
-        }
-
     }
 
     public void initialize() {
@@ -147,20 +179,31 @@ public class Controller implements EventHandler<KeyEvent> {
     }
 
     private void updateState() {
-        this.updateView();
-        if (!boxerLeft.isBlocking()) {
-            this.boxerLeft.addEnergy(1);
+        if(!this.isOver) {
+            this.updateView();
+            if (!boxerLeft.isBlocking()) {
+                this.boxerLeft.addEnergy(1);
+            }
+            if (!boxerRight.isBlocking()) {
+                this.boxerRight.addEnergy(1);
+            }
+            if (boxerRight.getHealth() < 1) {
+                this.timer.cancel();
+                Image backgroundImage = new Image("file:" + "assets/backgroundPlayerWin.png");
+                this.background.setImage(backgroundImage);
+                this.background.setFitWidth(1200);
+                this.background.setFitHeight(290);
+                this.isOver = true;
+                this.restart.setText("Restart: R");
+            } else if (boxerLeft.getHealth() < 1) {
+                this.timer.cancel();
+                Image backgroundImage = new Image("file:" + "assets/backgroundEnemyWin.png");
+                this.background.setImage(backgroundImage);
+                this.background.setFitWidth(1200);
+                this.background.setFitHeight(290);
+                this.isOver = true;
+                this.restart.setText("Restart: R");
+            }
         }
-        if (!boxerRight.isBlocking()) {
-            this.boxerRight.addEnergy(1);
-        }
-        if(boxerRight.getHealth() < 1){
-            this.timer.cancel();
-        }
-
-        else if(boxerLeft.getHealth() < 1){
-            this.timer.cancel();
-        }
-
     }
 }

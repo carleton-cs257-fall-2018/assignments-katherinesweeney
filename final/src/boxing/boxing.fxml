@@ -6,7 +6,7 @@
 <?import javafx.scene.image.*?>
 <BorderPane fx:controller="boxing.Controller" xmlns:fx="http://javafx.com/fxml">
     <top>
-            <BorderPane prefHeight="35" style="-fx-background-color: #0B5091; -fx-padding: 10px, 5px, 10px, 5px" >
+            <BorderPane prefHeight="35" style="-fx-background-color: #284098; -fx-padding: 10px, 5px, 10px, 5px" >
                 <left>
                     <BorderPane>
                         <top><Label fx:id="leftHealth" style="-fx-font-size: 150%; -fx-text-fill: white" /></top>
@@ -24,7 +24,6 @@
     </top>
 
     <center>
-
         <AnchorPane>
             <ImageView fx:id="background" />
             <ImageView fx:id="leftImageView" />
@@ -36,8 +35,8 @@
 
     <bottom>
         <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
-            <Label style="-fx-font-size: 140%; -fx-text-fill: white"
-                   text="Help: ? / Teleport: T / Stay: S / Move: W E D C X Z A / New game: G" />
+            <Label fx:id="restart" style="-fx-font-size: 140%; -fx-text-fill: white"
+                   text="Player 1: Move A D, Punch 1, Block 2, Kick 3|| Player 2: Move Left/Right Arrow, Punch K, Block L, Kick ; || Pause: Space" />
         </HBox>
     </bottom>
 

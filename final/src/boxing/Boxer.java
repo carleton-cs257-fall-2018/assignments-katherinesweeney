@@ -92,9 +92,9 @@ public class Boxer {
     public void kick() {
         if(!this.isPunching && !this.isKicking) {
             this.isBlocking = false;
-            if (this.energy > 24) {
+            if (this.energy > 19) {
                 opponent.getKicked();
-                this.energy -= 25;
+                this.energy -= 20;
                 this.isKicking = true;
             }
         }
@@ -112,6 +112,49 @@ public class Boxer {
      * and updates health
      */
     public void getPunched() {
+        int moveDirection = -2;
+        if(this.isRight){
+            moveDirection = 2;
+        }
+        if (Math.abs(opponent.position-this.position)==8 || Math.abs(opponent.position-this.position)==9){
+            if(this.isBlocking) {
+                this.takeHealth(10);
+            }
+            else{
+                this.takeHealth(20);
+
+            }
+            this.move(moveDirection);
+            this.isBlocking = false;
+            this.isHit = true;
+        }
+        if (Math.abs(opponent.position-this.position)==6 || Math.abs(opponent.position-this.position)==7){
+            if(!this.isBlocking) {
+                this.takeHealth(15);
+                this.isHit = true;
+            }
+            else{
+                this.takeHealth(5);
+            }
+            this.move(moveDirection);
+            this.isBlocking = false;
+        }
+        if (Math.abs(opponent.position-this.position)==10 || Math.abs(opponent.position-this.position)==11){
+            if(!this.isBlocking) {
+                this.takeHealth(10);
+            }
+            else{
+                this.takeHealth(5);
+            }
+            this.isBlocking = false;
+        }
+    }
+
+    /**
+     * Called when in hit box of oppenent's kick
+     * and updates health
+     */
+    public void getKicked() {
         int moveDirection = -1;
         if(this.isRight){
             moveDirection = 1;
@@ -146,13 +189,6 @@ public class Boxer {
                 this.addEnergy(-5);
             }
         }
-    }
-
-    /**
-     * Called when in hit box of oppenent's kick
-     * and updates health
-     */
-    public void getKicked() {
     }
 
     /**
@@ -203,6 +239,10 @@ public class Boxer {
             imagePath+="Punch";
             this.isPunching = false;
         }
+        else if (this.isKicking){
+            imagePath+="Kick";
+            this.isKicking = false;
+        }
         else if (this.isBlocking){
             imagePath+="Block";
         }
@@ -227,7 +267,4 @@ public class Boxer {
         return this.isBlocking;
     }
 
-    public void setBlockingFalse(){
-        this.isBlocking = false;
-    }
 }
