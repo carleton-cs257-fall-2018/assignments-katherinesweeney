@@ -10,8 +10,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+
+import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Controller.java
@@ -20,11 +25,13 @@ import java.util.TimerTask;
  * @author Owen Barnett, Justin Hahn, Kate Sweeney
  */
 public class Controller implements EventHandler<KeyEvent> {
-    @FXML private BoxerView boxerView;
     @FXML private Label leftHealth;
     @FXML private Label rightHealth;
     @FXML private Label leftEnergy;
     @FXML private Label rightEnergy;
+    @FXML private ImageView rightImageView;
+    @FXML private ImageView leftImageView;
+    @FXML private ImageView background;
 
     private Boxer boxerLeft;
     private Boxer boxerRight;
@@ -42,11 +49,30 @@ public class Controller implements EventHandler<KeyEvent> {
      * Helper method that updates view
      */
     private void updateView() {
-        this.boxerView.update(boxerLeft, boxerRight);
         this.leftHealth.setText(String.format("Health: %d", this.boxerLeft.getHealth()));
         this.rightHealth.setText(String.format("Health: %d", this.boxerRight.getHealth()));
         this.leftEnergy.setText(String.format("Energy: %d", this.boxerLeft.getEnergy()));
         this.rightEnergy.setText(String.format("Energy: %d", this.boxerRight.getEnergy()));
+
+
+        Image leftImg = new Image("file:"+boxerLeft.getImage());
+        this.leftImageView.setImage(leftImg);
+        this.leftImageView.setX(15*boxerLeft.getPosition());
+        this.leftImageView.setY(90);
+        this.leftImageView.setFitHeight(2*leftImg.getHeight());
+        this.leftImageView.setFitWidth(2*leftImg.getWidth());
+
+        Image rightImg = new Image("file:"+boxerRight.getImage());
+        this.rightImageView.setImage(rightImg);
+        this.rightImageView.setX(15*boxerRight.getPosition());
+        this.rightImageView.setY(90);
+        if(rightImg.getWidth() == 75){
+            this.rightImageView.setX(15*(boxerRight.getPosition()-4));
+        }
+        this.rightImageView.setFitHeight(2*rightImg.getHeight());
+        this.rightImageView.setFitWidth(2*rightImg.getWidth());
+
+
     }
 
     /**
@@ -89,18 +115,19 @@ public class Controller implements EventHandler<KeyEvent> {
 
     }
 
-    public double getBoardWidth() {
-        return BoxerView.CELL_WIDTH * this.boxerView.getWidth();
-    }
-
     public void initialize() {
-        this.boxerLeft = new Boxer(false,10,5);
-        this.boxerRight = new Boxer(true,40,5);
+        this.boxerLeft = new Boxer(false,5,5);
+        this.boxerRight = new Boxer(true,70,5);
 
         this.boxerLeft.addOpponent(this.boxerRight);
         this.boxerRight.addOpponent(this.boxerLeft);
 
         this.updateView();
+        Image backgroundImage = new Image("file:"+"assets/background.png");
+        this.background.setImage(backgroundImage);
+        this.background.setFitWidth(1200);
+        this.background.setFitHeight(290);
+
     }
 
     private void startTimer() {

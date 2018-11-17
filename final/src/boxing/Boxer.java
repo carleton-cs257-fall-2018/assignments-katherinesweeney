@@ -11,13 +11,14 @@ package boxing;
 public class Boxer {
     private int position;
     private Boxer opponent;
-    private int cellCount = 50;
+    private int cellCount = 80;
     private int health = 100;
     private int energy = 100;
     private boolean isRight;
     private boolean isPunching = false;
     private boolean isBlocking = false;
     private boolean isKicking = false;
+    private int idle = 0;
     /**
      * Initializes a new boxer
      *
@@ -45,7 +46,7 @@ public class Boxer {
      * @param move distance Boxer moves right
      */
     public void move(int move) {
-        if(this.position+move < cellCount-3 && this.position+move > 3 && Math.abs(this.position+move-opponent.getPosition())>2) {
+        if(this.position+move < cellCount-6 && this.position+move > 0 && Math.abs(this.position+move-opponent.getPosition())>5) {
             this.position += move;
         }
     }
@@ -55,7 +56,8 @@ public class Boxer {
      *
      * @return position of Boxer
      */
-    public int getPosition() { return this.position; }
+    public int getPosition() {
+        return this.position; }
 
     /**
      * Executes a punch
@@ -106,7 +108,7 @@ public class Boxer {
         if(this.isRight){
             moveDirection = 1;
         }
-        if (Math.abs(opponent.position-this.position)==4){
+        if (Math.abs(opponent.position-this.position)==8 || Math.abs(opponent.position-this.position)==9){
             if(this.isBlocking) {
                 this.health -= 2;
                 this.addEnergy(-5);
@@ -117,7 +119,7 @@ public class Boxer {
             }
             this.move(moveDirection);
         }
-        if (Math.abs(opponent.position-this.position)==3){
+        if (Math.abs(opponent.position-this.position)==6 || Math.abs(opponent.position-this.position)==7){
             if(!this.isBlocking) {
                 this.health -= 6;
 
@@ -127,14 +129,13 @@ public class Boxer {
             }
             this.move(moveDirection);
         }
-        if (Math.abs(opponent.position-this.position)==5){
+        if (Math.abs(opponent.position-this.position)==10 || Math.abs(opponent.position-this.position)==11){
             if(!this.isBlocking) {
                 this.health -= 2;
             }
             else{
                 this.addEnergy(-5);
             }
-            this.move(moveDirection);
         }
     }
 
@@ -195,6 +196,10 @@ public class Boxer {
         }
         else if (this.isBlocking){
             imagePath+="Block";
+        }
+        else{
+            imagePath+="Idle";
+
         }
 
         imagePath+=".png";
