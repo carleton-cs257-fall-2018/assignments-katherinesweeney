@@ -199,7 +199,11 @@ public class Boxer {
         }
         else{
             imagePath+="Idle";
-
+            imagePath+=Integer.toString(this.idle);
+            this.idle+=1;
+            if(this.idle == 4){
+                this.idle = 0;
+            }
         }
 
         imagePath+=".png";
