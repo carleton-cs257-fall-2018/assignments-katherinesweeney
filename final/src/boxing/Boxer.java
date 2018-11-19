@@ -1,10 +1,8 @@
 package boxing;
 
-
-
 /**
  * Boxer.java
- * A Model class that represents the upderlying data for Boxers
+ * A Model class that represents the underlying data for Boxers
  *
  * @author Owen Barnett, Justin Hahn, Kate Sweeney
  */
@@ -20,6 +18,7 @@ public class Boxer {
     private boolean isKicking = false;
     private boolean isHit = false;
     private int idle = 0;
+
     /**
      * Initializes a new boxer
      *
@@ -35,7 +34,7 @@ public class Boxer {
     /**
      * Sets the opponent Boxer reference
      *
-     * @param opponent Oponent Boxer object
+     * @param opponent Opponent Boxer object
      */
     public void addOpponent(Boxer opponent) {
         this.opponent = opponent;
@@ -52,11 +51,7 @@ public class Boxer {
         }
     }
 
-    /**
-     * Returns position of the Boxer
-     *
-     * @return position of Boxer
-     */
+
     public int getPosition() {
         return this.position; }
 
@@ -108,10 +103,10 @@ public class Boxer {
     }
 
     /**
-     * Called when in hit box of opponent's punch
-     * and updates health
+     * Called when opponent does a kick
+     * and updates health, and position
      */
-    public void getPunched() {
+    public void getKicked() {
         int moveDirection = -2;
         if(this.isRight){
             moveDirection = 2;
@@ -151,10 +146,10 @@ public class Boxer {
     }
 
     /**
-     * Called when in hit box of oppenent's kick
-     * and updates health
+     * Called when opponent executes a punch
+     * and updates health, energy, and position
      */
-    public void getKicked() {
+    public void getPunched() {
         int moveDirection = -1;
         if(this.isRight){
             moveDirection = 1;
@@ -191,18 +186,10 @@ public class Boxer {
         }
     }
 
-    /**
-     * Returns health of Boxer
-     *
-     * @return health of Boxer
-     */
+
     public int getHealth() { return this.health; }
 
-    /**
-     * Returns energy of Boxer
-     *
-     * @return energy of Boxer
-     */
+
     public int getEnergy() { return this.energy; }
 
     /**

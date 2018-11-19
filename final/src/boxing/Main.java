@@ -5,6 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import javafx.event.EventHandler;
+import javafx.application.Platform;
+
 /**
  * Main.java
  * Main class for boxing game. Initializes start up process
@@ -20,6 +24,13 @@ public class Main extends Application {
      */
     @Override
     public void start(javafx.stage.Stage primaryStage) throws Exception{
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
         FXMLLoader loader = new FXMLLoader(getClass().getResource("boxing.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("Boxing");

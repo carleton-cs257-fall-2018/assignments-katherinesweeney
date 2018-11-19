@@ -36,7 +36,7 @@
     <bottom>
         <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
             <Label fx:id="restart" style="-fx-font-size: 140%; -fx-text-fill: white"
-                   text="Player 1: Move A D, Punch 1, Block 2, Kick 3|| Player 2: Move Left/Right Arrow, Punch K, Block L, Kick ; || Pause: Space" />
+                   text="Player 1: Move A D, Punch 1, Block 2, Kick 3 || Player 2: Move Left/Right Arrow, Punch K, Block L, Kick ; || Pause: Space" />
         </HBox>
     </bottom>
 

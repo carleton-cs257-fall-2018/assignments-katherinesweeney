@@ -10,11 +10,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
-
+import javafx.stage.WindowEvent;
 import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -48,34 +47,26 @@ public class Controller implements EventHandler<KeyEvent> {
         this.startTimer();
     }
 
-    /**
-     * Helper method that updates view
-     */
     private void updateView() {
         this.leftHealth.setText(String.format("Health: %d", this.boxerLeft.getHealth()));
         this.rightHealth.setText(String.format("Health: %d", this.boxerRight.getHealth()));
         this.leftEnergy.setText(String.format("Energy: %d", this.boxerLeft.getEnergy()));
         this.rightEnergy.setText(String.format("Energy: %d", this.boxerRight.getEnergy()));
 
+        this.addImage(boxerLeft, false, this.leftImageView);
+        this.addImage(boxerRight, true, this.rightImageView);
+    }
 
-        Image leftImg = new Image("file:"+boxerLeft.getImage());
-        this.leftImageView.setImage(leftImg);
-        this.leftImageView.setX(15*boxerLeft.getPosition());
-        this.leftImageView.setY(90);
-        this.leftImageView.setFitHeight(2*leftImg.getHeight());
-        this.leftImageView.setFitWidth(2*leftImg.getWidth());
-
-        Image rightImg = new Image("file:"+boxerRight.getImage());
-        this.rightImageView.setImage(rightImg);
-        this.rightImageView.setX(15*boxerRight.getPosition());
-        this.rightImageView.setY(90);
-        if(rightImg.getWidth() == 75){
+    private void addImage(Boxer boxer, boolean isRight, ImageView boxerImageView){
+        Image img = new Image("file:"+boxer.getImage());
+        boxerImageView.setImage(img);
+        boxerImageView.setX(15*boxer.getPosition());
+        if(isRight && img.getWidth() == 75){
             this.rightImageView.setX(15*(boxerRight.getPosition()-4));
         }
-        this.rightImageView.setFitHeight(2*rightImg.getHeight());
-        this.rightImageView.setFitWidth(2*rightImg.getWidth());
-
-
+        boxerImageView.setY(90);
+        boxerImageView.setFitHeight(2*img.getHeight());
+        boxerImageView.setFitWidth(2*img.getWidth());
     }
 
     /**
@@ -86,6 +77,7 @@ public class Controller implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
+
         if(!this.isOver) {
             if (!this.isPaused) {
                 if (code == KeyCode.A) {
@@ -122,17 +114,11 @@ public class Controller implements EventHandler<KeyEvent> {
             if (code == KeyCode.SPACE) {
                 if (this.isPaused == false) {
                     this.timer.cancel();
-                    Image backgroundImage = new Image("file:" + "assets/backgroundPaused.png");
-                    this.background.setImage(backgroundImage);
-                    this.background.setFitWidth(1200);
-                    this.background.setFitHeight(290);
+                    this.setBackground("assets/backgroundPaused.png");
                     this.isPaused = true;
                 } else {
                     this.startTimer();
-                    Image backgroundImage = new Image("file:" + "assets/background.png");
-                    this.background.setImage(backgroundImage);
-                    this.background.setFitWidth(1200);
-                    this.background.setFitHeight(290);
+                    this.setBackground("assets/background.png");
                     this.isPaused = false;
                 }
             }
@@ -142,10 +128,14 @@ public class Controller implements EventHandler<KeyEvent> {
                 this.initialize();
                 this.isOver = false;
                 this.startTimer();
-                this.restart.setText("Player 1: Move A D, Punch 1, Block 2, Kick 3|| Player 2: Move Left/Right Arrow, Punch K, Block L, Kick ; || Pause: Space");
+                this.restart.setText("Player 1: Move A D, Punch 1, Block 2, Kick 3 || Player 2: Move Left/Right Arrow, Punch K, Block L, Kick ; || Pause: Space");
             }
         }
     }
+
+    /**
+     * Initializes a game by creating the two boxers and setting the background
+     */
 
     public void initialize() {
         this.boxerLeft = new Boxer(false,5,5);
@@ -155,11 +145,7 @@ public class Controller implements EventHandler<KeyEvent> {
         this.boxerRight.addOpponent(this.boxerLeft);
 
         this.updateView();
-        Image backgroundImage = new Image("file:"+"assets/background.png");
-        this.background.setImage(backgroundImage);
-        this.background.setFitWidth(1200);
-        this.background.setFitHeight(290);
-
+        this.setBackground("assets/background.png");
     }
 
     private void startTimer() {
@@ -188,22 +174,25 @@ public class Controller implements EventHandler<KeyEvent> {
                 this.boxerRight.addEnergy(1);
             }
             if (boxerRight.getHealth() < 1) {
-                this.timer.cancel();
-                Image backgroundImage = new Image("file:" + "assets/backgroundPlayerWin.png");
-                this.background.setImage(backgroundImage);
-                this.background.setFitWidth(1200);
-                this.background.setFitHeight(290);
-                this.isOver = true;
-                this.restart.setText("Restart: R");
-            } else if (boxerLeft.getHealth() < 1) {
-                this.timer.cancel();
-                Image backgroundImage = new Image("file:" + "assets/backgroundEnemyWin.png");
-                this.background.setImage(backgroundImage);
-                this.background.setFitWidth(1200);
-                this.background.setFitHeight(290);
-                this.isOver = true;
-                this.restart.setText("Restart: R");
+                this.endGame("assets/backgroundPlayerWin.png");
+            }
+            else if (boxerLeft.getHealth() < 1) {
+                this.endGame("assets/backgroundEnemyWin.png");
             }
         }
+    }
+
+    private void endGame(String victoryImagePath){
+        this.timer.cancel();
+        this.setBackground(victoryImagePath);
+        this.isOver = true;
+        this.restart.setText("Restart: R");
+    }
+
+    private void setBackground(String imagePath){
+        Image backgroundImage = new Image("file:" + imagePath);
+        this.background.setImage(backgroundImage);
+        this.background.setFitWidth(1200);
+        this.background.setFitHeight(290);
     }
 }
